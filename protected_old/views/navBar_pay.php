@@ -1,0 +1,1 @@
+<?php $this -> renderPartial('//navBar', array('user' => $user, 'button' => 'pay'));?>

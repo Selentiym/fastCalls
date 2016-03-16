@@ -1,0 +1,150 @@
+Dump at 18.02 19:49:10:<br/>
+<pre>array(6) {
+  ["Host"]=>
+  string(14) "f.mrimaster.ru"
+  ["X-Forwarded-For"]=>
+  string(13) "89.188.102.66"
+  ["Connection"]=>
+  string(5) "close"
+  ["Content-Length"]=>
+  string(3) "171"
+  ["Accept"]=>
+  string(3) "*/*"
+  ["Content-Type"]=>
+  string(70) "multipart/form-data; boundary=----------------------------8b19289dbd6b"
+}
+</pre><pre>array(1) {
+  ["data"]=>
+  array(1) {
+    [0]=>
+    string(29) "sms_status
+201607-1000000
+102"
+  }
+}
+</pre><br/>
+Dump at 18.02 19:49:17:<br/>
+<pre>array(6) {
+  ["Host"]=>
+  string(14) "f.mrimaster.ru"
+  ["X-Forwarded-For"]=>
+  string(13) "89.188.102.66"
+  ["Connection"]=>
+  string(5) "close"
+  ["Content-Length"]=>
+  string(3) "171"
+  ["Accept"]=>
+  string(3) "*/*"
+  ["Content-Type"]=>
+  string(70) "multipart/form-data; boundary=----------------------------67fd61323e82"
+}
+</pre><pre>array(1) {
+  ["data"]=>
+  array(1) {
+    [0]=>
+    string(29) "sms_status
+201607-1000000
+103"
+  }
+}
+</pre><br/>
+Dump at 8.03 11:43:16:<br/>
+<pre>array(6) {
+  ["Host"]=>
+  string(14) "f.mrimaster.ru"
+  ["X-Forwarded-For"]=>
+  string(13) "89.188.102.69"
+  ["Connection"]=>
+  string(5) "close"
+  ["Content-Length"]=>
+  string(3) "171"
+  ["Accept"]=>
+  string(3) "*/*"
+  ["Content-Type"]=>
+  string(70) "multipart/form-data; boundary=----------------------------1072bb2f591f"
+}
+</pre><pre>array(1) {
+  ["data"]=>
+  array(1) {
+    [0]=>
+    string(29) "sms_status
+201610-1000000
+102"
+  }
+}
+</pre><br/>
+Dump at 8.03 11:47:17:<br/>
+<pre>array(6) {
+  ["Host"]=>
+  string(14) "f.mrimaster.ru"
+  ["X-Forwarded-For"]=>
+  string(13) "89.188.102.69"
+  ["Connection"]=>
+  string(5) "close"
+  ["Content-Length"]=>
+  string(3) "171"
+  ["Accept"]=>
+  string(3) "*/*"
+  ["Content-Type"]=>
+  string(70) "multipart/form-data; boundary=----------------------------834e620a18da"
+}
+</pre><pre>array(1) {
+  ["data"]=>
+  array(1) {
+    [0]=>
+    string(29) "sms_status
+201610-1000001
+102"
+  }
+}
+</pre><br/>
+Dump at 8.03 11:47:33:<br/>
+<pre>array(6) {
+  ["Host"]=>
+  string(14) "f.mrimaster.ru"
+  ["X-Forwarded-For"]=>
+  string(13) "89.188.102.66"
+  ["Connection"]=>
+  string(5) "close"
+  ["Content-Length"]=>
+  string(3) "171"
+  ["Accept"]=>
+  string(3) "*/*"
+  ["Content-Type"]=>
+  string(70) "multipart/form-data; boundary=----------------------------b0bcb5e2b9a4"
+}
+</pre><pre>array(1) {
+  ["data"]=>
+  array(1) {
+    [0]=>
+    string(29) "sms_status
+201610-1000001
+103"
+  }
+}
+</pre><br/>
+Dump at 8.03 11:48:34:<br/>
+<pre>array(6) {
+  ["Host"]=>
+  string(14) "f.mrimaster.ru"
+  ["X-Forwarded-For"]=>
+  string(13) "89.188.102.69"
+  ["Connection"]=>
+  string(5) "close"
+  ["Content-Length"]=>
+  string(3) "171"
+  ["Accept"]=>
+  string(3) "*/*"
+  ["Content-Type"]=>
+  string(70) "multipart/form-data; boundary=----------------------------5272450833f7"
+}
+</pre><pre>array(1) {
+  ["data"]=>
+  array(1) {
+    [0]=>
+    string(29) "sms_status
+201610-1000000
+106"
+  }
+}
+</pre><br/>

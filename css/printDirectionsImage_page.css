@@ -1,0 +1,61 @@
+@page {
+	size:landscape;
+}
+#wrapper {
+	width:297mm;
+	
+}
+.main_cont {
+	width:320px;
+	margin:0 1%;
+	display:inline-block;
+	vertical-align:middle;
+	position:relative;
+}
+.main_cont img{
+	width:320px;
+}
+.separator {
+	width:1px;
+	height:90%;
+	vertical-align:middle;
+	border-left:1px dashed black;
+	display:inline-block;
+}
+.number {
+	font-size:20px;
+	position:absolute;
+	top:75px;
+	left:228px;
+	display:block;
+	text-align:center;
+	width:66px;
+}
+.doctor {
+	position:absolute;
+	top:432px;
+	left:10px;
+	display:block;
+	text-align:left;
+	width:230px;
+	text-indent:42px;
+}
+.tel_down {
+	font-size:18px;
+	font-weight:bold;
+	position:absolute;
+	top:497px;
+	left:212px;
+	display:block;
+	text-align:center;
+	width:90px;
+}
+.tel_up {
+	font-size:13px;
+	position:absolute;
+	top:49px;
+	left:243px;
+	display:block;
+	text-align:center;
+	width:90px;
+}

@@ -1,0 +1,8 @@
+@charset "UTF-8";
+table .table-borderless{
+    border-top-style: none;
+    border-left-style: none;
+    border-right-style: none;
+    border-bottom-style: none;
+}
+

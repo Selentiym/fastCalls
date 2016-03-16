@@ -1,0 +1,18 @@
+#pager {
+	display:inline-block;
+	vertical-align:middle;
+}
+#pager div {
+	display: inline-block;
+	margin-left: 5px;
+	vertical-align: middle;
+	cursor: pointer;
+	
+	font-size: 16px;
+}
+#pager div.active {
+	color:blue;
+}
+#pager #list-left:before {
+	content:'';
+}

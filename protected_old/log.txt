@@ -1,0 +1,664 @@
+There was a call 3.02 21:20:07:<br/>
+<br/><br/>
+There was a call 3.02 21:22:08:<br/>
+<br/><br/>
+There was a call 3.02 21:22:08:<br/>
+<br/><br/>
+There was a call 3.02 21:22:41:<br/>
+Number: 78123099736<br/>IVR: <br/>Number: 78123099736<br/>IVR: <br/>callerNum:79523660187<br/>дата = 3.02 and mangotalkerномер = "79523660187"<br/>дата = 3.02 and mangotalkerномер = "79523660187"<br/>дата = 3.02 and mangotalkerномер = 79523660187<br/>ApiId: <br/>CallerIdNum: <br/>CalledDID: <br/>CallSatus: <br/>New record<br/>sms to number: 79516727222 contains:<br/>Здравсвуйте, Смирнова Елена Валерьевна! Пациент Петров записался(ась) на исследование мрт поп на 15.30 20.02.<br/>Sms sent!Call save successful<br/>ErrorCode: 6<br/><br/><br/>
+There was a call 3.02 21:29:26:<br/>
+ApiId: kxscjlql5pxxmsmlztgb<br/>CallerIdNum: +79523660187<br/>CalledDID: 78123099736<br/>CallSatus: CANCEL<br/><br/><br/>
+There was a call 3.02 21:29:26:<br/>
+ApiId: kxscjlql5pxxmsmlztgb<br/>CallerIdNum: 78123099736<br/>CalledDID: 78123099736<br/>CallSatus: CANCEL<br/><br/><br/>
+There was a call 3.02 21:30:04:<br/>
+ApiId: z6pat7y625p5ff3mcuvg<br/>CallerIdNum: +79523660187<br/>CalledDID: 78123099736<br/>CallSatus: ANSWER<br/>Number: 78123099736<br/>IVR: <br/>Number: 78123099736<br/>IVR: <br/>callerNum:79523660187<br/>дата = 3.02 and mangotalkerномер = "79523660187"<br/>дата = 3.02 and mangotalkerномер = "79523660187"<br/>дата = 3.02 and mangotalkerномер = 79523660187<br/>New record<br/>sms to number: 79516727222 contains:<br/>Здравсвуйте, Смирнова Елена Валерьевна! Пациент Петров записался(ась) на исследование мрт поп на 15.30 20.02.<br/>Sms sent!Call save successful<br/>ErrorCode: 6<br/><br/><br/>
+There was a call 3.02 21:30:18:<br/>
+ApiId: z6pat7y625p5ff3mcuvg<br/>CallerIdNum: 78123099736<br/>CalledDID: 78123099736<br/>CallSatus: ANSWER<br/>callerNum:78123099736<br/>дата = 3.02 and mangotalkerномер = "78123099736"<br/>дата = 3.02 and mangotalkerномер = "78123099736"<br/>дата = 3.02 and mangotalkerномер = 78123099736<br/>дата = 3.02 and mangotalkerномер = 78123099736<br/>not todaymangotalkerномер = "78123099736"<br/>mangotalkerномер = "78123099736"<br/>mangotalkerномер = 78123099736<br/>mangotalkerномер = 78123099736<br/>not even currrent monthmangotalkerномер = "78123099736"<br/>mangotalkerномер = "78123099736"<br/>mangotalkerномер = 78123099736<br/>mangotalkerномер = 78123099736<br/>not found at all!<br/><br/>
+There was an interactive request 3.02 21:33:26:<br/>
+interactive:<br/>ApiId: 7pjkgiqv4ooqrtbqqdcr<br/>Number: 78123097166<br/>IVR: 77<br/>Phone not found<br/>end of interactive<br/><br/>
+There was an interactive request 3.02 21:51:20:<br/>
+interactive:<br/>ApiId: cuvpcnljnh54qh4artbz<br/>Number: 78123097166<br/>IVR: 14<br/>Phone not found<br/>end of interactive<br/><br/>
+There was a call 3.02 21:51:55:<br/>
+ApiId: cuvpcnljnh54qh4artbz<br/>CallerIdNum: +79523660187<br/>CalledDID: 78123097166<br/>CallSatus: ANSWER<br/>callerNum:79523660187<br/>дата = 3.02 and mangotalkerномер = "79523660187"<br/>дата = 3.02 and mangotalkerномер = "79523660187"<br/>дата = 3.02 and mangotalkerномер = 79523660187<br/>Найдена соответствующая запись в базе: 2<br/>save data to telfinCall<br/>not new<br/><br/>
+There was an interactive request 3.02 21:52:49:<br/>
+interactive:<br/>ApiId: iwcyx5wrpcpy5zg55fj6<br/>Number: 78123097166<br/>IVR: 29<br/>Phone not found<br/>end of interactive<br/><br/>
+There was a call 3.02 21:53:04:<br/>
+ApiId: iwcyx5wrpcpy5zg55fj6<br/>CallerIdNum: +78126877894<br/>CalledDID: 78123097166<br/>CallSatus: ANSWER<br/>callerNum:78126877894<br/>дата = 3.02 and mangotalkerномер = "78126877894"<br/>New record<br/>Call save successful<br/>ErrorCode: 3<br/><br/><br/>
+There was a call 4.02 20:27:04:<br/>
+ApiId: reaikhga2lv525nbg4nh<br/>CallerIdNum: +79315911538<br/>CalledDID: 78123099736<br/>CallSatus: ANSWER<br/>callerNum:79315911538<br/>дата = 4.02 and mangotalkerномер = "79315911538"<br/>дата = 4.02 and mangotalkerномер = "79315911538"<br/>дата = 4.02 and mangotalkerномер = 79315911538<br/>дата = 4.02 and mangotalkerномер = 79315911538<br/>not todaymangotalkerномер = "79315911538"<br/>mangotalkerномер = "79315911538"<br/>mangotalkerномер = 79315911538<br/>mangotalkerномер = 79315911538<br/>not even currrent monthmangotalkerномер = "79315911538"<br/>mangotalkerномер = "79315911538"<br/>mangotalkerномер = 79315911538<br/>mangotalkerномер = 79315911538<br/>not found at all!<br/><br/>
+There was a call 4.02 20:27:04:<br/>
+ApiId: reaikhga2lv525nbg4nh<br/>CallerIdNum: 78123099736<br/>CalledDID: 78123099736<br/>CallSatus: ANSWER<br/>Number: 78123099736<br/>IVR: <br/>Number: 78123099736<br/>IVR: <br/>callerNum:78123099736<br/>дата = 4.02 and mangotalkerномер = "78123099736"<br/>дата = 4.02 and mangotalkerномер = "78123099736"<br/>дата = 4.02 and mangotalkerномер = 78123099736<br/>дата = 4.02 and mangotalkerномер = 78123099736<br/>not todaymangotalkerномер = "78123099736"<br/>mangotalkerномер = "78123099736"<br/>mangotalkerномер = 78123099736<br/>mangotalkerномер = 78123099736<br/>not even currrent monthmangotalkerномер = "78123099736"<br/>mangotalkerномер = "78123099736"<br/>mangotalkerномер = 78123099736<br/>mangotalkerномер = 78123099736<br/>not found at all!<br/><br/>
+There was an interactive request 4.02 20:29:19:<br/>
+interactive:<br/>ApiId: v3srlwisu3pvyyqez546<br/>Number: 78123097166<br/>IVR: 10<br/>Number: 78123097166<br/>IVR: 10<br/>PhoneId: 20<br/>end of interactive<br/><br/>
+There was a call 4.02 20:29:43:<br/>
+ApiId: v3srlwisu3pvyyqez546<br/>CallerIdNum: +79315911538<br/>CalledDID: 78123097166<br/>CallSatus: ANSWER<br/>callerNum:79315911538<br/>дата = 4.02 and mangotalkerномер = "79315911538"<br/>дата = 4.02 and mangotalkerномер = "79315911538"<br/>дата = 4.02 and mangotalkerномер = 79315911538<br/>дата = 4.02 and mangotalkerномер = 79315911538<br/>not todaymangotalkerномер = "79315911538"<br/>mangotalkerномер = "79315911538"<br/>mangotalkerномер = 79315911538<br/>mangotalkerномер = 79315911538<br/>not even currrent monthmangotalkerномер = "79315911538"<br/>mangotalkerномер = "79315911538"<br/>mangotalkerномер = 79315911538<br/>mangotalkerномер = 79315911538<br/>not found at all!<br/><br/>
+There was an interactive request 4.02 20:29:52:<br/>
+interactive:<br/>ApiId: b5zlaft5h5nfhqmz5yh6<br/>Number: 78123097166<br/>IVR: 99<br/>Phone not found<br/>end of interactive<br/><br/>
+There was a call 4.02 20:30:29:<br/>
+ApiId: b5zlaft5h5nfhqmz5yh6<br/>CallerIdNum: +79315911538<br/>CalledDID: 78123097166<br/>CallSatus: ANSWER<br/>callerNum:79315911538<br/>дата = 4.02 and mangotalkerномер = "79315911538"<br/>дата = 4.02 and mangotalkerномер = "79315911538"<br/>дата = 4.02 and mangotalkerномер = 79315911538<br/>дата = 4.02 and mangotalkerномер = 79315911538<br/>not todaymangotalkerномер = "79315911538"<br/>mangotalkerномер = "79315911538"<br/>mangotalkerномер = 79315911538<br/>mangotalkerномер = 79315911538<br/>not even currrent monthmangotalkerномер = "79315911538"<br/>mangotalkerномер = "79315911538"<br/>mangotalkerномер = 79315911538<br/>mangotalkerномер = 79315911538<br/>not found at all!<br/><br/>
+There was a call 4.02 20:32:52:<br/>
+ApiId: lzqvfhmw5jezqo3a6pn7<br/>CallerIdNum: +79315911538<br/>CalledDID: 78123097166<br/>CallSatus: ANSWER<br/>Number: 78123097166<br/>IVR: <br/>This number has at least one IVR, but none specifyed => mistake!<br/>Number: 78123097166<br/>IVR: <br/>This number has at least one IVR, but none specifyed => mistake!<br/>callerNum:79315911538<br/>дата = 4.02 and mangotalkerномер = "79315911538"<br/>дата = 4.02 and mangotalkerномер = "79315911538"<br/>дата = 4.02 and mangotalkerномер = 79315911538<br/>дата = 4.02 and mangotalkerномер = 79315911538<br/>not todaymangotalkerномер = "79315911538"<br/>mangotalkerномер = "79315911538"<br/>mangotalkerномер = 79315911538<br/>mangotalkerномер = 79315911538<br/>not even currrent monthmangotalkerномер = "79315911538"<br/>mangotalkerномер = "79315911538"<br/>mangotalkerномер = 79315911538<br/>mangotalkerномер = 79315911538<br/>not found at all!<br/><br/>
+There was an interactive request 4.02 20:33:54:<br/>
+interactive:<br/>ApiId: w3rpn5ypjjbe6aqtitwk<br/>Number: 78123097166<br/>IVR: 10<br/>Number: 78123097166<br/>IVR: 10<br/>PhoneId: 20<br/>end of interactive<br/><br/>
+There was a call 4.02 20:35:46:<br/>
+ApiId: w3rpn5ypjjbe6aqtitwk<br/>CallerIdNum: 78123099736<br/>CalledDID: 78123097166<br/>CallSatus: ANSWER<br/>callerNum:78123099736<br/>дата = 4.02 and mangotalkerномер = "78123099736"<br/>дата = 4.02 and mangotalkerномер = "78123099736"<br/>дата = 4.02 and mangotalkerномер = 78123099736<br/>дата = 4.02 and mangotalkerномер = 78123099736<br/>not todaymangotalkerномер = "78123099736"<br/>mangotalkerномер = "78123099736"<br/>mangotalkerномер = 78123099736<br/>mangotalkerномер = 78123099736<br/>not even currrent monthmangotalkerномер = "78123099736"<br/>mangotalkerномер = "78123099736"<br/>mangotalkerномер = 78123099736<br/>mangotalkerномер = 78123099736<br/>not found at all!<br/><br/>
+There was a call 4.02 20:35:48:<br/>
+ApiId: w3rpn5ypjjbe6aqtitwk<br/>CallerIdNum: +79315911538<br/>CalledDID: 78123097166<br/>CallSatus: ANSWER<br/>callerNum:79315911538<br/>дата = 4.02 and mangotalkerномер = "79315911538"<br/>дата = 4.02 and mangotalkerномер = "79315911538"<br/>дата = 4.02 and mangotalkerномер = 79315911538<br/>дата = 4.02 and mangotalkerномер = 79315911538<br/>not todaymangotalkerномер = "79315911538"<br/>mangotalkerномер = "79315911538"<br/>mangotalkerномер = 79315911538<br/>mangotalkerномер = 79315911538<br/>not even currrent monthmangotalkerномер = "79315911538"<br/>mangotalkerномер = "79315911538"<br/>mangotalkerномер = 79315911538<br/>mangotalkerномер = 79315911538<br/>not found at all!<br/><br/>
+There was an interactive request 4.02 20:40:11:<br/>
+interactive:<br/>ApiId: 5cpc5exdq2ecslyxeok6<br/>Number: 78123097166<br/>IVR: 10<br/>Number: 78123097166<br/>IVR: 10<br/>PhoneId: 20<br/>end of interactive<br/><br/>
+There was a call 4.02 20:43:28:<br/>
+ApiId: 5cpc5exdq2ecslyxeok6<br/>CallerIdNum: +79315911538<br/>CalledDID: 78123097166<br/>CallSatus: ANSWER<br/>callerNum:79315911538<br/>дата = 4.02 and mangotalkerномер = "79315911538"<br/>дата = 4.02 and mangotalkerномер = "79315911538"<br/>дата = 4.02 and mangotalkerномер = 79315911538<br/>New record<br/>sms to number: 79516727222 contains:<br/>Здравсвуйте, doctor 7233:10! Пациент dfdsf записался(ась) на исследование vhn на 18.00 06.02.<br/>Sms sent!Call save successful<br/>ErrorCode: 6<br/><br/><br/>
+There was a call 4.02 20:43:40:<br/>
+ApiId: 5cpc5exdq2ecslyxeok6<br/>CallerIdNum: 78123099736<br/>CalledDID: 78123097166<br/>CallSatus: ANSWER<br/>callerNum:78123099736<br/>дата = 4.02 and mangotalkerномер = "78123099736"<br/>дата = 4.02 and mangotalkerномер = "78123099736"<br/>дата = 4.02 and mangotalkerномер = 78123099736<br/>дата = 4.02 and mangotalkerномер = 78123099736<br/>not todaymangotalkerномер = "78123099736"<br/>mangotalkerномер = "78123099736"<br/>mangotalkerномер = 78123099736<br/>mangotalkerномер = 78123099736<br/>not even currrent monthmangotalkerномер = "78123099736"<br/>mangotalkerномер = "78123099736"<br/>mangotalkerномер = 78123099736<br/>mangotalkerномер = 78123099736<br/>not found at all!<br/><br/>
+There was an interactive request 5.02 14:56:55:<br/>
+interactive:<br/>ApiId: gkhbdpgdpnakl4izn5hs<br/>Number: 78123097166<br/>IVR: 86<br/>Phone not found<br/>end of interactive<br/><br/>
+There was an interactive request 5.02 15:02:56:<br/>
+interactive:<br/>ApiId: 2kaptk4gntjhbrngeipp<br/>Number: 78123097166<br/>IVR: 76<br/>Phone not found<br/>end of interactive<br/><br/>
+There was a call 5.02 15:16:36:<br/>
+<br/><br/>
+There was an interactive request 5.02 15:18:40:<br/>
+interactive:<br/>ApiId: se6kgwrm3kysd6ju55sa<br/>Number: 78123097166<br/>IVR: 76<br/>Phone not found<br/>end of interactive<br/><br/>
+There was a call 5.02 15:19:07:<br/>
+ApiId: se6kgwrm3kysd6ju55sa<br/>CallerIdNum: +78126877894<br/>CalledDID: 78123097166<br/>CallSatus: ANSWER<br/>callerNum:78126877894<br/>okдата = 5.02 and mangotalkerномер = "78126877894"<br/>дата = 5.02 and mangotalkerномер = "78126877894"<br/>дата = 5.02 and mangotalkerномер = 78126877894<br/>дата = 5.02 and mangotalkerномер = 78126877894<br/>not todaymangotalkerномер = "78126877894"<br/>New record<br/>Call save successful<br/>ErrorCode: 3<br/><br/><br/>
+There was an interactive request 5.02 15:32:39:<br/>
+interactive:<br/>ApiId: gebuytagqsne6guweook<br/>Number: 78123097166<br/>IVR: 73<br/>Phone not found<br/>end of interactive<br/><br/>
+There was a call 5.02 15:33:02:<br/>
+ApiId: gebuytagqsne6guweook<br/>CallerIdNum: +78126877894<br/>CalledDID: 78123097166<br/>CallSatus: ANSWER<br/>callerNum:78126877894<br/>okдата = 5.02 and mangotalkerномер = "78126877894"<br/>дата = 5.02 and mangotalkerномер = "78126877894"<br/>дата = 5.02 and mangotalkerномер = 78126877894<br/>дата = 5.02 and mangotalkerномер = 78126877894<br/>not todaymangotalkerномер = "78126877894"<br/>New record<br/>Call save successful<br/>ErrorCode: 3<br/><br/><br/>
+There was a call 5.02 15:33:18:<br/>
+ApiId: mguxrk6vlvpbhqr64ev6<br/>CallerIdNum: 78123099736<br/>CalledDID: 78123091763<br/>CallSatus: CONGESTION<br/>bad call status<br/><br/><br/>
+There was a call 5.02 15:33:18:<br/>
+ApiId: mguxrk6vlvpbhqr64ev6<br/>CallerIdNum: +78123351127<br/>CalledDID: 78123091763<br/>CallSatus: CHANUNAVAIL<br/>bad call status<br/><br/><br/>
+There was an interactive request 7.02 16:10:28:<br/>
+interactive:<br/>ApiId: 2kydre5u4czo5sccdymv<br/>Number: 78123097166<br/>IVR: 46<br/>Phone not found<br/>end of interactive<br/><br/>
+There was a call 7.02 16:11:02:<br/>
+ApiId: 2kydre5u4czo5sccdymv<br/>CallerIdNum: +78126877894<br/>CalledDID: 78123097166<br/>CallSatus: ANSWER<br/>callerNum:78126877894<br/>okдата = 7.02 and mangotalkerномер = "78126877894"<br/>дата = 7.02 and mangotalkerномер = "78126877894"<br/>дата = 7.02 and mangotalkerномер = 78126877894<br/>дата = 7.02 and mangotalkerномер = 78126877894<br/>not todaymangotalkerномер = "78126877894"<br/>Найдена соответствующая запись в базе: 3<br/>save data to telfinCall<br/>not new<br/><br/>
+There was an interactive request 7.02 16:12:26:<br/>
+interactive:<br/>ApiId: cnqrlrejduthe6fjde5v<br/>Number: 78123097166<br/>IVR: 48<br/>Phone not found<br/>end of interactive<br/><br/>
+There was a call 7.02 16:12:46:<br/>
+ApiId: cnqrlrejduthe6fjde5v<br/>CallerIdNum: +78126877894<br/>CalledDID: 78123097166<br/>CallSatus: ANSWER<br/>callerNum:78126877894<br/>okдата = 7.02 and mangotalkerномер = "78126877894"<br/>дата = 7.02 and mangotalkerномер = "78126877894"<br/>дата = 7.02 and mangotalkerномер = 78126877894<br/>дата = 7.02 and mangotalkerномер = 78126877894<br/>not todaymangotalkerномер = "78126877894"<br/>Найдена соответствующая запись в базе: 3<br/>save data to telfinCall<br/>not new<br/><br/>
+There was an interactive request 7.02 16:32:30:<br/>
+interactive:<br/>ApiId: 3yxzhl4ryqyvhxypmpkx<br/>Number: 78123097166<br/>IVR: 73<br/>Phone not found<br/>end of interactive<br/><br/>
+There was a call 7.02 16:32:45:<br/>
+ApiId: 3yxzhl4ryqyvhxypmpkx<br/>CallerIdNum: +78126877894<br/>CalledDID: 78123097166<br/>CallSatus: ANSWER<br/>callerNum:78126877894<br/>okдата = 7.02 and mangotalkerномер = "78126877894"<br/>дата = 7.02 and mangotalkerномер = "78126877894"<br/>дата = 7.02 and mangotalkerномер = 78126877894<br/>дата = 7.02 and mangotalkerномер = 78126877894<br/>not todaymangotalkerномер = "78126877894"<br/>Найдена соответствующая запись в базе: 3<br/>save data to telfinCall<br/>not new<br/><br/>
+There was an interactive request 7.02 16:34:10:<br/>
+interactive:<br/>ApiId: 6vmqwpbrfv5d5q3zdgf3<br/>Number: 78123097166<br/>IVR: 79<br/>Phone not found<br/>end of interactive<br/><br/>
+There was a call 7.02 16:34:26:<br/>
+ApiId: 6vmqwpbrfv5d5q3zdgf3<br/>CallerIdNum: +78126877894<br/>CalledDID: 78123097166<br/>CallSatus: ANSWER<br/>callerNum:78126877894<br/>okдата = 7.02 and mangotalkerномер = "78126877894"<br/>дата = 7.02 and mangotalkerномер = "78126877894"<br/>дата = 7.02 and mangotalkerномер = 78126877894<br/>дата = 7.02 and mangotalkerномер = 78126877894<br/>not todaymangotalkerномер = "78126877894"<br/>Найдена соответствующая запись в базе: 3<br/>save data to telfinCall<br/>not new<br/><br/>
+There was an interactive request 7.02 16:35:58:<br/>
+interactive:<br/>ApiId: nydwsvohd5bx7skixmrm<br/>Number: 78123097166<br/>IVR: 18<br/>Phone not found<br/>end of interactive<br/><br/>
+There was a call 7.02 16:36:12:<br/>
+ApiId: nydwsvohd5bx7skixmrm<br/>CallerIdNum: +78126877894<br/>CalledDID: 78123097166<br/>CallSatus: ANSWER<br/>callerNum:78126877894<br/>okдата = 7.02 and mangotalkerномер = "78126877894"<br/>дата = 7.02 and mangotalkerномер = "78126877894"<br/>дата = 7.02 and mangotalkerномер = 78126877894<br/>дата = 7.02 and mangotalkerномер = 78126877894<br/>not todaymangotalkerномер = "78126877894"<br/>New record<br/>Call save successful<br/>ErrorCode: 3<br/><br/><br/>
+There was an interactive request 7.02 16:37:15:<br/>
+interactive:<br/>ApiId: 6lme6hmjsc236swg7lbv<br/>Number: 78123097166<br/>IVR: 46<br/>Phone not found<br/>end of interactive<br/><br/>
+There was a call 7.02 16:37:30:<br/>
+ApiId: 6lme6hmjsc236swg7lbv<br/>CallerIdNum: +78126877894<br/>CalledDID: 78123097166<br/>CallSatus: ANSWER<br/>callerNum:78126877894<br/>okдата = 7.02 and mangotalkerномер = "78126877894"<br/>дата = 7.02 and mangotalkerномер = "78126877894"<br/>дата = 7.02 and mangotalkerномер = 78126877894<br/>дата = 7.02 and mangotalkerномер = 78126877894<br/>not todaymangotalkerномер = "78126877894"<br/>New record<br/>Call save successful<br/>ErrorCode: 3<br/><br/><br/>
+There was an interactive request 7.02 16:40:29:<br/>
+interactive:<br/>ApiId: xc3eljsxbzubodrhr646<br/>Number: 78123097166<br/>IVR: 73<br/>Phone not found<br/>end of interactive<br/><br/>
+There was a call 7.02 16:40:43:<br/>
+ApiId: xc3eljsxbzubodrhr646<br/>CallerIdNum: +78126877894<br/>CalledDID: 78123097166<br/>CallSatus: ANSWER<br/>callerNum:78126877894<br/>okдата = 7.02 and mangotalkerномер = "78126877894"<br/>дата = 7.02 and mangotalkerномер = "78126877894"<br/>дата = 7.02 and mangotalkerномер = 78126877894<br/>дата = 7.02 and mangotalkerномер = 78126877894<br/>not todaymangotalkerномер = "78126877894"<br/><pre>array(14) {
+  ["дата"]=>
+  string(4) "3.02"
+  ["типисследования"]=>
+  string(11) "мрт гм"
+  ["н"]=>
+  string(0) ""
+  ["пожеланияклиента"]=>
+  string(0) ""
+  ["фио"]=>
+  string(14) "Сидоров"
+  ["датарождения"]=>
+  string(0) ""
+  ["контактныйтелефон"]=>
+  string(11) "89111234567"
+  ["клиника"]=>
+  string(6) "фыв"
+  ["цена"]=>
+  string(0) ""
+  ["отчетпозвонку"]=>
+  string(11) "15.30 01.03"
+  ["mangotalkerномер"]=>
+  string(11) "78126877894"
+  ["комментарий"]=>
+  string(14) "коммент"
+  ["направление"]=>
+  string(0) ""
+  ["sa"]=>
+  string(0) ""
+}
+</pre><pre>object(FastCall)#101 (24) {
+  ["mangoTalker"]=>
+  string(11) "78126877894"
+  ["inited"]=>
+  NULL
+  ["caller"]=>
+  string(11) "78126877894"
+  ["bCall"]=>
+  NULL
+  ["called"]=>
+  object(UserPhone)#89 (11) {
+    ["_new":"CActiveRecord":private]=>
+    bool(true)
+    ["_attributes":"CActiveRecord":private]=>
+    array(0) {
+    }
+    ["_related":"CActiveRecord":private]=>
+    array(0) {
+    }
+    ["_c":"CActiveRecord":private]=>
+    NULL
+    ["_pk":"CActiveRecord":private]=>
+    NULL
+    ["_alias":"CActiveRecord":private]=>
+    string(1) "t"
+    ["_errors":"CModel":private]=>
+    array(0) {
+    }
+    ["_validators":"CModel":private]=>
+    NULL
+    ["_scenario":"CModel":private]=>
+    string(6) "insert"
+    ["_e":"CComponent":private]=>
+    NULL
+    ["_m":"CComponent":private]=>
+    NULL
+  }
+  ["tCall"]=>
+  object(TelfinCall)#106 (11) {
+    ["_new":"CActiveRecord":private]=>
+    bool(false)
+    ["_attributes":"CActiveRecord":private]=>
+    array(8) {
+      ["ApiId"]=>
+      string(20) "xc3eljsxbzubodrhr646"
+      ["caller"]=>
+      string(11) "78126877894"
+      ["called"]=>
+      string(11) "78123097166"
+      ["ivr"]=>
+      string(2) "73"
+      ["id_phone"]=>
+      NULL
+      ["id_call"]=>
+      NULL
+      ["id_error"]=>
+      string(2) "10"
+      ["time"]=>
+      string(19) "2016-02-07 16:40:29"
+    }
+    ["_related":"CActiveRecord":private]=>
+    array(0) {
+    }
+    ["_c":"CActiveRecord":private]=>
+    NULL
+    ["_pk":"CActiveRecord":private]=>
+    string(20) "xc3eljsxbzubodrhr646"
+    ["_alias":"CActiveRecord":private]=>
+    string(1) "t"
+    ["_errors":"CModel":private]=>
+    array(0) {
+    }
+    ["_validators":"CModel":private]=>
+    NULL
+    ["_scenario":"CModel":private]=>
+    string(6) "update"
+    ["_e":"CComponent":private]=>
+    NULL
+    ["_m":"CComponent":private]=>
+    NULL
+  }
+  ["unix":"FastCall":private]=>
+  int(1454852429)
+  ["id_address"]=>
+  NULL
+  ["State"]=>
+  string(0) ""
+  ["dateString"]=>
+  string(4) "3.02"
+  ["report"]=>
+  string(11) "15.30 01.03"
+  ["i"]=>
+  NULL
+  ["j"]=>
+  NULL
+  ["H"]=>
+  string(0) ""
+  ["wishes"]=>
+  string(0) ""
+  ["fio"]=>
+  string(14) "Сидоров"
+  ["birth"]=>
+  string(0) ""
+  ["number"]=>
+  string(11) "89111234567"
+  ["clinic"]=>
+  string(6) "фыв"
+  ["price"]=>
+  string(0) ""
+  ["research_type"]=>
+  string(11) "мрт гм"
+  ["comment"]=>
+  string(14) "коммент"
+  ["id_error"]=>
+  NULL
+  ["id_call_type"]=>
+  NULL
+}
+</pre>New record<br/>Call save successful<br/>ErrorCode: 3<br/><br/><br/>
+There was an interactive request 7.02 16:46:01:<br/>
+interactive:<br/>ApiId: twansat43t2le5bel5ay<br/>Number: 78123097166<br/>IVR: 18<br/>Phone not found<br/>end of interactive<br/><br/>
+There was a call 7.02 16:46:15:<br/>
+ApiId: twansat43t2le5bel5ay<br/>CallerIdNum: +78126877894<br/>CalledDID: 78123097166<br/>CallSatus: ANSWER<br/>callerNum:78126877894<br/>okдата = 7.02 and mangotalkerномер = "78126877894"<br/>дата = 7.02 and mangotalkerномер = "78126877894"<br/>дата = 7.02 and mangotalkerномер = 78126877894<br/>дата = 7.02 and mangotalkerномер = 78126877894<br/>not todaymangotalkerномер = "78126877894"<br/><pre>array(14) {
+  ["дата"]=>
+  string(4) "3.02"
+  ["типисследования"]=>
+  string(11) "мрт гм"
+  ["н"]=>
+  string(0) ""
+  ["пожеланияклиента"]=>
+  string(0) ""
+  ["фио"]=>
+  string(14) "Сидоров"
+  ["датарождения"]=>
+  string(0) ""
+  ["контактныйтелефон"]=>
+  string(11) "89111234567"
+  ["клиника"]=>
+  string(6) "фыв"
+  ["цена"]=>
+  string(0) ""
+  ["отчетпозвонку"]=>
+  string(11) "15.30 01.03"
+  ["mangotalkerномер"]=>
+  string(11) "78126877894"
+  ["комментарий"]=>
+  string(14) "коммент"
+  ["направление"]=>
+  string(0) ""
+  ["sa"]=>
+  string(0) ""
+}
+</pre><pre>object(FastCall)#101 (24) {
+  ["mangoTalker"]=>
+  string(11) "78126877894"
+  ["inited"]=>
+  NULL
+  ["caller"]=>
+  string(11) "78126877894"
+  ["bCall"]=>
+  NULL
+  ["called"]=>
+  object(UserPhone)#89 (11) {
+    ["_new":"CActiveRecord":private]=>
+    bool(true)
+    ["_attributes":"CActiveRecord":private]=>
+    array(0) {
+    }
+    ["_related":"CActiveRecord":private]=>
+    array(0) {
+    }
+    ["_c":"CActiveRecord":private]=>
+    NULL
+    ["_pk":"CActiveRecord":private]=>
+    NULL
+    ["_alias":"CActiveRecord":private]=>
+    string(1) "t"
+    ["_errors":"CModel":private]=>
+    array(0) {
+    }
+    ["_validators":"CModel":private]=>
+    NULL
+    ["_scenario":"CModel":private]=>
+    string(6) "insert"
+    ["_e":"CComponent":private]=>
+    NULL
+    ["_m":"CComponent":private]=>
+    NULL
+  }
+  ["tCall"]=>
+  object(TelfinCall)#106 (11) {
+    ["_new":"CActiveRecord":private]=>
+    bool(false)
+    ["_attributes":"CActiveRecord":private]=>
+    array(8) {
+      ["ApiId"]=>
+      string(20) "twansat43t2le5bel5ay"
+      ["caller"]=>
+      string(11) "78126877894"
+      ["called"]=>
+      string(11) "78123097166"
+      ["ivr"]=>
+      string(2) "18"
+      ["id_phone"]=>
+      NULL
+      ["id_call"]=>
+      NULL
+      ["id_error"]=>
+      string(2) "10"
+      ["time"]=>
+      string(19) "2016-02-07 16:46:01"
+    }
+    ["_related":"CActiveRecord":private]=>
+    array(0) {
+    }
+    ["_c":"CActiveRecord":private]=>
+    NULL
+    ["_pk":"CActiveRecord":private]=>
+    string(20) "twansat43t2le5bel5ay"
+    ["_alias":"CActiveRecord":private]=>
+    string(1) "t"
+    ["_errors":"CModel":private]=>
+    array(0) {
+    }
+    ["_validators":"CModel":private]=>
+    NULL
+    ["_scenario":"CModel":private]=>
+    string(6) "update"
+    ["_e":"CComponent":private]=>
+    NULL
+    ["_m":"CComponent":private]=>
+    NULL
+  }
+  ["unix":"FastCall":private]=>
+  int(1454852761)
+  ["id_address"]=>
+  NULL
+  ["State"]=>
+  string(0) ""
+  ["dateString"]=>
+  string(4) "3.02"
+  ["report"]=>
+  string(11) "15.30 01.03"
+  ["i"]=>
+  NULL
+  ["j"]=>
+  NULL
+  ["H"]=>
+  string(0) ""
+  ["wishes"]=>
+  string(0) ""
+  ["fio"]=>
+  string(14) "Сидоров"
+  ["birth"]=>
+  string(0) ""
+  ["number"]=>
+  string(11) "89111234567"
+  ["clinic"]=>
+  string(6) "фыв"
+  ["price"]=>
+  string(0) ""
+  ["research_type"]=>
+  string(11) "мрт гм"
+  ["comment"]=>
+  string(14) "коммент"
+  ["id_error"]=>
+  NULL
+  ["id_call_type"]=>
+  NULL
+}
+</pre>Найдена соответствующая запись в базе: 3<br/>save data to telfinCall<br/>not new<br/><br/>
+There was an interactive request 7.02 17:08:35:<br/>
+interactive:<br/>ApiId: e2phfhghfnb6znw2apms<br/>Number: 78123097166<br/>IVR: 28<br/>Phone not found<br/>end of interactive<br/><br/>
+There was a call 7.02 17:08:48:<br/>
+ApiId: e2phfhghfnb6znw2apms<br/>CallerIdNum: +78126877894<br/>CalledDID: 78123097166<br/>CallSatus: ANSWER<br/>callerNum:78126877894<br/>okдата = 7.02 and mangotalkerномер = "78126877894"<br/>дата = 7.02 and mangotalkerномер = "78126877894"<br/>дата = 7.02 and mangotalkerномер = 78126877894<br/>дата = 7.02 and mangotalkerномер = 78126877894<br/>not todaymangotalkerномер = "78126877894"<br/><pre>array(14) {
+  ["дата"]=>
+  string(4) "3.02"
+  ["типисследования"]=>
+  string(11) "мрт гм"
+  ["н"]=>
+  string(0) ""
+  ["пожеланияклиента"]=>
+  string(0) ""
+  ["фио"]=>
+  string(14) "Сидоров"
+  ["датарождения"]=>
+  string(0) ""
+  ["контактныйтелефон"]=>
+  string(11) "89111234567"
+  ["клиника"]=>
+  string(6) "фыв"
+  ["цена"]=>
+  string(0) ""
+  ["отчетпозвонку"]=>
+  string(11) "15.30 01.03"
+  ["mangotalkerномер"]=>
+  string(11) "78126877894"
+  ["комментарий"]=>
+  string(14) "коммент"
+  ["направление"]=>
+  string(0) ""
+  ["sa"]=>
+  string(0) ""
+}
+</pre><pre>object(FastCall)#101 (24) {
+  ["mangoTalker"]=>
+  string(11) "78126877894"
+  ["inited"]=>
+  NULL
+  ["caller"]=>
+  string(11) "78126877894"
+  ["bCall"]=>
+  NULL
+  ["called"]=>
+  object(UserPhone)#89 (11) {
+    ["_new":"CActiveRecord":private]=>
+    bool(true)
+    ["_attributes":"CActiveRecord":private]=>
+    array(0) {
+    }
+    ["_related":"CActiveRecord":private]=>
+    array(0) {
+    }
+    ["_c":"CActiveRecord":private]=>
+    NULL
+    ["_pk":"CActiveRecord":private]=>
+    NULL
+    ["_alias":"CActiveRecord":private]=>
+    string(1) "t"
+    ["_errors":"CModel":private]=>
+    array(0) {
+    }
+    ["_validators":"CModel":private]=>
+    NULL
+    ["_scenario":"CModel":private]=>
+    string(6) "insert"
+    ["_e":"CComponent":private]=>
+    NULL
+    ["_m":"CComponent":private]=>
+    NULL
+  }
+  ["tCall"]=>
+  object(TelfinCall)#106 (11) {
+    ["_new":"CActiveRecord":private]=>
+    bool(false)
+    ["_attributes":"CActiveRecord":private]=>
+    array(8) {
+      ["ApiId"]=>
+      string(20) "e2phfhghfnb6znw2apms"
+      ["caller"]=>
+      string(11) "78126877894"
+      ["called"]=>
+      string(11) "78123097166"
+      ["ivr"]=>
+      string(2) "28"
+      ["id_phone"]=>
+      NULL
+      ["id_call"]=>
+      NULL
+      ["id_error"]=>
+      string(2) "10"
+      ["time"]=>
+      string(19) "2016-02-07 17:08:35"
+    }
+    ["_related":"CActiveRecord":private]=>
+    array(0) {
+    }
+    ["_c":"CActiveRecord":private]=>
+    NULL
+    ["_pk":"CActiveRecord":private]=>
+    string(20) "e2phfhghfnb6znw2apms"
+    ["_alias":"CActiveRecord":private]=>
+    string(1) "t"
+    ["_errors":"CModel":private]=>
+    array(0) {
+    }
+    ["_validators":"CModel":private]=>
+    NULL
+    ["_scenario":"CModel":private]=>
+    string(6) "update"
+    ["_e":"CComponent":private]=>
+    NULL
+    ["_m":"CComponent":private]=>
+    NULL
+  }
+  ["unix":"FastCall":private]=>
+  int(1454854115)
+  ["id_address"]=>
+  NULL
+  ["State"]=>
+  string(0) ""
+  ["dateString"]=>
+  string(4) "3.02"
+  ["report"]=>
+  string(11) "15.30 01.03"
+  ["i"]=>
+  NULL
+  ["j"]=>
+  NULL
+  ["H"]=>
+  string(0) ""
+  ["wishes"]=>
+  string(0) ""
+  ["fio"]=>
+  string(14) "Сидоров"
+  ["birth"]=>
+  string(0) ""
+  ["number"]=>
+  string(11) "89111234567"
+  ["clinic"]=>
+  string(6) "фыв"
+  ["price"]=>
+  string(0) ""
+  ["research_type"]=>
+  string(11) "мрт гм"
+  ["comment"]=>
+  string(14) "коммент"
+  ["id_error"]=>
+  NULL
+  ["id_call_type"]=>
+  NULL
+}
+</pre>New record<br/>Call save successful<br/>ErrorCode: 3<br/><br/><br/>
+There was an interactive request 7.02 17:09:34:<br/>
+interactive:<br/>ApiId: 6jimni3hrme6lipenb5n<br/>Number: 78123097166<br/>IVR: 91<br/>Phone not found<br/>end of interactive<br/><br/>
+There was a call 7.02 17:09:51:<br/>
+ApiId: 6jimni3hrme6lipenb5n<br/>CallerIdNum: +78126877894<br/>CalledDID: 78123097166<br/>CallSatus: ANSWER<br/>callerNum:78126877894<br/>okдата = 7.02 and mangotalkerномер = "78126877894"<br/>дата = 7.02 and mangotalkerномер = "78126877894"<br/>дата = 7.02 and mangotalkerномер = 78126877894<br/>дата = 7.02 and mangotalkerномер = 78126877894<br/>not todaymangotalkerномер = "78126877894"<br/>New record<br/>Call save successful<br/>ErrorCode: 3<br/><br/><br/>
+There was an interactive request 7.02 17:12:26:<br/>
+interactive:<br/>ApiId: lzxiqazchunv4jdj3zl7<br/>Number: 78123097166<br/>IVR: 76<br/>Phone not found<br/>end of interactive<br/><br/>
+There was a call 7.02 17:12:39:<br/>
+ApiId: lzxiqazchunv4jdj3zl7<br/>CallerIdNum: +78126877894<br/>CalledDID: 78123097166<br/>CallSatus: ANSWER<br/>callerNum:78126877894<br/>okдата = 7.02 and mangotalkerномер = "78126877894"<br/>дата = 7.02 and mangotalkerномер = "78126877894"<br/>дата = 7.02 and mangotalkerномер = 78126877894<br/>дата = 7.02 and mangotalkerномер = 78126877894<br/>not todaymangotalkerномер = "78126877894"<br/>New record<br/>Call save successful<br/>ErrorCode: 3<br/><br/><br/>
+There was a call 7.02 17:14:59:<br/>
+ApiId: vy4jm3cuy6xm3w32sprk<br/>CallerIdNum: +78126877894<br/>CalledDID: 78123097166<br/>CallSatus: ANSWER<br/>Number: 78123097166<br/>IVR: <br/>This number has at least one IVR, but none specified => mistake!<br/>Number: 78123097166<br/>IVR: <br/>This number has at least one IVR, but none specified => mistake!<br/>callerNum:78126877894<br/>okдата = 7.02 and mangotalkerномер = "78126877894"<br/>дата = 7.02 and mangotalkerномер = "78126877894"<br/>дата = 7.02 and mangotalkerномер = 78126877894<br/>дата = 7.02 and mangotalkerномер = 78126877894<br/>not todaymangotalkerномер = "78126877894"<br/>Найдена соответствующая запись в базе: 5<br/>save data to telfinCall<br/>not new<br/><br/>
+There was a call 7.02 17:15:30:<br/>
+ApiId: 7fmfkf43r5k4koxtsj4q<br/>CallerIdNum: +78126877894<br/>CalledDID: 78123097166<br/>CallSatus: ANSWER<br/>Number: 78123097166<br/>IVR: <br/>This number has at least one IVR, but none specified => mistake!<br/>Number: 78123097166<br/>IVR: <br/>This number has at least one IVR, but none specified => mistake!<br/>callerNum:78126877894<br/>okдата = 7.02 and mangotalkerномер = "78126877894"<br/>дата = 7.02 and mangotalkerномер = "78126877894"<br/>дата = 7.02 and mangotalkerномер = 78126877894<br/>дата = 7.02 and mangotalkerномер = 78126877894<br/>not todaymangotalkerномер = "78126877894"<br/>Найдена соответствующая запись в базе: 5<br/>save data to telfinCall<br/>not new<br/><br/>
+There was an interactive request 7.02 17:15:59:<br/>
+interactive:<br/>ApiId: q4jv4ev7so343bhcj4y7<br/>Number: 78123097166<br/>IVR: 76<br/>Phone not found<br/>end of interactive<br/><br/>
+There was a call 7.02 17:16:16:<br/>
+ApiId: q4jv4ev7so343bhcj4y7<br/>CallerIdNum: +78126877894<br/>CalledDID: 78123097166<br/>CallSatus: ANSWER<br/>callerNum:78126877894<br/>okдата = 7.02 and mangotalkerномер = "78126877894"<br/>дата = 7.02 and mangotalkerномер = "78126877894"<br/>дата = 7.02 and mangotalkerномер = 78126877894<br/>дата = 7.02 and mangotalkerномер = 78126877894<br/>not todaymangotalkerномер = "78126877894"<br/>Найдена соответствующая запись в базе: 5<br/>save data to telfinCall<br/>not new<br/><br/>
+There was an interactive request 7.02 17:16:41:<br/>
+interactive:<br/>ApiId: eqxcq6nti2l63t6mxe6i<br/>Number: 78123097166<br/>IVR: 86<br/>Phone not found<br/>end of interactive<br/><br/>
+There was a call 7.02 17:16:58:<br/>
+ApiId: eqxcq6nti2l63t6mxe6i<br/>CallerIdNum: +78126877894<br/>CalledDID: 78123097166<br/>CallSatus: ANSWER<br/>callerNum:78126877894<br/>okдата = 7.02 and mangotalkerномер = "78126877894"<br/>дата = 7.02 and mangotalkerномер = "78126877894"<br/>дата = 7.02 and mangotalkerномер = 78126877894<br/>дата = 7.02 and mangotalkerномер = 78126877894<br/>not todaymangotalkerномер = "78126877894"<br/>Найдена соответствующая запись в базе: 5<br/>save data to telfinCall<br/>not new<br/><br/>
+There was an interactive request 7.02 17:18:20:<br/>
+interactive:<br/>ApiId: usnq7kmqcopzxyeffqu6<br/>Number: 78123097166<br/>IVR: 82<br/>Phone not found<br/>end of interactive<br/><br/>
+There was a call 7.02 17:18:36:<br/>
+ApiId: usnq7kmqcopzxyeffqu6<br/>CallerIdNum: +78126877894<br/>CalledDID: 78123097166<br/>CallSatus: ANSWER<br/>callerNum:78126877894<br/>okдата = 7.02 and mangotalkerномер = "78126877894"<br/>дата = 7.02 and mangotalkerномер = "78126877894"<br/>дата = 7.02 and mangotalkerномер = 78126877894<br/>дата = 7.02 and mangotalkerномер = 78126877894<br/>not todaymangotalkerномер = "78126877894"<br/>New record<br/>Call save successful<br/>ErrorCode: 3<br/><br/><br/>
+There was an interactive request 7.02 17:19:36:<br/>
+interactive:<br/>ApiId: o27xsxox25trgad7ncsk<br/>Number: 78123097166<br/>IVR: 46<br/>Phone not found<br/>end of interactive<br/><br/>
+There was a call 7.02 17:19:48:<br/>
+ApiId: o27xsxox25trgad7ncsk<br/>CallerIdNum: +78126877894<br/>CalledDID: 78123097166<br/>CallSatus: ANSWER<br/>callerNum:78126877894<br/>okдата = 7.02 and mangotalkerномер = "78126877894"<br/>дата = 7.02 and mangotalkerномер = "78126877894"<br/>дата = 7.02 and mangotalkerномер = 78126877894<br/>дата = 7.02 and mangotalkerномер = 78126877894<br/>not todaymangotalkerномер = "78126877894"<br/>New record<br/>Call save successful<br/>ErrorCode: 3<br/><br/><br/>
+There was an interactive request 7.02 17:21:04:<br/>
+interactive:<br/>ApiId: ed7iry7dau2pmgwy7jcf<br/>Number: 78123097166<br/>IVR: 46<br/>Phone not found<br/>end of interactive<br/><br/>
+There was a call 7.02 17:21:16:<br/>
+ApiId: ed7iry7dau2pmgwy7jcf<br/>CallerIdNum: +78126877894<br/>CalledDID: 78123097166<br/>CallSatus: ANSWER<br/>callerNum:78126877894<br/>okдата = 7.02 and mangotalkerномер = "78126877894"<br/>дата = 7.02 and mangotalkerномер = "78126877894"<br/>дата = 7.02 and mangotalkerномер = 78126877894<br/>дата = 7.02 and mangotalkerномер = 78126877894<br/>not todaymangotalkerномер = "78126877894"<br/>New record<br/>Call save successful<br/>ErrorCode: 3<br/><br/><br/>
+There was an interactive request 7.02 17:21:40:<br/>
+interactive:<br/>ApiId: la7vkepfcjwat6agz6a3<br/>Number: 78123097166<br/>IVR: 36<br/>Phone not found<br/>end of interactive<br/><br/>
+There was a call 7.02 17:21:52:<br/>
+ApiId: la7vkepfcjwat6agz6a3<br/>CallerIdNum: +78126877894<br/>CalledDID: 78123097166<br/>CallSatus: ANSWER<br/>callerNum:78126877894<br/>okдата = 7.02 and mangotalkerномер = "78126877894"<br/>дата = 7.02 and mangotalkerномер = "78126877894"<br/>дата = 7.02 and mangotalkerномер = 78126877894<br/>дата = 7.02 and mangotalkerномер = 78126877894<br/>not todaymangotalkerномер = "78126877894"<br/>New record<br/>Call save successful<br/>ErrorCode: 3<br/><br/><br/>
+There was an interactive request 7.02 17:23:54:<br/>
+interactive:<br/>ApiId: mh3mupfjij33ld2zxs7p<br/>Number: 78123097166<br/>IVR: 16<br/>Phone not found<br/>end of interactive<br/><br/>
+There was a call 7.02 17:24:09:<br/>
+ApiId: mh3mupfjij33ld2zxs7p<br/>CallerIdNum: +78126877894<br/>CalledDID: 78123097166<br/>CallSatus: ANSWER<br/>callerNum:78126877894<br/>okдата = 7.02 and mangotalkerномер = "78126877894"<br/>дата = 7.02 and mangotalkerномер = "78126877894"<br/>дата = 7.02 and mangotalkerномер = 78126877894<br/>дата = 7.02 and mangotalkerномер = 78126877894<br/>not todaymangotalkerномер = "78126877894"<br/>New record<br/>Call save successful<br/>ErrorCode: 3<br/><br/><br/>
+There was an interactive request 7.02 17:24:33:<br/>
+interactive:<br/>ApiId: wsti3l4qntixeclbue43<br/>Number: 78123097166<br/>IVR: 28<br/>Phone not found<br/>end of interactive<br/><br/>
+There was a call 7.02 17:24:51:<br/>
+ApiId: wsti3l4qntixeclbue43<br/>CallerIdNum: +78126877894<br/>CalledDID: 78123097166<br/>CallSatus: ANSWER<br/>callerNum:78126877894<br/>okдата = 7.02 and mangotalkerномер = "78126877894"<br/>дата = 7.02 and mangotalkerномер = "78126877894"<br/>дата = 7.02 and mangotalkerномер = 78126877894<br/>дата = 7.02 and mangotalkerномер = 78126877894<br/>not todaymangotalkerномер = "78126877894"<br/>New record<br/>Call save successful<br/>ErrorCode: 3<br/><br/><br/>
+There was an interactive request 7.02 17:26:10:<br/>
+interactive:<br/>ApiId: bcl45ycheu4i3h2ulxzs<br/>Number: 78123097166<br/>IVR: 46<br/>Phone not found<br/>end of interactive<br/><br/>
+There was a call 7.02 17:26:23:<br/>
+ApiId: bcl45ycheu4i3h2ulxzs<br/>CallerIdNum: +78126877894<br/>CalledDID: 78123097166<br/>CallSatus: ANSWER<br/>callerNum:78126877894<br/>okдата = 7.02 and mangotalkerномер = "78126877894"<br/>дата = 7.02 and mangotalkerномер = "78126877894"<br/>дата = 7.02 and mangotalkerномер = 78126877894<br/>дата = 7.02 and mangotalkerномер = 78126877894<br/>not todaymangotalkerномер = "78126877894"<br/>New record<br/>Call save successful<br/>ErrorCode: 3<br/><br/><br/>
+There was an interactive request 7.02 17:27:11:<br/>
+interactive:<br/>ApiId: 3jexwx5oalvmlzcimwef<br/>Number: 78123097166<br/>IVR: 65<br/>Phone not found<br/>end of interactive<br/><br/>
+There was a call 7.02 17:27:32:<br/>
+ApiId: 3jexwx5oalvmlzcimwef<br/>CallerIdNum: +78126877894<br/>CalledDID: 78123097166<br/>CallSatus: ANSWER<br/>callerNum:78126877894<br/>okдата = 7.02 and mangotalkerномер = "78126877894"<br/>дата = 7.02 and mangotalkerномер = "78126877894"<br/>дата = 7.02 and mangotalkerномер = 78126877894<br/>дата = 7.02 and mangotalkerномер = 78126877894<br/>not todaymangotalkerномер = "78126877894"<br/>New record<br/>Call save successful<br/>ErrorCode: 3<br/><br/><br/>
+There was an interactive request 7.02 17:28:22:<br/>
+interactive:<br/>ApiId: qhj5ezsrqrvjr4cyuj75<br/>Number: 78123097166<br/>IVR: 89<br/>Phone not found<br/>end of interactive<br/><br/>
+There was a call 7.02 17:28:37:<br/>
+ApiId: qhj5ezsrqrvjr4cyuj75<br/>CallerIdNum: +78126877894<br/>CalledDID: 78123097166<br/>CallSatus: ANSWER<br/>callerNum:78126877894<br/>okдата = 7.02 and mangotalkerномер = "78126877894"<br/>дата = 7.02 and mangotalkerномер = "78126877894"<br/>дата = 7.02 and mangotalkerномер = 78126877894<br/>дата = 7.02 and mangotalkerномер = 78126877894<br/>not todaymangotalkerномер = "78126877894"<br/>New record<br/>Call save successful<br/>ErrorCode: 3<br/><br/><br/>
+There was an interactive request 7.02 17:30:07:<br/>
+interactive:<br/>ApiId: 4t3qfhkjtibfmvodyhty<br/>Number: 78123097166<br/>IVR: 73<br/>Phone not found<br/>end of interactive<br/><br/>
+There was a call 7.02 17:30:19:<br/>
+ApiId: 4t3qfhkjtibfmvodyhty<br/>CallerIdNum: +78126877894<br/>CalledDID: 78123097166<br/>CallSatus: ANSWER<br/>callerNum:78126877894<br/>okдата = 7.02 and mangotalkerномер = "78126877894"<br/>дата = 7.02 and mangotalkerномер = "78126877894"<br/>дата = 7.02 and mangotalkerномер = 78126877894<br/>дата = 7.02 and mangotalkerномер = 78126877894<br/>not todaymangotalkerномер = "78126877894"<br/>Найдена соответствующая запись в базе: 22<br/>save data to telfinCall<br/>not new<br/><br/>
+There was a call 7.02 17:35:57:<br/>
+ApiId: z7jrgg343vrxk2gtkjgz<br/>CallerIdNum: 78123099736<br/>CalledDID: 78123099736<br/>CallSatus: BUSY<br/>bad call status<br/><br/><br/>
+There was a call 7.02 17:35:58:<br/>
+ApiId: z7jrgg343vrxk2gtkjgz<br/>CallerIdNum: +11404056377<br/>CalledDID: 78123099736<br/>CallSatus: CHANUNAVAIL<br/>bad call status<br/><br/><br/>
+There was a call 7.02 17:36:00:<br/>
+ApiId: 7godiuk7mhd34pvntbee<br/>CallerIdNum: 78123099736<br/>CalledDID: 78123099736<br/>CallSatus: CANCEL<br/>bad call status<br/><br/><br/>
+There was a call 7.02 17:40:37:<br/>
+ApiId: qgacabxzsnroi2ouyuuj<br/>CallerIdNum: 78123099736<br/>CalledDID: 78123099736<br/>CallSatus: CONGESTION<br/>bad call status<br/><br/><br/>
+There was a call 7.02 17:40:37:<br/>
+ApiId: qgacabxzsnroi2ouyuuj<br/>CallerIdNum: +15587008350<br/>CalledDID: 78123099736<br/>CallSatus: CHANUNAVAIL<br/>bad call status<br/><br/><br/>
+There was a call 7.02 17:40:39:<br/>
+ApiId: ifmyjwvacynczarbc26a<br/>CallerIdNum: 78123099736<br/>CalledDID: 78123099736<br/>CallSatus: CONGESTION<br/>bad call status<br/><br/><br/>
+There was a call 7.02 17:40:40:<br/>
+ApiId: 3ksstpu26ge54ebtmkam<br/>CallerIdNum: 78123099736<br/>CalledDID: 78123099736<br/>CallSatus: CONGESTION<br/>bad call status<br/><br/><br/>
+There was a call 7.02 17:40:40:<br/>
+ApiId: 3ksstpu26ge54ebtmkam<br/>CallerIdNum: +81270040<br/>CalledDID: 78123099736<br/>CallSatus: CHANUNAVAIL<br/>bad call status<br/><br/><br/>
+There was a call 7.02 17:40:54:<br/>
+ApiId: ajxm5r23g7a5u5xg7tyu<br/>CallerIdNum: 78123099736<br/>CalledDID: 78123099736<br/>CallSatus: CONGESTION<br/>bad call status<br/><br/><br/>
+There was a call 7.02 17:40:55:<br/>
+ApiId: aqd6can22l2tr6eo5jce<br/>CallerIdNum: 78123099736<br/>CalledDID: 78123099736<br/>CallSatus: CONGESTION<br/>bad call status<br/><br/><br/>
+There was a call 7.02 17:40:56:<br/>
+ApiId: aqd6can22l2tr6eo5jce<br/>CallerIdNum: +13470175231<br/>CalledDID: 78123099736<br/>CallSatus: CHANUNAVAIL<br/>bad call status<br/><br/><br/>
+There was a call 7.02 17:40:57:<br/>
+ApiId: 2itdcewvwx4lsev5f4nr<br/>CallerIdNum: 78123099736<br/>CalledDID: 78123099736<br/>CallSatus: CONGESTION<br/>bad call status<br/><br/><br/>
+There was a call 8.02 09:40:37:<br/>
+ApiId: mkrda6lsilawcxkjgne2<br/>CallerIdNum: 78123099736<br/>CalledDID: 78123091763<br/>CallSatus: CHANUNAVAIL<br/>bad call status<br/><br/><br/>
+There was a call 8.02 09:42:28:<br/>
+ApiId: tocwmrsaejqx2sueqkb7<br/>CallerIdNum: 78123099736<br/>CalledDID: 78123091763<br/>CallSatus: ANSWER<br/>Number: 78123091763<br/>IVR: <br/>Number: 78123091763<br/>IVR: <br/>callerNum:78123099736<br/>okдата = 8.02 and mangotalkerномер = "78123099736"<br/>дата = 8.02 and mangotalkerномер = "78123099736"<br/>дата = 8.02 and mangotalkerномер = 78123099736<br/>дата = 8.02 and mangotalkerномер = 78123099736<br/>not todaymangotalkerномер = "78123099736"<br/>mangotalkerномер = "78123099736"<br/>mangotalkerномер = 78123099736<br/>mangotalkerномер = 78123099736<br/>not even currrent monthmangotalkerномер = "78123099736"<br/>mangotalkerномер = "78123099736"<br/>mangotalkerномер = 78123099736<br/>mangotalkerномер = 78123099736<br/>not found at all!<br/><br/>
+There was a call 8.02 12:21:46:<br/>
+ApiId: qoo4tx7mdpnpdhujgrdz<br/>CallerIdNum: 78123099736<br/>CalledDID: 78123099736<br/>CallSatus: ANSWER<br/>Number: 78123099736<br/>IVR: <br/>Number: 78123099736<br/>IVR: <br/>callerNum:78123099736<br/>okдата = 8.02 and mangotalkerномер = "78123099736"<br/>дата = 8.02 and mangotalkerномер = "78123099736"<br/>дата = 8.02 and mangotalkerномер = 78123099736<br/>дата = 8.02 and mangotalkerномер = 78123099736<br/>not todaymangotalkerномер = "78123099736"<br/>mangotalkerномер = "78123099736"<br/>mangotalkerномер = 78123099736<br/>mangotalkerномер = 78123099736<br/>not even currrent monthmangotalkerномер = "78123099736"<br/>mangotalkerномер = "78123099736"<br/>mangotalkerномер = 78123099736<br/>mangotalkerномер = 78123099736<br/>not found at all!<br/><br/>
+There was a call 8.02 12:23:17:<br/>
+ApiId: d4wn5rvpgvbsmoaim6ae<br/>CallerIdNum: 78123099736<br/>CalledDID: 78123099736<br/>CallSatus: ANSWER<br/>Number: 78123099736<br/>IVR: <br/>Number: 78123099736<br/>IVR: <br/>callerNum:78123099736<br/>okдата = 8.02 and mangotalkerномер = "78123099736"<br/>дата = 8.02 and mangotalkerномер = "78123099736"<br/>дата = 8.02 and mangotalkerномер = 78123099736<br/>дата = 8.02 and mangotalkerномер = 78123099736<br/>not todaymangotalkerномер = "78123099736"<br/>mangotalkerномер = "78123099736"<br/>mangotalkerномер = 78123099736<br/>mangotalkerномер = 78123099736<br/>not even currrent monthmangotalkerномер = "78123099736"<br/>mangotalkerномер = "78123099736"<br/>mangotalkerномер = 78123099736<br/>mangotalkerномер = 78123099736<br/>not found at all!<br/><br/>
+There was a call 8.02 12:23:38:<br/>
+ApiId: j6zjyw2vxkbdvvcp62wj<br/>CallerIdNum: +78123132858<br/>CalledDID: 78123099736<br/>CallSatus: ANSWER<br/>Number: 78123099736<br/>IVR: <br/>Number: 78123099736<br/>IVR: <br/>callerNum:78123132858<br/>okдата = 8.02 and mangotalkerномер = "78123132858"<br/>дата = 8.02 and mangotalkerномер = "78123132858"<br/>дата = 8.02 and mangotalkerномер = 78123132858<br/>дата = 8.02 and mangotalkerномер = 78123132858<br/>not todaymangotalkerномер = "78123132858"<br/>mangotalkerномер = "78123132858"<br/>mangotalkerномер = 78123132858<br/>mangotalkerномер = 78123132858<br/>not even currrent monthmangotalkerномер = "78123132858"<br/>mangotalkerномер = "78123132858"<br/>mangotalkerномер = 78123132858<br/>mangotalkerномер = 78123132858<br/>not found at all!<br/><br/>
+There was a call 8.02 12:23:38:<br/>
+ApiId: j6zjyw2vxkbdvvcp62wj<br/>CallerIdNum: 78123099736<br/>CalledDID: 78123099736<br/>CallSatus: ANSWER<br/>callerNum:78123099736<br/>okдата = 8.02 and mangotalkerномер = "78123099736"<br/>дата = 8.02 and mangotalkerномер = "78123099736"<br/>дата = 8.02 and mangotalkerномер = 78123099736<br/>дата = 8.02 and mangotalkerномер = 78123099736<br/>not todaymangotalkerномер = "78123099736"<br/>mangotalkerномер = "78123099736"<br/>mangotalkerномер = 78123099736<br/>mangotalkerномер = 78123099736<br/>not even currrent monthmangotalkerномер = "78123099736"<br/>mangotalkerномер = "78123099736"<br/>mangotalkerномер = 78123099736<br/>mangotalkerномер = 78123099736<br/>not found at all!<br/><br/>
+There was a call 8.02 12:24:17:<br/>
+ApiId: kk6svhgoaehgusb4hdvz<br/>CallerIdNum: 78123099736<br/>CalledDID: 78123099736<br/>CallSatus: ANSWER<br/>Number: 78123099736<br/>IVR: <br/>Number: 78123099736<br/>IVR: <br/>callerNum:78123099736<br/>okдата = 8.02 and mangotalkerномер = "78123099736"<br/>дата = 8.02 and mangotalkerномер = "78123099736"<br/>дата = 8.02 and mangotalkerномер = 78123099736<br/>дата = 8.02 and mangotalkerномер = 78123099736<br/>not todaymangotalkerномер = "78123099736"<br/>mangotalkerномер = "78123099736"<br/>mangotalkerномер = 78123099736<br/>mangotalkerномер = 78123099736<br/>not even currrent monthmangotalkerномер = "78123099736"<br/>mangotalkerномер = "78123099736"<br/>mangotalkerномер = 78123099736<br/>mangotalkerномер = 78123099736<br/>not found at all!<br/><br/>
+There was a call 8.02 16:13:23:<br/>
+ApiId: libdvuaqv5jfvahdugar<br/>CallerIdNum: +78123351127<br/>CalledDID: 78123091763<br/>CallSatus: ANSWER<br/>Number: 78123091763<br/>IVR: <br/>Number: 78123091763<br/>IVR: <br/>callerNum:78123351127<br/>okдата = 8.02 and mangotalkerномер = "78123351127"<br/>дата = 8.02 and mangotalkerномер = "78123351127"<br/>дата = 8.02 and mangotalkerномер = 78123351127<br/>дата = 8.02 and mangotalkerномер = 78123351127<br/>not todaymangotalkerномер = "78123351127"<br/>mangotalkerномер = "78123351127"<br/>mangotalkerномер = 78123351127<br/>mangotalkerномер = 78123351127<br/>not even currrent monthmangotalkerномер = "78123351127"<br/>mangotalkerномер = "78123351127"<br/>mangotalkerномер = 78123351127<br/>mangotalkerномер = 78123351127<br/>not found at all!<br/><br/>
+There was a call 8.02 16:48:26:<br/>
+ApiId: sxmbzujio2feead2zij7<br/>CallerIdNum: +79516727222<br/>CalledDID: 78123099736<br/>CallSatus: ANSWER<br/>Number: 78123099736<br/>IVR: <br/>Number: 78123099736<br/>IVR: <br/>callerNum:79516727222<br/>okдата = 8.02 and mangotalkerномер = "79516727222"<br/>дата = 8.02 and mangotalkerномер = "79516727222"<br/>дата = 8.02 and mangotalkerномер = 79516727222<br/>дата = 8.02 and mangotalkerномер = 79516727222<br/>not todaymangotalkerномер = "79516727222"<br/>mangotalkerномер = "79516727222"<br/>mangotalkerномер = 79516727222<br/>mangotalkerномер = 79516727222<br/>not even currrent monthmangotalkerномер = "79516727222"<br/>mangotalkerномер = "79516727222"<br/>mangotalkerномер = 79516727222<br/>mangotalkerномер = 79516727222<br/>not found at all!<br/><br/>
+There was an interactive request 8.02 20:42:40:<br/>
+interactive:<br/>ApiId: yjxyukmqsbauqfbwtkbb<br/>Number: 78123097166<br/>IVR: 10<br/>Number: 78123097166<br/>IVR: 10<br/>PhoneId: 20<br/>end of interactive<br/><br/>
+There was a call 8.02 21:46:36:<br/>
+ApiId: yjxyukmqsbauqfbwtkbb<br/>CallerIdNum: 001<br/>CalledDID: 78123097166<br/>CallSatus: ANSWER<br/>callerNum:<br/>incorrect caller number<br/><br/>
+There was a call 8.02 21:46:36:<br/>
+ApiId: yjxyukmqsbauqfbwtkbb<br/>CallerIdNum: 001<br/>CalledDID: 78123097166<br/>CallSatus: ANSWER<br/>callerNum:<br/>incorrect caller number<br/><br/>
+There was a call 8.02 21:47:05:<br/>
+ApiId: yjxyukmqsbauqfbwtkbb<br/>CallerIdNum: +79602616540<br/>CalledDID: 78123097166<br/>CallSatus: ANSWER<br/>callerNum:79602616540<br/>okдата = 8.02 and mangotalkerномер = "79602616540"<br/>дата = 8.02 and mangotalkerномер = "79602616540"<br/>дата = 8.02 and mangotalkerномер = 79602616540<br/>дата = 8.02 and mangotalkerномер = 79602616540<br/>not todaymangotalkerномер = "79602616540"<br/>mangotalkerномер = "79602616540"<br/>mangotalkerномер = 79602616540<br/>mangotalkerномер = 79602616540<br/>not even currrent monthmangotalkerномер = "79602616540"<br/>mangotalkerномер = "79602616540"<br/>mangotalkerномер = 79602616540<br/>mangotalkerномер = 79602616540<br/>not found at all!<br/><br/>
+There was an interactive request 9.02 19:03:54:<br/>
+interactive:<br/>ApiId: ao2xrk74sh3b24kjx7xe<br/>Number: 78123097166<br/>IVR: 10<br/>Number: 78123097166<br/>IVR: 10<br/>PhoneId: 20<br/>end of interactive<br/><br/>
+There was an interactive request 9.02 20:03:29:<br/>
+interactive:<br/>ApiId: qwhiqz434fdf264sovbf<br/>Number: 78123097166<br/>IVR: 10<br/>Number: 78123097166<br/>IVR: 10<br/>PhoneId: 20<br/>end of interactive<br/><br/>

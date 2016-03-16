@@ -1,0 +1,6 @@
+There was a call 21:20:25:
+
+There was a call 5.02 15:20:51:<br/>
+ApiId: <br/>CallerIdNum: <br/>CalledDID: <br/>CallSatus: <br/>bad call status<br/><br/><br/>
+There was an interactive request 21.02 12:24:15:<br/>
+interactive:<br/>ApiId: war6ql6onls6eb75rpef<br/>Number: 78123097166<br/>IVR: 10<br/>Number: 78123097166<br/>IVR: 10<br/>PhoneId: 20<br/>end of interactive<br/><br/>

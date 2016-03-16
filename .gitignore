@@ -1,0 +1,18 @@
+#ignore all archives
+*.[oa]
+
+#ignore bash and php files that are used to link hub and live site.
+phpPull
+phpPush
+push.php
+date.d
+#ignore the assets folder as it can be updated often
+/assets/
+#ignore log files
+*.log
+#ignore swp files
+*.swp
+#ignore the images folder temporarily
+#images/clinics/**/*
+#ignore the runtime folder filled with often updated data
+protected/runtime/**/*

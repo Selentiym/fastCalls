@@ -1,0 +1,7 @@
+{
+    "require": {
+        "zelenin/smsru": "~4",
+		"asimlqt/php-google-spreadsheet-client": "2.3.*",
+		"google/apiclient":">=1"
+    }
+}

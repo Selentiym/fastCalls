@@ -1,0 +1,159 @@
+
+@page {
+	size:landscape;
+}
+#wrapper {
+	width:297mm;
+	
+}
+.single_direction {
+	width:28%;
+	padding: 1%;
+	
+	margin:0 1%;
+	display:inline-block;
+	vertical-align:middle;
+	border-radius:8px;
+	border:1px solid black;
+}
+.separator {
+	width:1px;
+	height:90%;
+	vertical-align:middle;
+	border-left:1px dashed black;
+	display:inline-block;
+}
+.bottom_line {
+	height:1px;
+	width:80%;
+	margin: 0 auto;
+	border-bottom:1px solid black;
+}
+.heading {
+	font-weight:bold;
+	text-align:center;
+}
+.tel {
+	font-size:14px;
+	text-align:center;
+}
+.inf_list {
+	font-size:20px;
+	margin: 5px 0;
+}
+.inf_list span {
+	width:60px;
+	height:28px;
+	padding:2px 5px;
+	border-radius: 8px;
+	border:1px solid black;
+	display:inline-block;
+	text-align:center;
+	margin-left:5px;
+}
+.block {
+	margin:5px;
+	border-radius: 8px;
+	border:1px solid black;
+	padding:5px;
+}
+.checkbox{
+	width:18px;
+	height:18px;
+	border-radius:3px;
+	border:1px solid black;
+	display:inline-block;
+	vertical-align:middle;
+	margin:1px;
+}
+.checkbox_cont {
+	display:inline-block;
+	vertical-align:middle;
+	margin:0 5px;
+	font-size: 14px;
+}
+.name {
+	width: 26px;
+	text-align:left;
+	display:inline-block;
+}
+.contrast {
+	display:inline-block;
+	font-size:9px;
+	vertical-align:middle;
+}
+.custom_gap_1{
+	border-bottom:1px dotted black;
+	width:130px;
+	display:inline-block;
+}
+.gap {
+	display:inline-block;
+	border-bottom:1px dotted black;
+}
+.gap_80 {
+	width:80%;
+	display:inline-block;
+	border-bottom:1px dotted black;
+}
+.obl_issled {
+	text-align:center;
+	margin-top:15px;
+	margin-bottom:10px;
+}
+.block_heading {
+	text-decoration:underline;
+	font-weight:bold;
+	font-size:13px;
+	text-align:center;
+}
+.gap_cont {
+	background: url('../images/dot.png') repeat-x 0 90%;
+	overflow:hidden;
+	min-width:1px;
+	min-height:15px;
+	margin-bottom:5px;
+}
+.diagn {
+	font-size:14px;
+	font-weight:bold;
+	text-align:center;
+	margin-top:10px;
+}
+.gap_int {
+	background:#fff;
+}
+.gap_tiny {
+	width:25px;
+	border-bottom:1px dotted black;
+	display:inline-block;
+}
+.custom_gap_2{
+	border-bottom:1px dotted black;
+	width:60px;
+	display:inline-block;
+}
+.w80 {
+	width:80%;
+}
+.assign {
+	font-size:18px;
+	font-weight:bold;
+	text-align:center;
+}
+.addr {
+	margin-right:13px;
+}
+.full_hor_line {
+	margin:5px 0;
+	padding:0;
+	border-bottom:1px solid black;
+	min-width:1px;
+	min-height:1px;
+}
+.logo  {
+	float:right;
+	margin:0;
+	margin-top:3px;
+	width:81px;
+}

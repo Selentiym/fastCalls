@@ -1,0 +1,115 @@
+.mistake{
+	width:100px;
+}
+.flash_error{
+	background:#ff3333;
+}
+.doctor_shortcut {
+	height:250px;
+	overflow-y:auto;
+}
+.doctor_shortcut .print_me{
+	display:block;
+	
+	height:50px;
+	text-decoration:none;
+	text-align:right;
+}
+.doctor_shortcut .navbar span{
+	width:30px;
+}
+.doctor_shortcut .print_me span{
+	text-decoration:italic;
+	font-size:8px;
+	display:inline-block;
+	width:50px;
+}
+.doctor_shortcut .print_image{
+	display:inline-block;
+	width:30px;
+	height:20px;
+	background:url('../images/print.png') no-repeat;
+}
+a > .page {
+	margin: 5px;
+}
+.page.active {
+	color: red;
+	font-size: 20px;
+}
+.select2 {
+	width:200px;
+}
+.assigned {
+	background-color:lightgreen;
+}
+.verifyed {
+	background-color:green;
+}
+.cancelled {
+	background-color:indianred;
+}
+.side {
+	background-color:white;
+}
+.missed{
+	background-color:#ff2b2b;
+}
+/* Admin page, table */
+#admin_table .mainDoc {
+	background-color:lightgreen;
+}
+#admin_table .doctor {
+	background-color:#b3deff;
+}
+#admin_table .month {
+	width:130px;
+}
+#admin_table .fio {
+	width:150px;
+}
+#admin_table .tel {
+	width:200px;
+}
+#admin_table .mail{
+	width:100px;
+}
+#admin_table .create{
+	width:90px;
+}
+
+#admin_table .user_cell {
+	width: 150px;
+}
+#admin_table .md_line td{
+	text-align:center
+}
+
+#medPreds div{
+	display:inline-block;
+	margin-left:10px;
+}
+
+#patients_table {
+	width:80%;
+	min-width:800px;
+	margin:0 auto;
+}
+#patients_table .num {
+	width:5%;
+}
+#patients_table .fio {
+	width:20%;
+}
+#patients_table .tel {
+	width:15%;
+}
+#patients_table .note {
+	min-width:30%;
+}
+#patients_table .create {
+	width:15%;
+}
+#patients_table .doc {
+	width:15%;
+}

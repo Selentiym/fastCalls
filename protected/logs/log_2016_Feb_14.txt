@@ -1,0 +1,2 @@
+There was a call 14.02 10:53:05:<br/>
+ApiId: kpshajzftxyixsf2w4lv<br/>CallerIdNum: +79247820483<br/>CalledDID: 78123097466<br/>CallSatus: ANSWER<br/>Number: 78123097466<br/>IVR: <br/>Number: 78123097466<br/>IVR: <br/>callerNum:79247820483<br/>okдата = 14.02 and mangotalkerномер = "79247820483"<br/>дата = 14.02 and mangotalkerномер = "79247820483"<br/>дата = 14.02 and mangotalkerномер = 79247820483<br/>дата = 14.02 and mangotalkerномер = 79247820483<br/>New record<br/>Call save successful<br/>ErrorCode: 6<br/><br/><br/>

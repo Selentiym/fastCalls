@@ -1,0 +1,1 @@
+<?php UserPhone::model() -> stat('1','1');?>
