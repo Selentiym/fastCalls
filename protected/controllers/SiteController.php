@@ -886,7 +886,4 @@ class SiteController extends Controller
 		fclose($f);*/
 		//echo "100";
 	 }
-	public function actionCheck(){
-		echo "Success!";
-	}
 }
