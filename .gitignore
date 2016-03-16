@@ -16,3 +16,5 @@ date.d
 #images/clinics/**/*
 #ignore the runtime folder filled with often updated data
 protected/runtime/**/*
+#ignore the tokendata files
+*.tokendata
