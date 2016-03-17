@@ -75,7 +75,13 @@ return array(
 				'print/<arg:\w+>' => 'site/printDirections',
 				
 				'unlinkCall/<arg:\d+>' => 'site/unlinkCall',
-				
+
+				'sendSms/<arg:\w+>' => 'site/sendSms',
+
+				'payStat/user/<arg:\w+>' => 'site/payStatistics',
+				'payStat/user/<arg:\w+>/<from:\d*>' => 'site/payStatistics',
+				'payStat/user/<arg:\w*>/<from:\d*>/<to:\d*>' => 'site/payStatistics',
+
 				'stat/<from:\d*>' => 'site/stat',
 				'stat/<arg:\w+>' => 'site/stat',
 				'stat/<from:\d*>/<to:\d*>' => 'site/stat',

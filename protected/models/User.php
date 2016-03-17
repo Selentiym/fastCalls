@@ -187,6 +187,7 @@ class User extends UModel
 	/**
 	 * Function to be used in ViewModel action to have more flexibility
 	 * @arg mixed arg - the argument populated from the controller.
+	 * @return User
 	 */
 	public function customFind($arg){
 		$obj = false;
@@ -686,7 +687,7 @@ class User extends UModel
 	}
 	/**
 	 * @arg string text - the text of an sms to be sent
-	 * @return object[smsmResponse]
+	 * @return array('error' => '<errorText>','response' => SmsResponse, 'delayed' => '<when to send>', 'text' => '<text>', 'number' => '<number>')
 	 */
 	public function sendSms($text){
 		//Если номер нормальный, отправляем. Регулярка с http://habrahabr.ru/post/110731/
@@ -696,6 +697,7 @@ class User extends UModel
 			$sms = new Sms('create',$this, '' , $text);
 			$date = getdate();
 			//Получаем настоящее время в часах.
+			//Отсрачиваем отправку смс, если время не рабочее.
 			$hours = $date['hours'];
 			if ($hours < 9) {
 				$min = (9 - $hours) * 3600;
@@ -714,11 +716,18 @@ class User extends UModel
 				$delayed = 'Отправка без задержки.';
 			}
 			
-			echo "sms to number: {$sms -> number} contains:<br/>{$sms -> text}<br/>{$delayed}<br/>";
-			$sms -> send($time);
+			//echo "sms to number: {$sms -> number} contains:<br/>{$sms -> text}<br/>{$delayed}<br/>";
+			$resp = $sms -> send($time);
+			return array(
+				'response' => $resp,
+				'delayed' => $delayed,
+				'text' => $sms -> text,
+				'number' => $sms -> number
+			);
 			//Yii::app() -> sms -> sendSms($this -> tel, $text);
 		} else {
-			echo "Неверный номер!<br/>";
+			//echo "Неверный номер!<br/>";
+			return array('error' => 'У выбранного пользователя указан некорректный номер!\nНомер доожен начинаться с 7. Напимер,79113332211.');
 			new CustomFlash('error','User','sendSmsInvalidNumber'.$this -> id,'Собщение пользователю '.$this -> fio.' не отправлено: неверный номер. Проверьте его правильность:'.$this -> tel,true);
 		}
 	}
@@ -735,5 +744,47 @@ class User extends UModel
 		$link = Yii::app() -> baseUrl.'/cabinet'.$login;
 		return CHtml::link($this -> fio, $link);
 	}
-	
+	/**
+	 * Gives statistics of the calls for the period
+	 * @param integer from
+	 * @param integer to
+	 * @return array - array of pairs <callTypeId> => <numberOfSuchCalls>
+	 */
+	public function giveStatistics($from = 0, $to = 0){
+		if (!$to){
+			$to = time();
+		}
+		if (!$from) {
+			$from = $to - 3600 * 24;
+		}
+		$types = CallType::model() -> findAll();
+		$rez = array();
+		foreach ($types as $type) {
+			$command = Yii::app() -> db -> createCommand("SELECT COUNT(*) FROM `tbl_call` WHERE ".BaseCall::model() -> giveSqlForTimePeriod($from, $to).' AND `id_call_type`=\''.$type -> id.'\' AND `id_user`=\''.$this -> id.'\'');
+			$rez [$type -> string] = ($command -> queryScalar());
+		}
+		return $rez;
+		//return Data::model() -> giveCallsInRange($from,$to, $this);
+	}
+
+	/**
+	 * Generates an sms to the user.
+	 * @param integer from
+	 * @param integer to
+	 * @param bool send - whether to send the sms immediately
+	 * @return string text of the sms.
+	 */
+	public function smsReportOnPeriod($from, $to, $send = false){
+		$stat = $this -> giveStatistics($from, $to);
+		$fromText = date('j.n',$from);
+		$toText = date('j.n',$to);
+		$ver = $stat['verifyed'];
+		$money = $ver * $this -> conditions;
+		$text = "Уважаемый(ая) <ФИО>!\nВ период с {$fromText} по {$toText} было потверждено {$ver} Ваших пациентов, и Вы заработали {$money}р.";
+		if ($send) {
+			$this -> sendSms($text);
+		}
+		$text = SmsPattern::prepareText($this, $text);
+		return $text;
+	}
 }

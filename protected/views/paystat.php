@@ -17,6 +17,21 @@
 	Yii::app()->getClientScript()->registerScriptFile(Yii::app()->baseUrl.'/js/bundle-bundle_daterangepicker_defer.js');
 
 
+	Yii::app()->getClientScript()->registerScript('sendSmsFunction',"
+		//При нажатии на кнопку отправить, нужно запульнуть аякс запрос на отправку.
+		$('.sendSmsButton').click(function(){
+			smsText = $('#t_'+$(this).data('username')).html();
+			$.post(
+				'".Yii::app() -> baseUrl."/sendSms/'+$(this).data('username'),
+				{
+					text: smsText
+				},
+				function(reply){
+					alert(reply);
+				}
+			);
+		});
+	",CClientScript::POS_READY);
 	Yii::app()->getClientScript()->registerScript('DatePickerRange',"
 		$(function () {
 

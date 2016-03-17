@@ -397,6 +397,23 @@ class BaseCall extends UModel
 		return $criteria;
 	}
 	/**
+	 * @arg integer from - the time to search from
+	 * @arg integer to - the time to search to
+	 * @arg string oper - operator to be used
+	 * @return string - the sql where string containing time condition
+	 */
+	public function giveSqlForTimePeriod($from = NULL, $to = NULL, $oper = ''){
+		$rez = '';
+		if ((int)($from)) {
+			$rez .= ' '.$oper.' `date` >= FROM_UNIXTIME(\''.$from.'\')';
+			$oper = 'AND';
+		}
+		if ((int)($to)) {
+			$rez .= ' '.$oper.' `date` < FROM_UNIXTIME(\''.$to.'\')';
+		}
+		return $rez;
+	}
+	/**
 	 * @return string - the type of call. They are stored in the database table {{call_type}}
 	 */
 	public function Classify(){

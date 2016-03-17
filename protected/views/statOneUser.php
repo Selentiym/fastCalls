@@ -2,6 +2,7 @@
 	<div class="panel-heading">Статистика записей по месяцам</div>
 	<div class="panel-body">
 		<h3>Статистика звонков</h3>
+		<button onClick="location.href='<?php echo Yii::app() -> baseUrl."/payStat/user/{$user -> username}/".(time() - 24*3600*50)."/".time();?>';">Статистика за прошедший месяц</button>
 		<div>Номер телефона: <?php foreach ($user -> phones as $phone) {echo $phone -> showMe()."<br/>";} ?></div>
 		<table class="table">
 			<tbody>

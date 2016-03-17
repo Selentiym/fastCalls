@@ -143,6 +143,11 @@ class SiteController extends Controller
 				'modelClass' => 'User',
 				'view' => '//review/list'
 			),
+			'payStatistics' => array(
+				'class' => 'application.controllers.site.ModelViewAction',
+				'modelClass' => 'User',
+				'view' => '//users/payStatistics'
+			),
 			
 			'userSendSms' => array(
 				'class' => 'application.controllers.site.ModelCollectionAction',
@@ -506,12 +511,30 @@ class SiteController extends Controller
 			$this -> render('//accessDenied');
 		}
 	}
-	public function actionSendSms() {
-		$user = User::model() -> findByPk(562);
-		if (is_a($user, 'User')) {
-			$user -> sendSms('Проверка работы смс обработчика.');
-		} else {
-			echo "incorrect user";
+
+	/**
+	 * Send an sms to user with text from $_POST['text']. For ajax use only!
+	 * @param $arg - username of the person to be sent sms to
+	 */
+	public function actionSendSms($arg) {
+		if (Yii::app()->request->isAjaxRequest) {
+			$user = User::model() -> CustomFind($arg);
+			if (!$user) {
+				echo "Не удалось найти нужного пользователя!";
+				Yii::app() -> end;
+			}
+			if ($text = $_POST['text']) {
+				$text = SmsPattern::prepareText($user, $text);
+				//Yii::app() -> end();
+				if ($rez = $user -> sendSms($text)) {
+					echo $rez['delayed']."\n";
+					echo "Текст: ".$rez['text']."\n";
+					echo "Номер: ".$rez['number'];
+				}
+			}
+			//var_dump($_POST);
+		}else {
+			echo "Это действие доступно только для AJAX запросов!";
 		}
 	}
 	/*

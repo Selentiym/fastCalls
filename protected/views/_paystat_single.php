@@ -34,7 +34,9 @@ if ($user -> id_type == UserType::model() -> getNumber('doctor'))
 
 <!--<td><?php echo $user -> giveStringFromArray($user -> phones, ',', 'number'); ?></td>-->
 <td><?php echo $user -> givePayString(); ?></td>
-
+<td><textarea <?php echo "id='t_".$user -> username."'>" . $user -> smsReportOnPeriod($from, $to, false); ?></textarea>
+	<button data-username='<?php echo $user -> username; ?>' class="sendSmsButton">Отправить смс</button>
+</td>
 <td><?php echo $user -> tel."<br/>". $user -> email; ?></td>
 
 <td>
