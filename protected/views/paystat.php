@@ -155,6 +155,7 @@
 <th class="miss">Не пришли</th>
 <th class="verify">Пришли</th>
 <th class="money">Оплата</th>
+<th class="money">Сообщение</th>
 <th class="tel">Контакты</th>
 <th class="cond">Условия</th>
 </tr>

@@ -517,7 +517,7 @@ class SiteController extends Controller
 	 * @param $arg - username of the person to be sent sms to
 	 */
 	public function actionSendSms($arg) {
-		if (Yii::app()->request->isAjaxRequest) {
+		if ((Yii::app()->request->isAjaxRequest)&&(Yii::app() -> user -> checkAccess('admin'))) {
 			$user = User::model() -> CustomFind($arg);
 			if (!$user) {
 				echo "Не удалось найти нужного пользователя!";
