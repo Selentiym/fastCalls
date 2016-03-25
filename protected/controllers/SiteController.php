@@ -851,8 +851,10 @@ class SiteController extends Controller
 				$qArr = array('sq' => $queryString);
 				//Ищем запись.
 				$entry = $api -> searchEverywhere($qArr, $work);
+
 				if ($entry) {
-					$tempCall = new BaseCall();
+					$entry = $entry -> getValues();
+					$tempCall = new Call(array());
 					$tempCall -> report = $entry['отчетпозвонку'];
 					$tempCall -> State = $entry['sa'];
 					$newId = $tempCall -> ClassifyId();
