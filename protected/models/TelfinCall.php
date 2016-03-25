@@ -111,7 +111,7 @@ class TelfinCall extends UModel
 		return parent::model($className);
 	}
 	/**
-	 * @arg stdClass btCall - brefore telfin call object. It is taken from the telfin api response.
+	 * @arg stdClass btCall - before telfin call object. It is taken from the telfin api response.
 	 * @return TelfinCall - the created TelfinCall object with data taken from the btCall
 	 */
 	public static function createFromTelfinStat($btCall){

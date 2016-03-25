@@ -357,7 +357,7 @@ class SiteController extends Controller
 				'method' => 'SearchAgain',
 				'access' => function(){return Yii::app() -> user -> checkAccess('admin');},
 				'redirectUrl' => Yii::app() -> baseUrl . '/errors/telfin',
-				'args' => false
+				'args' => true
 			),
 			'unlinkCall' => array(
 				'class'=>'application.controllers.site.ClassMethodAction',
