@@ -1,4 +1,7 @@
 <?php
+//The constant JSON_PRETTY_PRINT was replaced by its numerical value 128 in order to use this code from the command line.
+//For some reason the JSON_PRETTY_PRINT is not defined by the shell on the server
+defined('JSON_PRETTY_PRINT') or define('JSON_PRETTY_PRINT',128);
 	class TelfinApiHelper {
 		/**
 		 * @const handlerURI - where to send access token answer.
@@ -337,6 +340,8 @@
 				$tokendata -> obtained = time();
 				$tokendata -> update_after = $tokendata -> obtained + $tokendata -> expires_in - 15*60;
 				$this -> token = $tokendata -> access_token;
+				//The constant JSON_PRETTY_PRINT was replaced by its numerical value 128 in order to use this code from the command line.
+				//For some reason the JSON_PRETTY_PRINT is not defined by the shell on the server
 				file_put_contents(__DIR__ . DIRECTORY_SEPARATOR . self::TOKEN_FILE,json_encode($tokendata, JSON_PRETTY_PRINT));
 				if ($this -> token) {
 					return true;
