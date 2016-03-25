@@ -163,7 +163,7 @@
 		public function getLastEntry($queryArray, $spread, $work){
 			$this -> setWorkArea($spread, $work);
 			$data = $this -> giveData($queryArray);
-			$entries = $data -> getEntries();
+			$entries = $data ? $data -> getEntries() : array();
 			if (count($entries) > 0) {
 				return end($entries);
 			} else {

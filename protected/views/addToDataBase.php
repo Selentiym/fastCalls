@@ -19,5 +19,6 @@
 		'modelName' => 'TestAddress'
 	));
 	$this -> renderPartial('//_mentor_list');
-	
+	echo CHtml::button('Обновить статусы звонков',array('id' => 'renew'));
+	Yii::app() -> getClientScript() -> registerScript('renew','$("#renew").click(function(){location.href="'.Yii::app() -> baseUrl.'/renewStatus";});',CClientScript::POS_END);
 ?>

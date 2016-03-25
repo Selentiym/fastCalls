@@ -866,7 +866,19 @@ class SiteController extends Controller
 					}
 				}
 			}
-			vardump($changed);
+			$was = count($assigned);
+			echo "Обновление статусов проведено. До начала процедуры было $was звонков со статусом Записан<br/>";
+			echo "Ниже приведено количество записей, которые приобрели какой-либо статус.<br/>";
+			unset($changed['Записан']);
+			$ch = 0;
+			foreach($changed as $arr){
+				$status = $arr['name'];
+				$num = $arr['count'];
+				echo $status.": ".$num."<br/>";
+				$ch += $num;
+			}
+			echo "Не удалось обновить статус у ".($was - $ch)." записей.";
+			echo CHtml::link('OK',Yii::app() -> baseUrl.'/data');
 		}
 	}//*/
 	/**
