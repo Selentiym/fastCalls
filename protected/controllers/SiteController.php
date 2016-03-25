@@ -852,7 +852,7 @@ class SiteController extends Controller
 				//Ищем запись.
 				$entry = $api -> searchEverywhere($qArr, $work);
 				if ($entry) {
-					$tempCall = new aCall();
+					$tempCall = new bCall();
 					$tempCall -> report = $entry['отчетпозвонку'];
 					$tempCall -> State = $entry['sa'];
 					$newId = $tempCall -> ClassifyId();
