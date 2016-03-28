@@ -50,6 +50,7 @@
 			$criteria -> addCondition('id_call IS NULL');
 			//Нашли все звонки за сегодняшний день, к которым не прицепились записи
 			$tCalls = TelfinCall::model() -> findAll($criteria);
+			echo "Непривязанных записей: ".count($tCalls)."<br/>".PHP_EOL;
 			foreach ($tCalls as $tCall) {
 				$tCall -> SearchAgain();
 				//break;
