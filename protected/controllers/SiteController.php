@@ -8,7 +8,7 @@ class SiteController extends Controller
 	/**
 	 * How long to wait for the data to be inserted into the google doc file
 	 */
-	const WAIT_MINS = 60;
+	const WAIT_MINS = 0;
 	/**
 	 * The length of an IVR number
 	 */
