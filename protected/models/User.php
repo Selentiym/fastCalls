@@ -526,16 +526,13 @@ class User extends UModel
 		$crit -> compare('id_type', UserType::model() -> getNumber('mainDoc'));
 		return User::model() -> findAll($crit);
 	}
+
 	/**
-	 * @return array - array of User objects with the following structure: main doctor, <his users> , another main doctor, <his users>, ...
+	 * @param integer[] $medPreds - array of main doctor's ids whose users are to be shown
+	 * @param string $sortby
+	 * @return User[] - array of User with the following structure: main doctor, <his users> , another main doctor, <his users>, ...
 	 */
-	public function findAllByMainDocs($medPreds = '',$sortby) {
-		
-		
-		/*if ($sortby) {
-			$sortString = $sortby. ' ASC';
-		}
-		$crit -> order = $sortString;*/
+	public function findAllByMainDocs($medPreds = false,$sortby = '') {
 		$crit = new CDbCriteria;
 		$crit -> compare('id_type', UserType::model() -> getNumber('mainDoc'));
 		if (!empty($medPreds)) {
@@ -543,12 +540,10 @@ class User extends UModel
 		}
 		$MDs = User::model() -> findAll($crit);
 		//Получаем для каждого из них юзеров и добавляем в массив.
-		
 		$users = array();
-		$params = $criteria -> params;
 		foreach($MDs as $MD) {
 			$criteria = new CDbCriteria;
-			$criteria -> order = $sortString;
+			//$criteria -> order = $sortString;
 			$criteria -> compare('id_parent', $MD -> id);
 			$users[] = $MD;
 			$users = array_merge($users, User::model() -> findAll($criteria));

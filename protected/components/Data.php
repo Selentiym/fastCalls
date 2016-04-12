@@ -20,7 +20,14 @@ class Data extends DataFromCsvFile {
 		$from = mktime(0,0,0,$start['mon'], $start['mday'],$start['year']);
 		return $from;
 	}
-	public function giveArrayKeys($from = '', $to = ''){
+
+	/**
+	 * @param int $from
+	 * @param int $to
+	 * @param int $add interval which to make statistics for.
+	 * @return int[] - array that contains the lower bounds.
+	 */
+	public function giveArrayKeys($from = 0, $to = 0, $add = 604800){
 		
 		if (!$from) {
 			$command = Yii::app()->db->createCommand('SELECT MIN(`create_time`) FROM {{user}}');
@@ -36,7 +43,6 @@ class Data extends DataFromCsvFile {
 		//Определили начальный момент.
 		$lower = $this -> generateTimeRanges($time,$to);
 		//echo "<br/>".$lower;
-		$add = 604800;
 		$rez = array();
 		while ($lower < $to) {
 			$rez[] = $lower;
@@ -147,9 +153,28 @@ class Data extends DataFromCsvFile {
 	 * @return array - an array array(<className> => <number of calls classified to be className>)
 	 */
 	public function countCallsInRange($from, $to, $user){
+		//Получили все возможные типы звонков.
+		$types = CallType::model() -> findAll();
+		//Устанавливаем временные границы
+		$criteria = BaseCall::giveCriteriaForTimePeriodStatic($from, $to);
+		$criteria->compare('id_user', $user->id);
+		$criteria->compare('id_call_type', ':typeId');
+		//Для еще большей оптимизации можно тут добавить Singleton для $types,
+		//чтобы каждый раз не дергать базу (хотя, быть может, Yii сам кеширует подобные вещи)
+		$rez = array();
+		//Получаем количетсво звонков данного типа в нужный период.
+		foreach ($types as $type) {
+			$rez [$type -> string] = BaseCall::model() -> count($criteria,array(':typeId' => $type -> id));
+		}
+		$rez['common'] = array_sum($rez);
+		//var_dump($rez);
+		//Yii::app() -> end();
+		return $rez;
+	}
+	/*public function countCallsInRange($from, $to, $user){
 		$calls = $this -> giveCallsInRange($from, $to, $user);
 		return $this -> countArray($calls);
-	}
+	}*/
 	public function giveMonthName($n){
 		$arr = $this -> giveMonthNamesArray();
 		return $arr[(($n - 1 )% 12) +1];

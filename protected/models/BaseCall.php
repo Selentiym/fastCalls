@@ -399,6 +399,21 @@ class BaseCall extends UModel
 	/**
 	 * @arg integer from - the time to search from
 	 * @arg integer to - the time to search to
+	 * @return CDbCRiteria
+	 */
+	public static function giveCriteriaForTimePeriodStatic($from = NULL, $to = NULL){
+		$criteria = new CDbCriteria;
+		if ((int)($from)) {
+			$criteria -> addCondition('date >= FROM_UNIXTIME('.$from.')');
+		}
+		if ((int)($to)) {
+			$criteria -> addCondition('date < FROM_UNIXTIME('.$to.')');
+		}
+		return $criteria;
+	}
+	/**
+	 * @arg integer from - the time to search from
+	 * @arg integer to - the time to search to
 	 * @arg string oper - operator to be used
 	 * @return string - the sql where string containing time condition
 	 */

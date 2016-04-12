@@ -1,4 +1,8 @@
-<?php if (Yii::app() -> user -> checkAccess('admin')) :  
+<?php
+if (Yii::app() -> user -> checkAccess('admin')) :
+
+	Yii::app()->getClientScript()->registerCssFile(Yii::app()->baseUrl.'/css/bundle-bundle_daterangepicker_defer.css');
+	Yii::app()->getClientScript()->registerScriptFile(Yii::app()->baseUrl.'/js/bundle-bundle_daterangepicker_defer.js');
 
 	$admin = User::model() -> findByPk(Yii::app() -> user -> getId());
 	$this -> renderPartial('//navBar',array('user' => $admin, 'button' => 'no'));
@@ -14,6 +18,8 @@
 	//$frompage["sortby"] = 'create_time';
 	if (in_array($frompage["sortby"],$sortable)) {
 		$sortby = $frompage["sortby"];
+	} else {
+		$sortby = '';
 	}
 	$users = User::model() -> findAllByMainDocs($frompage["medPreds"],$sortby);
 	//Сортировка в браузере
@@ -67,9 +73,6 @@
 		});
 	",CClientScript::POS_READY);*/
 	
-	Yii::app()->getClientScript()->registerCssFile(Yii::app()->baseUrl.'/css/bundle-bundle_daterangepicker_defer.css');
-	Yii::app()->getClientScript()->registerScriptFile(Yii::app()->baseUrl.'/js/bundle-bundle_daterangepicker_defer.js');
-	
 	
 	//Календарик для выбора дат.
 	Yii::app()->getClientScript()->registerScript('DatePickerRange',"
@@ -121,56 +124,6 @@
 	
 	$data = new Data();
 	//print_r($get);
-
- $translate = array(
-    "am" => "дп",
-    "pm" => "пп",
-    "AM" => "ДП",
-    "PM" => "ПП",
-    "Monday" => "Понедельник",
-    "Mon" => "Пн",
-    "Tuesday" => "Вторник",
-    "Tue" => "Вт",
-    "Wednesday" => "Среда",
-    "Wed" => "Ср",
-    "Thursday" => "Четверг",
-    "Thu" => "Чт",
-    "Friday" => "Пятница",
-    "Fri" => "Пт",
-    "Saturday" => "Суббота",
-    "Sat" => "Сб",
-    "Sunday" => "Воскресенье",
-    "Sun" => "Вс",
-    "January" => "Января",
-    "Jan" => "Янв",
-    "February" => "Февраля",
-    "Feb" => "Фев",
-    "March" => "Марта",
-    "Mar" => "Мар",
-    "April" => "Апреля",
-    "Apr" => "Апр",
-    "May" => "Мая",
-    "May" => "Мая",
-    "June" => "Июня",
-    "Jun" => "Июн",
-    "July" => "Июля",
-    "Jul" => "Июл",
-    "August" => "Августа",
-    "Aug" => "Авг",
-    "September" => "Сентября",
-    "Sep" => "Сен",
-    "October" => "Октября",
-    "Oct" => "Окт",
-    "November" => "Ноября",
-    "Nov" => "Ноя",
-    "December" => "Декабря",
-    "Dec" => "Дек",
-    "st" => "ое",
-    "nd" => "ое",
-    "rd" => "е",
-    "th" => "ое"
-    );
-	
 ?>
 <!-- Form to contain technical information and to be submitted if the changes are to take place -->
 <form id="controlForm" method = "post">
@@ -186,9 +139,9 @@
 			<span id="reportrange" style="border-bottom: dotted 1px; font-size: 150%">
 				<i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
 				<span><small>с</small>
-				<?php echo strtr(date("d F Y",$from), $translate); ?>
+				<?php echo LanguageHelper::engTranslateDate(date("d F Y",$from)); ?>
 				<small>по</small>
-				<?php echo strtr(date("d F Y",$to),$translate); ?>
+				<?php echo LanguageHelper::engTranslateDate(date("d F Y",$to)); ?>
 				</span> <b class="caret"></b>
 			</span>
 
@@ -214,6 +167,7 @@
 		print_r($user -> calls);*/
 		$add = 604800;
 		//print_r($data -> giveArrayKeys());
+		//Вывд заголовка таблицы. Можно сделать посимпатичнее.
 		foreach ($data -> giveArrayKeys($from, $to) as $moment) {
 			echo "<th>";
 			echo date('d M',$moment);
