@@ -21,8 +21,11 @@
 class User extends UModel
 {
 	const SMS_SEND = '1';
-	
-	
+	/**
+	 * @var string $_childrenIdString contains all chuildren's ids separated by commas
+	 */
+	private $_childrenIdString;
+
 	public $addresses = array();
 	public $password_change = '';
 	public $password_change_second = '';
@@ -100,6 +103,7 @@ class User extends UModel
 			'calls' => array(self::HAS_MANY,'BaseCall', 'id_user'),
 			'reviews' => array(self::HAS_MANY,'Review', 'id_user'),
 			'patients' => array(self::HAS_MANY,'Patient', 'id_user', 'order'=>'patients.create_time DESC'),
+			//'children' => array(self::HAS_MANY,'User','id_parent'),
 		);
 	}
 
@@ -781,5 +785,11 @@ class User extends UModel
 		}
 		$text = SmsPattern::prepareText($this, $text);
 		return $text;
+	}
+	public function getChildrenIdString() {
+		if (!$this -> _childrenIdString) {
+			$this -> _childrenIdString = $this -> giveStringFromArray($this -> getChildren(),',','id');
+		}
+		return $this -> _childrenIdString;
 	}
 }

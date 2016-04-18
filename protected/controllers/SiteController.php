@@ -923,4 +923,11 @@ class SiteController extends Controller
 		fclose($f);*/
 		//echo "100";
 	 }
+	public function actionCheckDebug(){
+		echo "start func";
+		$a = 'some text in a variable.';
+		echo "Stop for a breakpoint here";
+		$time = time();
+		echo "Exit the function";
+	}
 }

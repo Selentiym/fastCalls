@@ -152,7 +152,47 @@ class Data extends DataFromCsvFile {
 	/**
 	 * @return array - an array array(<className> => <number of calls classified to be className>)
 	 */
-	public function countCallsInRange($from, $to, $user){
+	public function countCallsInRange($from, $to, User $user){
+		//Если речь идет не о медпредах, то алгоритм обычный.
+		//if ($user -> id_type != 2) {
+		$conn = MysqlConnect::getConnection();
+		//$BaseSql = "SELECT `id_call_type`,COUNT(`id`) from `tbl_call` WHERE `id_user`='561' AND `date` > FROM_UNIXTIME('1459890000') AND `date` < FROM_UNIXTIME('1460753999') GROUP BY `id_call_type`";
+		$BaseSql = "SELECT `id_call_type`,COUNT(`id`) from `tbl_call` WHERE `date` > FROM_UNIXTIME('{$from}') AND `date` < FROM_UNIXTIME('{$to}')";
+		$append = true;
+		$type = $user -> id_type;
+		if ($user -> id_type == 2) {
+			if ($children = $user -> getChildrenIdString()) {
+				$Sql = $BaseSql . " AND `id_user` IN ({$user -> getChildrenIdString()})";
+				$append = false;
+			}
+		}
+		if ($append) {
+			$Sql = $BaseSql . " AND `id_user` = '{$user -> id}'";
+		}
+		$Sql .= " GROUP BY `id_call_type`";
+		//$BaseSql = "SELECT * FROM `tbl_call`";
+		$q = mysqli_query($conn, $Sql);
+		$username = $user -> username;
+		$children = $user -> children;
+		$err = mysqli_error($conn);
+		$translate = array(
+				1 => 'verifyed',
+				2 => 'missed',
+				3 => 'cancelled',
+				4 => 'side',
+				5 => 'declined',
+				6 => 'assigned'
+		);
+		$rez = array();
+		//$rez = mysqli_fetch_array ($q);
+		while ($temp = $q->fetch_array(MYSQLI_NUM)) {
+			$rez [$translate[$temp[0]]] = $temp[1];
+		}
+		$total = array_sum($rez);
+		$rez['common'] = $total;
+		return $rez;
+	}//*/
+	/*public function countCallsInRange($from, $to, $user){
 		//Получили все возможные типы звонков.
 		$types = CallType::model() -> findAll();
 		//Устанавливаем временные границы
@@ -170,7 +210,7 @@ class Data extends DataFromCsvFile {
 		//var_dump($rez);
 		//Yii::app() -> end();
 		return $rez;
-	}
+	}//*/
 	/*public function countCallsInRange($from, $to, $user){
 		$calls = $this -> giveCallsInRange($from, $to, $user);
 		return $this -> countArray($calls);
