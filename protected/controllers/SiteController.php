@@ -111,6 +111,11 @@ class SiteController extends Controller
 				'access' => function () {return Yii::app() -> user -> checkAccess('admin');},
 				'view' => '//users/collection'
 			),
+			'group'=>array(
+				'class'=>'application.controllers.site.FileViewAction',
+				'access' => function () {return Yii::app() -> user -> checkAccess('admin');},
+				'view' => '//cabinet/group'
+			),
 			
 			'cabinet' => array(
 				'class' => 'application.controllers.site.ModelViewAction',

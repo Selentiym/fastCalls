@@ -172,8 +172,8 @@ class Data extends DataFromCsvFile {
 		$Sql .= " GROUP BY `id_call_type`";
 		//$BaseSql = "SELECT * FROM `tbl_call`";
 		$q = mysqli_query($conn, $Sql);
-		$username = $user -> username;
-		$children = $user -> children;
+		//$username = $user -> username;
+		//$children = $user -> children;
 		$err = mysqli_error($conn);
 		$translate = array(
 				1 => 'verifyed',
