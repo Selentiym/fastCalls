@@ -1,3 +1,5 @@
+var parentDrag = $("#DragContainer");
+var parentAction = $("#ActionContainer");
 /**
  * Created by user on 19.04.2016.
  */
@@ -73,9 +75,11 @@ function Node(parameters){
      */
     me.destroy = function(){
         ind = _.indexOf(Base.prototype.getObject(me.id));
+        if (!ind) { return false; };
         Base.prototype.objects.splice(ind, 1);
         //delete me.objects[me.getObject(me.id)];
         me.element.remove();
+        return true;
     };
     return me;
 }
@@ -160,7 +164,7 @@ function Drop(parameters){
 function FastDrag(parameters){
     var defaultParam = {
         html: '<span style="color:red">blabla</span>',
-        target: $('#parentDrag'),
+        target: parentDrag,
         show: true,
         config: {
             cancel:'.noDrag',
@@ -185,6 +189,27 @@ function FastDrag(parameters){
     var me =  Drag(param);
     return me;
 }
+function UserDrag(parameters){
+    var users = chArr(parameters.users);
+    var name = parameters.name;
+    if (!name) {
+        name = 'Без названия';
+    }
+    var html = $('<h2/>',{
+        text: name
+    });
+    html.after($('<div/>',{
+        'class':'body'
+    }).append($('<p/>',{
+        text:users.toString()
+    })));
+    parameters.html = html;
+    var me = FastDrag(parameters);
+    me.element.addClass('userDrag');
+    //Сохраняем юзеров, которых отображает данный блок.
+    me.users = users;
+    return me;
+}
 function ActionDrop(parameters){
     var me =  Drop(parameters);
     me.action = parameters.action;
@@ -204,7 +229,7 @@ function Action(parameters){
     var DOMparams = chObj(parameters.DOMparams);
     DOMparams = $.extend(true,{
         show:true,
-        target:$("#parentDrag"),
+        target:parentAction,
         css:{
             background:'#18FF96'
         },
@@ -249,17 +274,22 @@ function ActionAdd(parameters){
             var users = [];
             var text = "";
             var i = 0;
-            for (i = 0; i < drop.guests.length; i++) {
-                //text += drag.element.attr("id") + ', ';
-                text += drop.guests[i].element.attr("id") + ', ';
-                //Не забываем удалить операнд.
-                drop.guests[i].destroy();
-            }
+            var users = [];
+            //Удаляем все операнды.
+            _.map(drop.guests, function (obj) {
+                if ((obj.users instanceof Array)&&(obj.users.length)) {
+                    users = _.union(users, obj.users);
+                }
+                obj.destroy();
+                return undefined;
+            });
             //обнуляем содержащиеся Drag-и.
             drop.guests = [];
             console.log(Base.prototype.objects);
-            var rez = FastDrag({
-                html: 'sum: ' + text
+            var rez = UserDrag({
+                //html: 'sum: ' + text
+                users:users,
+                name:'sum'
             });
             return true;
         }

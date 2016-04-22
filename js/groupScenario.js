@@ -1,15 +1,17 @@
 /**
  * Created by user on 20.04.2016.
  */
-obj1 = new FastDrag({
+obj1 = new UserDrag({
     nodeConfig:{
         'id':'drag1'
-    }
+    },
+    users:[3,4,5]
 });
-obj2 = new FastDrag({
+obj2 = new UserDrag({
     nodeConfig:{
         'id':'drag2'
-    }
+    },
+    users: [1,2,3]
 });
 obj1.newProp = 'newProp';
 /*obj2 = new Drop({

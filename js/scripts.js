@@ -9,7 +9,7 @@ function chObj(object){
     return object;
 }
 function chArr(arr){
-    if (arr instanceof Array) {
+    if (!(arr instanceof Array)) {
         return [];
     }
     return arr;

@@ -26,57 +26,15 @@ Yii::app()->getClientScript()->registerCssFile(Yii::app()->baseUrl.'/css/jquery-
             height:500px;
         }
     </style>
-    <script type="text/javascript">
-        $(function() {
-
-            $('.drag').draggable({
-                cancel:'.noDragDiv, .destroy',
-                //helper:'clone',
-                //opacity:'0.35',
-                revertDuration:500,
-                snap:true,
-                snapMode: 'outer',
-                snapTolerance:5,
-                containment:"parent",
-                stack:'.drag',
-                distance:10,
-                /*start:function(event, ui){
-                 alert('start!');
-                 }*/
-            });
-
-        });
-        $(document).ready(function(){
-            $('#destroy').click(function(){
-                $('.drag').draggable('destroy');
-
-            });
-            $('#disable').click(function(){
-                $('.drag').draggable('disable');
-            });
-            $('#enable').click(function(){
-                $('.drag').draggable('enable');
-            });
-            obj3 = $('#hasObject').data('object');
-        });
-        /*function Obj(arg) {
-         this . _arg = arg;
-         }
-         Obj.prototype.sayArg = function(){
-         alert(this . _arg);
-         }
-         var obj1 = new Obj('arg1');
-         var obj2 = new Obj('arg2');*/
-        function ObjF(arg) {
-            var _arg = arg;
-            this . sayArg = function() {
-                alert(_arg);
-            }
-        }
-    </script>
 <button id="kill">Kill!</button>
 <button id="destroy">Destroy!</button>
 <button id="disable">disable!</button>
 <button id="enable">enable!</button>
-<div id="parentDrag">
+<div id="parentDrag" style="position:relative">
+    <div id="DragContainer" style="position:absolute;top:0;left:0;width:100%;height:100%;">
+
+    </div>
+    <div id="ActionContainer" style="position:absolute;top:0;left:0;z-index:-1">
+
+    </div>
 </div>
