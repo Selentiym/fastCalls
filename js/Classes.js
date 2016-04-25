@@ -42,37 +42,48 @@ function Node(parameters){
     if (!nodeConfig.id) {
         nodeConfig.id = 'el' + me.id;
     }
-    //Создаем элемент, который будет отображать наш draggable
-    me.element = $(node, nodeConfig);
-    me.element.append(html);
-    /**
-     * Задаем стили элемента.
-     */
-    if (css) {
-        me.element.css(css);
-    }
-    /**
-     * Задаем позицию вставляемого элемента.
-     */
-    if (!position.left) {
-        position.left = 0;
-    }
-    if (!position.top) {
-        position.top = 0;
-    }
-    me.element.offset(position);
-    //Сохраняем на DOM-елементе ссылку на объект.
-    me.element.data('object',me.id);
-    //alert(me.id);
-    /**
-     * Добавляем элемент на страницу, если нужно.
-     */
-    if (show) {
+    if (nodeConfig.element) {
+        //nodeConfig.element.detach();
+        me.element = nodeConfig.element;
+    } else {
+        //Создаем элемент, который будет отображать наш draggable
+        me.element = $(node, nodeConfig);
+        me.element.append(html);
+        /**
+         * Задаем стили элемента.
+         */
+        if (css) {
+            me.element.css(css);
+        }
+        /**
+         * Задаем позицию вставляемого элемента.
+         */
+        if (!position.left) {
+            position.left = 0;
+        }
+        if (!position.top) {
+            position.top = 0;
+        }
+        if ((position.left) || (position.top)) {
+            me.element.position(position);
+        }
+        /**
+         * Отображаем элемент на странице, если нужно.
+         */
         if (!target) {
             target = $('body');
         }
+
         target.append(me.element);
+        if (!show) {
+            //alert('do not show!');
+            me.element.hide();
+        }
     }
+    //Сохраняем на DOM-елементе ссылку на объект.
+    me.element.data('object',me.id);
+    //alert(me.id);
+
 
     /**
      * Задаем функцию уничтожения
@@ -131,10 +142,22 @@ Base.prototype.toString = function (){
  */
 function Drag(parameters){
     var config = parameters.config;
-
     var me =  Node(parameters);
+    /**
+     * Содержит drop, к которому прикреплен данный drag.
+     */
+    me.holer = false;
+
     me.element.addClass('prefix_drag');
     me.element.draggable(chObj(config));
+    /**
+     * Как только начинается движение, удаляем драг из дропа.
+     */
+    me.element.on("dragstart",function(event, ui){
+        if (me.holder) {
+            me.holder.removeDrag(me);
+        }
+    });
     return me;
 }
 /**
@@ -145,7 +168,7 @@ function Drop(parameters){
     //Наследуемся от Node
     var me =  Node(parameters);
     me.element.droppable(config);
-
+    //Будет содежать драги, которые попали в данный дроп.
     me.guests = [];
     /**
      * Задаем обработчик попадания элемента в droppable
@@ -154,7 +177,8 @@ function Drop(parameters){
         var el = Base.prototype.getObject(ui.draggable.data('object'));
         console.log(me + ': ' + el);
         //Сохраняем элемент, который был вброшен, в массив вброшенных.
-        me.guests.push(el);
+        //me.guests.push(el);
+        me.capture(el);
         console.log(me.guests);
     });
     /**
@@ -166,6 +190,74 @@ function Drop(parameters){
         me.guests.remove(el);
         console.log('text' + me.guests);
     });
+    /**
+     * Добавляем Drag в коллекцию.
+     * @param drag
+     */
+    me.capture = function (drag) {
+        //alert($.inArray(drag, me.guests));
+        if ($.inArray(drag, me.guests) !== -1) {
+            return;
+        }
+        //alert(me.element.offset());
+        var pos = me.element.offset();
+        console.log(pos);
+        var sumWidth = 0;
+        var maxHeight = 0;
+        //Считаем ширину уже имеющихся элементов.
+        _.map(me.guests,function(drag){
+            sumWidth += drag.element.innerWidth();
+            var h = drag.element.innerHeight();
+            if (h > maxHeight) {
+                maxHeight = h;
+            }
+        });
+        maxHeight += 20;
+        //Прибавляем расстояния между элементами
+        sumWidth += (me.guests.length + 1) * 10;
+        //Сдвиг нового элемента относительно родителя.
+        var leftOffset = sumWidth;
+        sumWidth += drag.element.innerWidth() + 10;
+        //Если ширина дропа мала, то увеличиваем ее.
+        if (sumWidth > me.element.width()) {
+            me.element.width(sumWidth);
+        }
+        if (maxHeight > me.element.height()) {
+            me.element.height(maxHeight);
+        }
+
+        drag.element.offset({
+            top: pos.top + 10,
+            left: pos.left + leftOffset
+        });
+        console.log(drag.element.offset());
+        //Добавляем драг в массив содержащихся
+        me.guests.push(drag);
+        //Сохраняем информацию о хозяине в драге.
+        drag.holder = me;
+    };
+    /**
+     * Удаляем драг из имеющихся и обновляем позиции.
+     * @param drag
+     */
+    me.removeDrag = function(drag) {
+        var ind = $.inArray(drag, me.guests);
+        if (ind === -1) {
+            return;
+        }
+        //Сдвигаем более правые элементы.
+        var offset = drag.element.innerWidth() + 10;
+        _.each(me.guests,function(dr,i){
+            if (i > ind) {
+                var pos = dr.element.offset();
+                dr.element.offset({
+                    left: pos.left - offset
+                });
+            }
+        });
+        //Удаляем из массива со сдвигом индекса
+        me.guests.splice(ind,1);
+    };
     return me;
 }
 /**
@@ -248,6 +340,45 @@ function ActionDrop(parameters){
     me.element.on("drop",function(){
         me.action.go();
     });
+    /**
+     * Функция для выдачи юзеров. В первый аргумент можно передать
+     * callable, чтобы применить к массиву массивов пользователей
+     * всех Drag'ов, которые лежат в этом дропе.
+     * Во втором аргументе передается bool, убить ли drag'и потом.
+     * В третьем аргументе передается bool, использовать ли первый массив в качестве
+     * основы.
+     */
+    me.getUsers = function(callable, destroy, init){
+        if (callable !== undefined) {
+            try {
+                var users = [];
+                if (init === true) {
+                    drag1 = me.guests.shift();
+                    users = drag1.users;
+                }
+                _.map(me.guests,function(drag){
+                    users = callable(users,drag.users);
+                    if (destroy === true) {
+                        drag.destroy();
+                    }
+                });
+                if (destroy === true) {
+                    me.guests = [];
+                }
+                return users;
+            } catch (e) {
+                console.log(e);
+                alert('Ошибка при получении юзеров.');
+                return [];
+            }
+        }
+    };
+    me.removeGuests = function(){
+        _.map(me.guests, function(drag){
+            drag.destroy();
+        });
+        me.guests = [];
+    };
     return me;
 }
 /**
@@ -270,12 +401,44 @@ function Action(parameters){
     },DOMparams);
     var me =  Node(DOMparams);
     me.drops = [];
+    /**
+     * Хранит контейнер, для помещения в него результата действия.
+     */
+    me.resultDrop = false;
+    if (parameters.resultDrop) {
+        var param = parameters.resultDrop;
+        //Не хотим, чтобы кто-то что-то кидал в результирующий дроп.
+        param.config = $.extend(param.config, {accept:'nothing'});
+        me.resultDrop = new Drop(param);
+        console.log(me.resultDrop.element);
+    }
+    /**
+     * Выводит результат действия.
+     */
+    me.showRezult = function (drag) {
+        if (me.resultDrop) {
+            me.resultDrop.capture(drag);
+
+        } else {
+
+        }
+        drag.element.show();
+    };
+    /**
+     * Эта функция будет вызываться дропами при попадании в последнего какого-то драга.
+     */
     me.go = function(){
         return me.validate();
     };
+    /**
+     * Показывает, можно ли выполнить действие (учитывает драги в дропах).
+     */
     me.validate = function (){
         return false;
     };
+    /**
+     * Добавляет дроп к списку аргументов действия.
+     */
     me.addDrop = function(conf){
         var config = chObj(conf);
         //Задаем в качестве контейнера для Drop'а элемент действия.
@@ -302,7 +465,6 @@ function ActionAdd(parameters){
     me.go = function () {
         if (me.validate()) {
             var drop = me.drops[0];
-            var i = 0;
             //Будет хранить результирующих пользователей
             var users = [];
             //Удаляем все операнды.
@@ -317,14 +479,50 @@ function ActionAdd(parameters){
             drop.guests = [];
             console.log(Base.prototype.objects);
             //Создаем результат
-            UserDrag({
+            me.showRezult(UserDrag({
                 //html: 'sum: ' + text
                 users:users,
-                name:'sum'
-            });
+                name:'sum',
+                show:false
+            }));
             return true;
         }
         return false;
+    };
+    return me;
+}
+function ActionSubtract(parameters){
+    var me = Action(parameters);
+    /**
+     * Создаем дропы
+     */
+    var minuendConfig = parameters.menuend;
+    var subtrahendConfig = parameters.subtrahend;
+    me.addDrop(minuendConfig);
+    me.addDrop(subtrahendConfig);
+    //Будем пользоваться ими внутри функций, для удобства выносим.
+    var min = me.drops[0];
+    var subtr = me.drops[1];
+    //Задаем триггер
+    me.validate = function(){
+        return ((min.guests.length)&&(subtr.guests.length));
+    };
+    me.go = function() {
+        if (me.validate()) {
+            //Получили объединение пользователей
+            var minUs = min.getUsers(_.union, true, false);
+            var subtrUs = subtr.getUsers(_.union, true, false);
+            //А теперь вычитаем их
+            var users = _.difference(minUs, subtrUs);
+            //Создаем результат
+            me.showRezult(UserDrag({
+                //html: 'sum: ' + text
+                users:users,
+                name:'subtract',
+                show:false
+            }));
+            return true;
+        }
     };
     return me;
 }

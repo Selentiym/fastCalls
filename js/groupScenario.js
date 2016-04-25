@@ -53,3 +53,33 @@ new ActionAdd({
         }
     }
 });
+new ActionSubtract({
+    DOMparams:{
+        nodeConfig:{
+            element:$("#subtrAction")
+        },
+        css:{
+            background:"#aaa",
+            width:"500px"
+        }
+    },
+    menuend:{
+        nodeConfig: {
+            'class': 'ui-corner-all actionDrag',
+            element:$("#menuend")
+        },
+        show: true
+    },
+    subtrahend:{
+        nodeConfig: {
+            'class': 'ui-corner-all actionDrag',
+            element:$("#subtrahend")
+        },
+        show: true
+    },
+    resultDrop: {
+        nodeConfig:{
+            element:$("#subtrRez")
+        }
+    }
+});
