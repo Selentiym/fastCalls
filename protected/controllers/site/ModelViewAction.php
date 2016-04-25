@@ -2,19 +2,22 @@
 	class ModelViewAction extends CAction
 	{
 		/**
-		 * @var string model class for action
+		 * @var string $model class for action
 		 */
 		public $modelClass;
 
 		/**
-		 * @var string view for render
+		 * @var string $view for render
 		 */
-		public $view;
+		public $view = false;
 		/**
-		 * @var boolean partial - whether to user render partial.
+		 * @var boolean $partial - whether to user render partial.
 		 */
 		public $partial = false;
-
+		/**
+		 * @var bool $ajax - whether this is an ajax action
+		 */
+		public $ajax = false;
 		/**
 		 * @param $arg string model argument to be taken into customFind
 		 * @throws CHttpException

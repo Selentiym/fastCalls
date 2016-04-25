@@ -18,6 +18,10 @@
 		 */
 		public $access = false;
 		/**
+		 * @var bool $ajax - whether this method has to be invoked by an ajax request.
+		 */
+		public $ajax = false;
+		/**
 		 * @var bool/string view - view for render
 		 */
 		public $view = false;
@@ -56,7 +60,13 @@
 					//Ищем объект.
 					$modelClass = $this -> modelClass;
 					$method = $this -> method;
-					$object = $modelClass::model() -> customFind($arg);
+					//Поиск производим с уже заданным сценарием, чтобы
+					// адекватно искать в CustomFind
+					$toSearch = $modelClass::model();
+					if ($this -> scenario) {
+						$toSearch -> setScenario($this -> scenario);
+					}
+					$object = $toSearch -> customFind($arg);
 					
 					if (is_a($object, $modelClass)) {
 						if ($this -> scenario) {
@@ -65,6 +75,10 @@
 						
 						if (method_exists($object, $method)) {
 							$object -> $method ($this -> args);
+							if ($this -> ajax) {
+								//if this is an ajax method, stop any other output.
+								return;
+							}
 							if ($this -> view) {
 								if ($this -> partial) {
 									$this -> controller -> renderPartial(array('model' => $object));

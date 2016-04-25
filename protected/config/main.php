@@ -154,6 +154,8 @@ return array(
 				
 				'<action:\w+>' => 'site/<action>',
 				'<action:\w+>/<id:\d+>' => 'site/<action>',
+
+				'site/usersByMD/<arg:\d+>' => 'site/usersByMD',
 				
 				'<action:\w+>/<from:\d+>/<to:\d+>' => 'site/<action>',
 				

@@ -194,21 +194,28 @@ class User extends UModel
 	 * @return User
 	 */
 	public function customFind($arg){
-		$obj = false;
-		if ($arg) {
-			if ((!(int)$arg)||(preg_match('/^\d{10}$/',$arg))) {
-				$criteria = new CDbCriteria;
-				$criteria -> compare('username',$arg, false);
-				$obj = $this -> find($criteria);
-			} else {
-				$obj = $this -> findByPk($arg);
-			}
-			//var_dump($obj);
+		switch ($this -> scenario) {
+			case 'searchById':
+				return $this -> findByPk($arg);
+				break;
+			default:
+				$obj = false;
+				if ($arg) {
+					if ((!(int)$arg)||(preg_match('/^\d{10}$/',$arg))) {
+						$criteria = new CDbCriteria;
+						$criteria -> compare('username',$arg, false);
+						$obj = $this -> find($criteria);
+					} else {
+						$obj = $this -> findByPk($arg);
+					}
+					//var_dump($obj);
+				}
+				if (!$obj) {
+					$obj = $this -> findByPk(Yii::app() -> user -> getId());
+				}
+				return $obj;
+				break;
 		}
-		if (!$obj) {
-			$obj = $this -> findByPk(Yii::app() -> user -> getId());
-		}
-		return $obj;
 	}
 	public function checkIIdentificator($i) {
 		if (!$this -> phones) {
@@ -791,5 +798,18 @@ class User extends UModel
 			$this -> _childrenIdString = $this -> giveStringFromArray($this -> getChildren(),',','id');
 		}
 		return $this -> _childrenIdString;
+	}
+
+	/**
+	 * Выводит json_encode массива идентификаторов пользователей
+	 */
+	public function giveChildrenIds(){
+		$arr = array();
+		if ($this -> id_type == UserType::model() -> getNumber('mainDoc')) {
+			$arr = CHtml::giveAttributeArray($this -> getChildren(),'id');
+		} else {
+			$arr [] = $this -> id;
+		}
+		echo json_encode($arr);
 	}
 }

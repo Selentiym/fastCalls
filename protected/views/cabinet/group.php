@@ -22,14 +22,14 @@ Yii::app()->getClientScript()->registerCssFile(Yii::app()->baseUrl.'/css/jquery-
         #parentDrag {
             border:2px solid grey;
             border-radius:10px;
-            width:500px;
-            height:500px;
+            width:1000px;
+            height:1000px;
         }
     </style>
-<button id="kill">Kill!</button>
-<button id="destroy">Destroy!</button>
-<button id="disable">disable!</button>
-<button id="enable">enable!</button>
+<div id="generators">
+    <div class="gen md" data-gen="561" data-className="MedPredDrag">561</div>
+    <div class="gen md" data-gen="562" data-className="MedPredDrag">562</div>
+</div>
 <div id="parentDrag" style="position:relative">
     <div id="DragContainer" style="position:absolute;top:0;left:0;width:100%;height:100%;">
 

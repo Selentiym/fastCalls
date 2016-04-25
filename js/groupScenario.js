@@ -1,7 +1,18 @@
 /**
  * Created by user on 20.04.2016.
  */
-obj1 = new UserDrag({
+console.log($('.md'));
+$('.md').click(function(){
+    var data = $(this).attr('data-gen');
+    new MedPredDrag({
+        MDid:data
+    });
+    //eval('var o1 = new ' + className +'({data:data});');
+});
+/*console.log(MedPredDrag({
+    MDid:562
+}));*/
+/*obj1 = new UserDrag({
     nodeConfig:{
         'id':'drag1'
     },
@@ -12,8 +23,7 @@ obj2 = new UserDrag({
         'id':'drag2'
     },
     users: [1,2,3]
-});
-obj1.newProp = 'newProp';
+});*/
 /*obj2 = new Drop({
     target: $('#parentDrag'),
     nodeConfig:{
@@ -28,10 +38,8 @@ obj1.newProp = 'newProp';
         background:'#123'
     }
 });*/
-obj2 = new ActionAdd({
-
+new ActionAdd({
     dropConfig: {
-        target: $('#parentDrag'),
         nodeConfig: {
             'class': 'ui-corner-all',
             id: 'drop1'

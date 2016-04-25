@@ -153,6 +153,7 @@ class SiteController extends Controller
 				'modelClass' => 'User',
 				'view' => '//users/payStatistics'
 			),
+
 			
 			'userSendSms' => array(
 				'class' => 'application.controllers.site.ModelCollectionAction',
@@ -371,6 +372,15 @@ class SiteController extends Controller
 				'access' => function(){return Yii::app() -> user -> checkAccess('admin');},
 				'redirectUrl' => Yii::app() -> baseUrl . '/',
 				'args' => false
+			),
+			'usersByMD' => array(
+				'class' => 'application.controllers.site.ClassMethodAction',
+				'modelClass' => 'User',
+				'method' => 'giveChildrenIds',
+				'ajax' => true,
+				'args' => false,
+				'scenario' => 'searchById',
+				'access' => function(){return Yii::app() -> user -> checkAccess('admin');},
 			),
 		);
 	}

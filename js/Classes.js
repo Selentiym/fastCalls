@@ -1,5 +1,6 @@
-var parentDrag = $("#DragContainer");
-var parentAction = $("#ActionContainer");
+parentDrag = $("#DragContainer");
+parentAction = $("#ActionContainer");
+baseUrl = '';
 /**
  * Created by user on 19.04.2016.
  */
@@ -29,8 +30,11 @@ function Node(parameters){
     //Сохранили созданный объект в базу и нарастили инкремент.
     Base.prototype.inc ++;
     Base.prototype.objects[Base.prototype.inc] = me;
+
     //Сохраняем айдишник на всякий случай.
     me.id = Base.prototype.inc;
+    console.log('Added node '+me.id);
+    console.log(Base.prototype.objects[me.id]);
     if (!node) {
         node = '<div/>';
     }
@@ -74,11 +78,19 @@ function Node(parameters){
      * Задаем функцию уничтожения
      */
     me.destroy = function(){
-        ind = _.indexOf(Base.prototype.getObject(me.id));
-        if (!ind) { return false; };
-        Base.prototype.objects.splice(ind, 1);
+        var ind = _.indexOf(Base.prototype.getObject(me.id));
+        if (!ind) { return false; }
+        //Base.prototype.objects.splice(ind, 1);
+        //var obj = Base.prototype.objects[ind];
+        //Меняем соответсвующее значениена undefined
+        //delete Base.prototype.objects[ind];
+        Base.prototype.objects[ind] = undefined;
         //delete me.objects[me.getObject(me.id)];
+        //Удаляем элемент DOM
         me.element.remove();
+        //Удаляем объект.
+        delete me;
+        console.log(Base.prototype.objects);
         return true;
     };
     return me;
@@ -102,6 +114,7 @@ Base.prototype.inc = 0;
 Base.prototype.getObject = function (id){
     //console.log(this);
     if (!this.objects[id]) {
+        console.log(this);
         alert('mistake!');
     }
     return this.objects[id];
@@ -186,11 +199,11 @@ function FastDrag(parameters){
         }
     };
     var param = $.extend(true, defaultParam, parameters);
-    var me =  Drag(param);
-    return me;
+    return Drag(param);
 }
 function UserDrag(parameters){
     var users = chArr(parameters.users);
+    //alert(users);
     var name = parameters.name;
     if (!name) {
         name = 'Без названия';
@@ -209,6 +222,24 @@ function UserDrag(parameters){
     //Сохраняем юзеров, которых отображает данный блок.
     me.users = users;
     return me;
+}
+function MedPredDrag(parameters){
+    var param = chObj(parameters);
+    var users = [];
+    var MDid = param.MDid;
+    if (!MDid) {
+        MDid = param.data;
+    }
+    if (!MDid) { return {success:false}; }
+    $.ajax({
+        url: baseUrl + 'site/usersByMD/'+ MDid,
+        dataType:'json'
+    }).done(function(data){
+        me = UserDrag({
+            users:data
+        });
+    });
+    param.users = users;
 }
 function ActionDrop(parameters){
     var me =  Drop(parameters);
@@ -271,9 +302,8 @@ function ActionAdd(parameters){
     me.go = function () {
         if (me.validate()) {
             var drop = me.drops[0];
-            var users = [];
-            var text = "";
             var i = 0;
+            //Будет хранить результирующих пользователей
             var users = [];
             //Удаляем все операнды.
             _.map(drop.guests, function (obj) {
@@ -286,7 +316,8 @@ function ActionAdd(parameters){
             //обнуляем содержащиеся Drag-и.
             drop.guests = [];
             console.log(Base.prototype.objects);
-            var rez = UserDrag({
+            //Создаем результат
+            UserDrag({
                 //html: 'sum: ' + text
                 users:users,
                 name:'sum'
