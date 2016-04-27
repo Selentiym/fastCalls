@@ -1,14 +1,9 @@
 /**
  * Created by user on 20.04.2016.
  */
-console.log($('.md'));
-$('.md').click(function(){
-    var data = $(this).attr('data-gen');
-    new MedPredDrag({
-        MDid:data
-    });
-    //eval('var o1 = new ' + className +'({data:data});');
-});
+//$(document).ready(function(){
+//});
+
 /*console.log(MedPredDrag({
     MDid:562
 }));*/
@@ -83,3 +78,39 @@ new ActionSubtract({
         }
     }
 });
+$('#hidden').sidr({
+    name: 'sidr-left',
+    source:'#menu',
+    displace:true,
+    renaming: true,
+    onOpenEnd :function(){
+        var MedPredList = $('#sidr-id-mainDoc');
+        $('.md').dblclick(function () {
+            var data = $(this).attr('data-gen');
+            new MedPredDrag({
+                MDid: data
+            });
+            //eval('var o1 = new ' + className +'({data:data});');
+        });
+        $('#sidr-left ul li').click(function (event) {
+            $(this).children('.hideable').toggle(500);
+            //console.log(event.target);
+            event.stopPropagation();
+        });
+        $('#menu').remove();
+        MedPredList.select2({
+            placeholder:'Выберите медпреда'
+        });
+        MedPredList.on('select2:selecting', function(event) {
+            //получили значение тега option, который был выбран.
+            var value = event.params.args.data.id;
+            //console.log(event.val);
+            event.preventDefault();
+            MedPredList.select2('close');
+            MedPredDrag({
+                MDid:value
+            })
+        });
+    }
+});
+$.sidr('open', 'sidr-left');

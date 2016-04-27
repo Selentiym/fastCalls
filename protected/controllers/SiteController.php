@@ -40,6 +40,13 @@ class SiteController extends Controller
 				'access' => function () {return Yii::app() -> user -> checkAccess('admin');},
 				'view' => '//statistics/numbers'
 			),
+			'viewMenu'=>array(
+				'class'=>'application.controllers.site.FileViewAction',
+				'access' => function () {return Yii::app() -> user -> checkAccess('admin');},
+				'partial' => true,
+				'showScripts' => true,
+				'view' => '//cabinet/menu'
+			),
 			'smsList'=>array(
 				'class'=>'application.controllers.site.FileViewAction',
 				'access' => function () {return Yii::app() -> user -> checkAccess('admin');},

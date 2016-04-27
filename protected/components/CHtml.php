@@ -71,7 +71,6 @@
 					}, function (date, label) {
 						//end.subtract(1, 'days');
 						alert(date.unix());
-						
 					});
 
 				});

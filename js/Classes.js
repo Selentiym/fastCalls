@@ -201,7 +201,10 @@ function Drop(parameters){
         }
         //alert(me.element.offset());
         var pos = me.element.offset();
-        console.log(pos);
+        if (pos.top != 20) {
+            console.log(pos);
+            console.log(me.element);
+        }
         var sumWidth = 0;
         var maxHeight = 0;
         //Считаем ширину уже имеющихся элементов.
@@ -212,6 +215,8 @@ function Drop(parameters){
                 maxHeight = h;
             }
         });
+        var h = drag.element.innerHeight();
+        if (maxHeight < h) { maxHeight = h; }
         maxHeight += 20;
         //Прибавляем расстояния между элементами
         sumWidth += (me.guests.length + 1) * 10;
@@ -287,7 +292,7 @@ function FastDrag(parameters){
              }*/
         },
         nodeConfig:{
-            'class':'drag ui-corner-all ui-state-error'
+            'class':'drag'
         }
     };
     var param = $.extend(true, defaultParam, parameters);
@@ -417,6 +422,7 @@ function Action(parameters){
      */
     me.showRezult = function (drag) {
         if (me.resultDrop) {
+            drag.element.show();
             me.resultDrop.capture(drag);
 
         } else {
