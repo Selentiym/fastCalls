@@ -14,55 +14,11 @@ Yii::app() -> clientScript -> registerScriptFile(Yii::app() -> baseUrl . '/js/gr
 //Yii::app() -> clientScript -> registerCssFile(Yii::app() -> baseUrl . '/css/jquery-ui.css', CClientScript::POS_END);
 Yii::app()->getClientScript()->registerCssFile(Yii::app()->baseUrl.'/css/jquery-ui.css');
 Yii::app()->getClientScript()->registerCssFile(Yii::app()->baseUrl.'/css/jquery.sidr.light.min.css');
+Yii::app()->getClientScript()->registerCssFile(Yii::app()->baseUrl.'/css/group.css');
 ?>
     <!--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="//ajax.aspnetcdn.com/ajax/jquery.ui/1.10.3/jquery-ui.min.js"></script>
     <link rel="stylesheet" href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.10.3/themes/sunny/jquery-ui.css">-->
-    <style type="text/css">
-        .drag {
-            border: thin solid black;
-            border-radius:5px;
-            min-width:150px;
-            text-align: center;
-            padding:10px;
-            background-color:lightgoldenrodyellow;
-            display:inline-block;
-        }
-        .drag h2{
-            font-size:15px;
-            text-align:left;
-            margin:5px;
-        }
-        #parentDrag {
-            border:2px solid grey;
-            border-radius:10px;
-            width:1000px;
-            height:1000px;
-        }
-        .actionDrag {
-            display:inline-block;
-            margin:10px;
-        }
-        #subtrAction {}
-        #subtrAction div{
-            display:inline-block;
-            margin:10px;
-            vertical-align:middle;
-        }
-        .drop {
-            background:#123;
-            width:200px;
-            height:200px;
-            border-radius:5px;
-        }
-        #generators {
-            margin:0;
-            width:200px;
-            background:darkgreen;
-            height: 100%;
-            display:inline-block;
-        }
-    </style>
 <!--<div id="sidr">
     <ul>
         <li><div class="gen md" data-gen="561" data-className="MedPredDrag">561</div></li>
@@ -107,7 +63,16 @@ Yii::app()->getClientScript()->registerCssFile(Yii::app()->baseUrl.'/css/jquery.
             ?>
         </li>
         <li>
-            check
+            Options
+            <?php
+                //Потом навесим на этот селект select2() плагин. Важно: айдишник сменится, так как селект будет загружен в боковую панель sidr.
+                echo "<select id='options'>";
+                echo "<option></option>";
+                foreach(UserOption::model() -> findAll() as $opt) {
+                    echo "<option value='{$opt -> id}'>{$opt -> name}</option>";
+                }
+                echo "</select>";
+            ?>
         </li>
     </ul>
 </div>

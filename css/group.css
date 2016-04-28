@@ -1,0 +1,60 @@
+.drag {
+    border: thin solid black;
+    border-radius:5px;
+    min-width:150px;
+    text-align: center;
+    padding:0;
+    background-color:lightgoldenrodyellow;
+    display:inline-block;
+}
+.drag h2{
+    font-size:15px;
+    text-align:left;
+    margin:5px;
+}
+.drag .body {
+    padding:5px;
+}
+.drag .headMenu {
+    text-align:right;
+    padding-right:5px;
+    padding-top:2px;
+}
+.drag .headMenu span{
+    cursor:pointer;
+}
+.drag .headMenu span.closeDrag{
+    background: url("../images/cross_small.png");
+    width:20px;
+    height:20px;
+    display:inline-block;
+}
+#parentDrag {
+    border:2px solid grey;
+    border-radius:10px;
+    width:1000px;
+    height:1000px;
+}
+.actionDrag {
+    display:inline-block;
+    margin:10px;
+}
+#subtrAction {}
+#subtrAction div{
+    display:inline-block;
+    margin:10px;
+    vertical-align:middle;
+}
+.drop {
+    background:#123;
+    width:200px;
+    height:200px;
+    border-radius:5px;
+}
+#generators {
+    margin:0;
+    width:200px;
+    background:darkgreen;
+    height: 100%;
+    display:inline-block;
+}

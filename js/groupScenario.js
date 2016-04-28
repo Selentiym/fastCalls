@@ -82,35 +82,66 @@ $('#hidden').sidr({
     name: 'sidr-left',
     source:'#menu',
     displace:true,
-    renaming: true,
-    onOpenEnd :function(){
-        var MedPredList = $('#sidr-id-mainDoc');
-        $('.md').dblclick(function () {
-            var data = $(this).attr('data-gen');
-            new MedPredDrag({
-                MDid: data
-            });
-            //eval('var o1 = new ' + className +'({data:data});');
-        });
-        $('#sidr-left ul li').click(function (event) {
-            $(this).children('.hideable').toggle(500);
-            //console.log(event.target);
-            event.stopPropagation();
-        });
-        $('#menu').remove();
-        MedPredList.select2({
-            placeholder:'Выберите медпреда'
-        });
-        MedPredList.on('select2:selecting', function(event) {
-            //получили значение тега option, который был выбран.
-            var value = event.params.args.data.id;
-            //console.log(event.val);
-            event.preventDefault();
-            MedPredList.select2('close');
-            MedPredDrag({
-                MDid:value
-            })
-        });
-    }
+    renaming: true//,
+    //onOpenEnd :
 });
 $.sidr('open', 'sidr-left');
+
+(function(){
+    var MedPredList = $('#sidr-id-mainDoc');
+    $('.md').dblclick(function () {
+        var data = $(this).attr('data-gen');
+        new MedPredDrag({
+            MDid: data
+        });
+        //eval('var o1 = new ' + className +'({data:data});');
+    });
+    $('#sidr-left ul li').click(function (event) {
+        $(this).children('.hideable').toggle(500);
+        //console.log(event.target);
+        event.stopPropagation();
+    });
+    $('#menu').remove();
+    MedPredList.select2({
+        placeholder:'Выберите медпреда'
+    });
+    MedPredList.on('select2:selecting', function(event) {
+        //получили значение тега option, который был выбран.
+        var value = event.params.args.data.id;
+        //console.log(event.val);
+        event.preventDefault();
+        MedPredList.select2('close');
+        MedPredDrag({
+            MDid:value
+        })
+    });
+    var OptionsList = $('#sidr-id-options');
+    OptionsList.select2({
+        placeholder:'Выберите свойство'
+    });
+    OptionsList.on('select2:selecting', function(event) {
+        //получили значение тега option, который был выбран.
+        var value = event.params.args.data.id;
+        //console.log(event.val);
+        event.preventDefault();
+        OptionsList.select2('close');
+        OptionDrag({
+            OptionId:value
+        })
+    });
+})();
+/**
+ * В процессе создания новых драгов нужно не забывать вешать на них обработчики.
+ * @param el - новый, только что созданный, драг
+ * @constructor
+ */
+function DragAddListeners(el){
+    el.children('.DragName').click(function(e){
+        if (e.altKey) {
+            Base.prototype.getObject(el.data('object')).rename();
+        }
+    });
+}
+$('.DragName').click(function(e){
+    alert('click');
+});

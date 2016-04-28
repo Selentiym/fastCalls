@@ -3,6 +3,7 @@
 		public static function activeDropDownListChosen2($model,$attribute,$data,$htmlOptions=array(),$selected_ids=array(),$select2Options='') {
 			$selected = array();
 			$selected_ids = array_filter($selected_ids);
+
 			if (is_array($data)) {
 				asort($data);
 			}

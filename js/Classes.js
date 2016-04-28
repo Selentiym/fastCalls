@@ -65,7 +65,7 @@ function Node(parameters){
             position.top = 0;
         }
         if ((position.left) || (position.top)) {
-            me.element.position(position);
+            me.element.offset(position);
         }
         /**
          * Отображаем элемент на странице, если нужно.
@@ -147,7 +147,13 @@ function Drag(parameters){
      * Содержит drop, к которому прикреплен данный drag.
      */
     me.holer = false;
-
+    /**
+     * Объект, который хранит различные переменные.
+     * Выделен в отдельной свойство, чтобы не путать ни с чем стандартным.
+     */
+    me.vars = chObj(parameters.vars);
+    //Запоминаем конфиг.
+    me.vars.config = parameters;
     me.element.addClass('prefix_drag');
     me.element.draggable(chObj(config));
     /**
@@ -300,14 +306,25 @@ function FastDrag(parameters){
 }
 function UserDrag(parameters){
     var users = chArr(parameters.users);
+    if (!users.length) {
+        alert('Не выбрано ни одного пользователя!');
+        return;
+    }
     //alert(users);
     var name = parameters.name;
     if (!name) {
         name = 'Без названия';
     }
-    var html = $('<h2/>',{
-        text: name
+    var closeButton = $('<span/>', {
+        'class':'closeDrag'
     });
+    var html = $('<div/>',{
+        'class':'headMenu'
+    }).append(closeButton);
+    html.after($('<h2/>',{
+        text: name,
+        "class":"DragName"
+    }));
     html.after($('<div/>',{
         'class':'body'
     }).append($('<p/>',{
@@ -315,9 +332,43 @@ function UserDrag(parameters){
     })));
     parameters.html = html;
     var me = FastDrag(parameters);
+    //Вешаем обработчик закрытия окна. Только сейчас, чтобы можно было сохранить
+    // в замыкание функцию закрытия.
+    closeButton.click(function(){
+        if (me.vars.notTrivial) {
+            if (!confirm('Набор пользователей в выбранной группе нетривиален. Вы действительно хотите удалить элемент?')) {
+                return;
+            }
+        }
+        me.destroy();
+    });
+    //Запоминаем какое было задано имя.
+    me.vars.name = name;
     me.element.addClass('userDrag');
     //Сохраняем юзеров, которых отображает данный блок.
     me.users = users;
+    /**
+     * Добавляем обработчики, если доступна функция с главной страницы.
+     */
+    if (typeof DragAddListeners == 'function') {
+        DragAddListeners(me.element);
+    }
+    /**
+     * Перименовывает драг
+     */
+    me.rename = function(newName){
+        if (!newName) {
+            var entered = prompt('Введите новое имя:', me.vars.name);
+            if (entered !== null) {
+                if (!entered) {
+                    alert('Элемент не может иметь пустое имя');
+                    return;
+                }
+                me.element.children('h2').html(entered);
+                me.vars.name = entered;
+            }
+        }
+    };
     return me;
 }
 function MedPredDrag(parameters){
@@ -333,10 +384,31 @@ function MedPredDrag(parameters){
         dataType:'json'
     }).done(function(data){
         me = UserDrag({
-            users:data
+            users:data.users,
+            name:'MD: ' + data.fio
         });
     });
     param.users = users;
+}
+function OptionDrag(parameters){
+    var param = chObj(parameters);
+    var id = param.OptionId;
+    if (!id) {
+        id = param.data;
+    }
+    if (!parseInt(id)) { return {success:false}; }
+    $.ajax({
+        url: baseUrl + 'site/usersByOption/' + id,
+        dataType: 'json'
+    }).done(function(data){
+
+        console.log(data);
+
+        me = UserDrag({
+            users:data.users,
+            name:data.name
+        });
+    });
 }
 function ActionDrop(parameters){
     var me =  Drop(parameters);
@@ -421,10 +493,10 @@ function Action(parameters){
      * Выводит результат действия.
      */
     me.showRezult = function (drag) {
+        drag.vars.notTrivial = true;
         if (me.resultDrop) {
             drag.element.show();
             me.resultDrop.capture(drag);
-
         } else {
 
         }

@@ -231,12 +231,33 @@
                     </div>
                 </div>
 				
-				<label>Куратор</label>
+				<label>Свойства</label>
 				<div class="well">
                     <div class="form-group">
 						
 						<div class="col-xs-5">
-							<?php CHtml::activeDropDownListChosen2(UserMentor::model(), 'id',CHtml::listData(UserMentor::model() -> findAll(),'id','name'), array('class' => 'select2 createUser','name' => 'User[id_mentor]'), array(), '{}'); ?>
+							<?php
+							$inp = $_POST['User']['input_type']=='mainForm' ? $_POST['User']['input_options'] : CHtml::giveAttributeArray($model -> options, 'id');
+							if (empty($inp)) {
+								$inp = array();
+							}
+							CHtml::activeDropDownListChosen2(UserOption::model(), 'id',CHtml::listData(UserOption::model() -> findAll(),'id','name'), array('class' => 'select2 createUser','name' => 'User[input_options]', 'multiple' => 'multiple'), $inp, '{
+								tokenSeparators: [";"],
+								tags:true,
+								placeholder:"Выберите специализацию"
+							}');
+							//User::model();
+							?>
+						</div>
+                    </div>
+                </div>
+
+				<label>Куратор</label>
+				<div class="well">
+                    <div class="form-group">
+
+						<div class="col-xs-5">
+							<?php CHtml::activeDropDownListChosen2(UserMentor::model(), 'id',CHtml::listData(UserMentor::model() -> findAll(),'id','name'), array('class' => 'select2 createUser','name' => 'User[id_mentor]'), array($model -> id_mentor), '{}'); ?>
 						</div>
                     </div>
                 </div>

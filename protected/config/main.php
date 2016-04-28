@@ -156,7 +156,8 @@ return array(
 				'<action:\w+>/<id:\d+>' => 'site/<action>',
 
 				'site/usersByMD/<arg:\d+>' => 'site/usersByMD',
-				
+				'site/<action:\w+>/<arg:\d+>' => 'site/<action>',
+
 				'<action:\w+>/<from:\d+>/<to:\d+>' => 'site/<action>',
 				
 				'<controller:\w+>/<id:\d+>'=>'<controller>/view',

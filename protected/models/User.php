@@ -34,6 +34,7 @@ class User extends UModel
 	public $parent;
 	public $children;
 	public $input_type;
+	public $input_options;
 	/**
 	 * @return string the associated database table name
 	 */
@@ -58,12 +59,11 @@ class User extends UModel
 			array('fio', 'length', 'max'=>500),
 			array('create_time', 'safe'),
 			// The following rule is used by search().
-			// @todo Please remove those attributes that should not be searched.
 			array('id, password, username, fio, email, i, create_time, id_type, id_speciality', 'safe', 'on'=>'search'),
 			array('id, id_parent', 'unsafe', 'on'=>'create'),
 			array('input_type', 'safe'),
-			array('jMin, jMax, jMin_add, jMax_add, addresses, password_change, password_change_second,phone,tel,speciality, phones_input, id_mentor, username, conditions, conditions_add, bik,card_number,webmoney,bank_account,allowPatients', 'safe', 'on'=>'create'),
-			array('jMin, jMax, jMin_add, jMax_add, addresses, password_change, password_change_second,phone,tel,speciality, phones_input, id_mentor, username, conditions, conditions_add, bik,card_number,webmoney,bank_account,allowPatients', 'safe', 'on'=>'updateByAdmins'),
+			array('jMin, jMax, jMin_add, jMax_add, addresses, password_change, password_change_second,phone,tel,speciality, phones_input, id_mentor, username, conditions, conditions_add, bik,card_number,webmoney,bank_account,allowPatients,input_options', 'safe', 'on'=>'create'),
+			array('jMin, jMax, jMin_add, jMax_add, addresses, password_change, password_change_second,phone,tel,speciality, phones_input, id_mentor, username, conditions, conditions_add, bik,card_number,webmoney,bank_account,allowPatients,input_options', 'safe', 'on'=>'updateByAdmins'),
 			array('*', 'unsafe', 'on'=>'SelfUpdate'),
 			array('bik,card_number,webmoney,bank_account', 'safe', 'on'=>'SelfUpdate'),
 		);
@@ -98,6 +98,7 @@ class User extends UModel
 			'type' => array(self::BELONGS_TO, 'UserType', 'id_type'),
 			'userSpeciality' => array(self::BELONGS_TO, 'UserSpeciality', 'id_speciality'),
 			'address_array' => array(self::MANY_MANY, 'UserAddress', '{{address_assignments}}(id_user, id_address)'),
+			'options' => array(self::MANY_MANY, 'UserOption', '{{user_option_assignments}}(id_user, id_option)'),
 			'phones' => array(self::MANY_MANY, 'UserPhone', '{{phone_assignments}}(id_user, id_phone)'),
 			'mentor' => array(self::BELONGS_TO, 'UserMentor', 'id_mentor'),
 			'calls' => array(self::HAS_MANY,'BaseCall', 'id_user'),
@@ -356,6 +357,30 @@ class User extends UModel
 	}
 	public function afterSave() {
 		//print_r($this -> addresses);
+		//Добавялем опции юзеру
+		if (($this -> input_type == 'mainForm')) {
+			//Опции, которые должны быть у юзера
+			$inp = $this -> input_options;
+			if (empty($inp)) {
+				$inp = array();
+			}
+			//Опции, которые уже есть
+			$has = CHtml::giveAttributeArray($this -> options, id);
+			//Удалим те, которые есть, но не нужны
+			$toDel = array_diff($has, $inp);
+			//Добавим те, которых нет
+			$toAdd = array_diff($inp, $has);
+			$delCr = new CDbcriteria();
+			$delCr -> compare('id_user', $this -> id);
+			$delCr -> addInCondition('id_option',$toDel);
+			UserOptionAssignment::model() -> deleteAll($delCr);
+			foreach ($toAdd as $id) {
+				$ass = new UserOptionAssignment();
+				$ass -> id_option = $id;
+				$ass -> id_user = $this -> id;
+				$ass -> save();
+			}
+		}
 		//Добавляем адреса юзеру
 		if (($this -> input_type == 'mainForm')) {
 			//Удаляем адреса, елси они были записаны.
@@ -805,11 +830,10 @@ class User extends UModel
 	 */
 	public function giveChildrenIds(){
 		$arr = array();
+		$arr [] = $this -> id;
 		if ($this -> id_type == UserType::model() -> getNumber('mainDoc')) {
 			$arr = CHtml::giveAttributeArray($this -> getChildren(),'id');
-		} else {
-			$arr [] = $this -> id;
 		}
-		echo json_encode($arr);
+		echo json_encode(array('users' => $arr, 'fio' => $this -> fio));
 	}
 }
