@@ -37,7 +37,7 @@ CustomFlash::showFlashes();
                 if (!empty($model->logo)) {
                     //$logo = Yii::app()->baseUrl.'/images/clinics/' . $model->id . '/' .$model->logo;
                     $logo = $model -> giveImageFolderRelativeUrl() . $model->logo;
-                    echo '<div id="logo">' . CHtml::ajaxLink('<img src="'.Yii::app() -> baseUrl.'/images/cross_small.png"/>', Yii::app() -> baseUrl.'/propDelete', array('type'=> 'POST', 'data'=>array('model' => 'clinic', 'prop' => 'logo'), 'success' => 'js: $("#logo").hide()'))
+                    echo '<div id="logo">' . CHtml::ajaxLink('<img src="'.Yii::app() -> baseUrl.'/images/cross_small.png"/>', Yii::app() -> baseUrl.'/propDelete', array('type'=> 'POST', 'data'=>array('modelClass' => 'UserOption', 'prop' => 'logo', 'arg' => $model -> id), 'success' => 'js: $("#logo").hide()'))
                         . CHtml::image($logo, CHtml::encode('Логотип'),
                             array('style' => 'max-width:172px;max-height:200px; padding: 8px 0px 8px 15px;')) . '</div>';
                 }
