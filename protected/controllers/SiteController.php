@@ -206,6 +206,11 @@ class SiteController extends Controller
 				'modelClass' => 'UserMentor',
 				'view' => '//mentor/create_mentor'
 			),
+			'OptionCreate' => array(
+				'class' => 'application.controllers.site.ModelCreateAction',
+				'modelClass' => 'UserOption',
+				'view' => '//option/create_option'
+			),
 			'PatientCreate' => array(
 				'class' => 'application.controllers.site.ModelCreateAction',
 				'modelClass' => 'Patient',
@@ -261,6 +266,11 @@ class SiteController extends Controller
 				'class' => 'application.controllers.site.ModelUpdateAction',
 				'modelClass' => 'UserMentor',
 				'view' => '//mentor/update_mentor'
+			),
+			'OptionUpdate' => array(
+				'class' => 'application.controllers.site.ModelUpdateAction',
+				'modelClass' => 'UserOption',
+				'view' => '//option/update_option'
 			),
 			
 			

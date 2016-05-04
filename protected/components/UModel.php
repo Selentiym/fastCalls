@@ -95,5 +95,94 @@
 			}
 			return $list;
 		}
+
+		/**
+		 ****************************************************************************************
+		 * @param $files_arr - $_FILES array
+		 * Функция, в которой следует описать все операции, производимые с файлами при
+		 * создании/изменении модели.
+		 */
+		public function fileOperations($files_arr) { return false; }
+		/**
+		 * @param $files_arr - $_FILES array
+		 * @param string $imageProp - property that contains image name
+		 */
+		public function uploadImage($files_arr, $imageProp = 'image') {
+			//Если передана нужная картинка, то делаем что-то
+			if(!empty($files_arr[get_class($this)]['name']['image'])){
+				//Если данной моделью еще не получен id, то сохраняем промежуточный результат.
+				if ($this -> FolderKey() == 'id') {
+					if (!$this -> id) {
+						unset($this -> $imageProp);
+						$this -> save();
+					}
+				}
+				//Создаем личную папку модели, если ее нет
+				$images_filePath = $this -> giveImageFolderAbsoluteUrl();
+				if (!file_exists($images_filePath))
+				{
+					mkdir($images_filePath);
+				}
+
+				$image_old = $this->$imageProp;
+				$this->$imageProp = CUploadedFile::getInstance($this,'image');
+				$image_unique_id = substr(md5(uniqid(mt_rand(), true)), 0, 5) . '.' .$this->$imageProp->extensionName;
+				$fileName = $images_filePath . $image_unique_id;
+				//echo $fileName;
+				if ($this->validate()) {
+					$this->$imageProp->saveAs($fileName);
+					$this->$imageProp = $image_unique_id;
+					if (strlen($image_old) > 0) @unlink ($images_filePath. DIRECTORY_SEPARATOR .$image_old);
+				}
+				else
+					$this->$imageProp = $image_old;
+			}
+		}
+		/**
+		 ****************************************************************************************
+		 */
+		public function giveFileFolderAbsoluteUrl($seed = NULL, $fileClass = NULL)
+		{
+			return Yii::getPathOfAlias('webroot') . $this -> giveFileFolderRelativeUrl($seed, $fileClass, true);
+		}
+		public function giveFileFolderRelativeUrl($seed = NULL, $fileClass = NULL, $for_abs = false)
+		{
+			if ((isset($fileClass))&&(strlen($fileClass)>0))
+			{
+				$d = '/';
+				$add = !$for_abs ? Yii::app() -> baseUrl : '';
+				//$d = DIRECTORY_SEPARATOR;
+				if (!isset($seed))
+				{
+					$attr_name = $this -> FolderKey();
+					if (isset($this -> $attr_name))
+					{
+						//return $d.'..'.$d. $fileClass .$d. get_class($this) .$d . $this -> $attr_name . $d;
+						return $add . $d . $fileClass .$d. get_class($this) .$d . $this -> $attr_name . $d;
+						//return $d . $fileClass .$d. get_class($this) .$d . $this -> $attr_name . $d;
+					} else {
+						return false;
+					}
+				} else {
+					return $add . $d . $fileClass .$d. get_class($this) .$d . $seed . $d;
+					//return realpath(Yii::app() -> basePath.'/../').$d.'images'.$d. get_class($this) .$d . $seed . $d;
+				}
+			} else return false;
+		}
+		//Функция, которая создает название папки, в которую сохраняются картинки для конкретной модели
+		public function giveImageFolderAbsoluteUrl($seed = NULL)
+		{
+			return $this -> giveFileFolderAbsoluteUrl($seed, 'images');
+		}
+		public function giveImageFolderRelativeUrl($seed = NULL)
+		{
+			return $this -> giveFileFolderRelativeUrl($seed, 'images');
+		}
+		//определяет какой атрибут является названием папки. Необходимо, чтобы он не повторялся, иначе плохо.
+		//Переопределить в дочерних классах.
+		public function FolderKey()
+		{
+			return 'id';
+		}
 	}
 ?>

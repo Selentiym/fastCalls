@@ -111,6 +111,10 @@ return array(
 				'mentor' => 'site/MentorCreate',
 				'mentor/update/<arg_update:\w+>' => 'site/MentorUpdate',
 				'mentor/delete/<arg:\w+>' => 'site/MentorDelete',
+
+				'option' => 'site/optionCreate',
+				'option/update/<arg_update:\w+>' => 'site/optionUpdate',
+				'option/delete/<arg:\w+>' => 'site/optionDelete',
 				
 				'allstat/<from:\d+>/<to:\d+>' => 'site/allstat',
 				'allstat/<from:\d+>' => 'site/allstat',

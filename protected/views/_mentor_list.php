@@ -12,10 +12,10 @@
 		echo CHtml::button('Удалить', array('id' => 'deleteMentor'));
 		Yii::app()->clientScript->registerScript('clickScriptForMentors', "
 			$('#changeMentor').click(function(){
-				location.replace('".$this -> createUrl('/MentorUpdate')."/update/'+$('#mentors').val());
+				location.replace('".$this -> createUrl('/MentorUpdate')."/'+$('#mentors').val());
 			});
 			$('#deleteMentor').click(function(){
-				location.replace('".$this -> createUrl('MentorDelete')."/delete/'+$('#mentors').val());
+				location.replace('".$this -> createUrl('MentorDelete')."/'+$('#mentors').val());
 			});
 			$('#createMentor').click(function(){
 				location.replace('".$this -> createUrl('MentorCreate')."');

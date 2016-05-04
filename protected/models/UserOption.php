@@ -105,4 +105,12 @@ class UserOption extends UModel
 		$info['users'] = CHtml::giveAttributeArray($this -> users, 'id');
 		echo json_encode($info, JSON_PRETTY_PRINT);
 	}
+	/**
+	 * @param $files_arr - $_FILES array
+	 * @param string $imageProp - property that contains image name
+	 */
+	public function FileOperations($files_arr) {
+		parent::uploadImage($files_arr, 'logo');
+		return true;
+	}
 }

@@ -30,6 +30,9 @@
 		{
 			if (!Yii::app() -> user -> isGuest) {
 				//Получаем модель, которую нужно обновить
+				/**
+				 * @var UModel $model
+				 */
 				$model = CActiveRecord::model($this->modelClass)->customFind($arg_update);
 				//Если не получилось ее найти, то сообщаем об ошибке
 				if(!$model)
@@ -39,6 +42,10 @@
 					//Если указан, какой должен быть у модели сценарий, то задаем его.
 					if ($this -> scenario) {
 						$model -> setScenario($this -> scenario);
+					}
+					if ($_FILES) {
+						//Помимо обычных атрибутов устанавливаем файлы
+						$model -> fileOperations($_FILES);
 					}
 					//Сохраняем атрибуты
 					if (isset($_POST[$this -> modelClass])) {

@@ -26,6 +26,10 @@
 		{
 			if (!Yii::app() -> user -> isGuest) {
 				$modelName = $this -> modelClass;
+
+				/**
+				 * @var UModel $model
+				 */
 				//Создаем модель с нужным сценарием.
 				$model = new $modelName($this -> scenario);
 				//Даем модели знать, что она такое. (для юзера, например, определяем тип создаваемого юзера)
@@ -34,8 +38,11 @@
 				//print_r($_POST);
 				//Если у зашедшего достаточно прав, чтобы создать модель, то делаем это, иначе выводим сообщение, что юзер не прав.
 				if ($model -> checkCreateAccess($arg)) {
+					if ($_FILES) {
+						//Помимо обычных атрибутов устанавливаем файлы
+						$model -> fileOperations($_FILES);
+					}
 					//Сохраняем атрибуты
-					//print_r($_POST[$this -> modelClass]);
 					if (!empty($_POST[$this -> modelClass])) {
 						
 						$model -> attributes = $_POST[$this -> modelClass];
