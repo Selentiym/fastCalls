@@ -25,6 +25,9 @@
 			}
 			$htmlOptions = array_merge_recursive($htmlOptions, $extra_htmlOptions);
 			echo parent::activeDropDownList($model,$attribute,$data,$htmlOptions);
+			if ($htmlOptions['appendSelect2To']) {
+				$htmlOptions['id'] = $htmlOptions['appendSelect2To'];
+			}
 			Yii::app()->clientScript->registerScript('chosen_'.$htmlOptions['id'], "
 				$('#".$htmlOptions['id']."').select2(".$select2Options.");
 			",CClientScript::POS_END);

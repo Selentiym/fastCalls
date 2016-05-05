@@ -116,9 +116,9 @@ $.sidr('open', 'sidr-left');
         })
     });
     var OptionsList = $('#sidr-id-options');
-    OptionsList.select2({
+    /*OptionsList.select2({
         placeholder:'Выберите свойство'
-    });
+    });*/
     OptionsList.on('select2:selecting', function(event) {
         //получили значение тега option, который был выбран.
         var value = event.params.args.data.id;

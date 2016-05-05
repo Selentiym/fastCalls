@@ -66,12 +66,13 @@ Yii::app()->getClientScript()->registerCssFile(Yii::app()->baseUrl.'/css/group.c
             Options
             <?php
                 //Потом навесим на этот селект select2() плагин. Важно: айдишник сменится, так как селект будет загружен в боковую панель sidr.
-                echo "<select id='options'>";
+                UserOption::prettySelect(false, 'options', 'sidr-id-options','Выберите свойство');
+                /*echo "<select id='options'>";
                 echo "<option></option>";
                 foreach(UserOption::model() -> findAll() as $opt) {
                     echo "<option value='{$opt -> id}'>{$opt -> name}</option>";
                 }
-                echo "</select>";
+                echo "</select>";*/
             ?>
         </li>
     </ul>
