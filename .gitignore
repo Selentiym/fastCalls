@@ -18,3 +18,9 @@ date.d
 protected/runtime/**/*
 #ignore the tokendata files
 *.tokendata
+#ignore tokeninfo
+tokenfile.json
+#ignore all logs
+protected/logs/**/*
+#ignore model images since they can be changed via web interface
+images/UserOption/**/*
