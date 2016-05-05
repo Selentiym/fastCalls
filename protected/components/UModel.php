@@ -109,11 +109,11 @@
 		 */
 		public function uploadImage($files_arr, $imageProp = 'image') {
 			//Если передана нужная картинка, то делаем что-то
-			if(!empty($files_arr[get_class($this)]['name']['image'])){
+			if(!empty($files_arr[get_class($this)]['name'][$imageProp])){
 				//Если данной моделью еще не получен id, то сохраняем промежуточный результат.
 				if ($this -> FolderKey() == 'id') {
 					if (!$this -> id) {
-						unset($this -> $imageProp);
+						//unset($this -> $imageProp);
 						$this -> save();
 					}
 				}
@@ -125,7 +125,7 @@
 				}
 
 				$image_old = $this->$imageProp;
-				$this->$imageProp = CUploadedFile::getInstance($this,'image');
+				$this->$imageProp = CUploadedFile::getInstance($this,$imageProp);
 				$image_unique_id = substr(md5(uniqid(mt_rand(), true)), 0, 5) . '.' .$this->$imageProp->extensionName;
 				$fileName = $images_filePath . $image_unique_id;
 				//echo $fileName;
@@ -183,6 +183,13 @@
 		public function FolderKey()
 		{
 			return 'id';
+		}
+		/**
+		 * @param string $prop - property which contains the name of the image
+		 * @return bool whether the image exists
+		 */
+		public function checkImage($prop){
+			return (file_exists($this -> giveImageFolderAbsoluteUrl(). '/'. $this -> $prop) && (strlen($this -> $prop) > 0));
 		}
 	}
 ?>

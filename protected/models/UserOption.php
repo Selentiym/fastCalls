@@ -26,12 +26,11 @@ class UserOption extends UModel
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('name, logo', 'required'),
+			array('name', 'required'),
 			array('name', 'length', 'max'=>1024),
 			array('logo', 'length', 'max'=>2048),
-			// The following rule is used by search().
-			// @todo Please remove those attributes that should not be searched.
-			array('id, name, logo', 'safe', 'on'=>'search'),
+			array('name', 'safe'),
+			array('logo', 'unsafe'),
 		);
 	}
 
@@ -102,6 +101,9 @@ class UserOption extends UModel
 	 */
 	public function DumpForJS(){
 		$info['name'] = $this -> name;
+		if ($this -> checkImage('logo')) {
+			$info['image'] = $this -> giveImageFolderRelativeUrl(). $this -> logo;
+		}
 		$info['users'] = CHtml::giveAttributeArray($this -> users, 'id');
 		echo json_encode($info, JSON_PRETTY_PRINT);
 	}

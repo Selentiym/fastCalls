@@ -37,7 +37,6 @@
                 if (!state.element) {
                     return state.text;
                 }
-                console.log(state);
                 //return state.text;
                 return $("<img/>",{
                     src:$(state.element).attr("data-image"),

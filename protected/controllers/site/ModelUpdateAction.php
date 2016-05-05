@@ -46,6 +46,7 @@
 					if ($_FILES) {
 						//Помимо обычных атрибутов устанавливаем файлы
 						$model -> fileOperations($_FILES);
+						$model -> save();
 					}
 					//Сохраняем атрибуты
 					if (isset($_POST[$this -> modelClass])) {

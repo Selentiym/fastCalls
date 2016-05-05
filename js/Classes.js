@@ -322,9 +322,8 @@ function UserDrag(parameters){
         'class':'headMenu'
     }).append(closeButton);
     html.after($('<h2/>',{
-        text: name,
         "class":"DragName"
-    }));
+    }).append(name));
     html.after($('<div/>',{
         'class':'body'
     }).append($('<p/>',{
@@ -403,10 +402,19 @@ function OptionDrag(parameters){
     }).done(function(data){
 
         console.log(data);
-
+        var name = data.name;
+        if (data.image) {
+            name = $('<img/>',{
+                src:data.image,
+                css: {
+                    height:'30px',
+                    border:'1px solid green'
+                }
+            }).after(data.name);
+        }
         me = UserDrag({
             users:data.users,
-            name:data.name
+            name:name
         });
     });
 }

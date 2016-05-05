@@ -965,9 +965,44 @@ class SiteController extends Controller
 	 }
 	public function actionCheckDebug(){
 		echo "start func";
-		$a = 'some text in a variable.';
+		$a = Yii::getVersion();
 		echo "Stop for a breakpoint here";
 		$time = time();
 		echo "Exit the function";
+	}
+
+	/**
+	 * This is an ajax method that deletes the specified property.
+	 */
+	public function actionPropDelete () {
+		$rez = array();
+		if (Yii::app()->request->isAjaxRequest) {
+			$data = $_POST;
+			$modelClass = $data['modelClass'];
+			/**
+			 * @var UModel $model
+			 */
+			$model = $modelClass::model() -> customFind($data['arg']);
+			//Если не нашлась модель, то ничего не деламем.
+			if ((!$model)||($model -> getIsNewRecord())) {
+				$rez['success'] = false;
+				return;
+			}
+			if ($model -> checkUpdateAccess()) {
+				$prop = $data['prop'];
+				$model -> $prop = '';
+				$rez['success'] = $model -> save();
+				if (!$rez['success']) {
+					var_dump($model -> getErrors());
+				}
+			} else {
+				$rez['success'] = false;
+				echo "Not enough rights";
+			}
+		} else {
+			echo "Данное действие доступно только через ajax.";
+			$rez ['success'] = false;
+		}
+		echo json_encode($rez, JSON_PRETTY_PRINT);
 	}
 }
