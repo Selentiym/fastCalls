@@ -24,3 +24,7 @@ tokenfile.json
 protected/logs/**/*
 #ignore model images since they can be changed via web interface
 images/UserOption/**/*
+#some pragrammaticaly changed files
+protected/dump.txt
+protected/log.txt
+protected/store.txt
