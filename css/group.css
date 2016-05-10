@@ -12,21 +12,35 @@
     text-align:left;
     margin:5px;
 }
-.drag .body {
+.body {
     padding:5px;
 }
-.drag .headMenu {
+.headMenu {
     text-align:right;
     padding-right:5px;
     padding-top:2px;
 }
-.drag .headMenu span{
+.headMenu span{
     cursor:pointer;
 }
 .drag .headMenu span.closeDrag{
     background: url("../images/cross_small.png");
     width:20px;
     height:20px;
+    display:inline-block;
+}
+.drag .headMenu span.enlargeDrag{
+    background: url("../images/expand-screen-icon.png");
+    width:20px;
+    height:20px;
+    margin-right: 5px;
+    display:inline-block;
+}
+.dialog .headMenu span.wrapDialog{
+    background: url("../images/wrap-icon.png");
+    width:20px;
+    height:20px;
+    margin-right: 5px;
     display:inline-block;
 }
 #parentDrag {

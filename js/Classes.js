@@ -1,6 +1,8 @@
 parentDrag = $("#DragContainer");
 parentAction = $("#ActionContainer");
+parentCont = $("#parentDrag");
 baseUrl = '';
+parentDialog = $("#DialogContainer");
 /**
  * Created by user on 19.04.2016.
  */
@@ -46,7 +48,7 @@ function Node(parameters){
         //nodeConfig.element.detach();
         me.element = nodeConfig.element;
     } else {
-        //Создаем элемент, который будет отображать наш draggable
+        //Создаем элемент, который будет отображать
         me.element = $(node, nodeConfig);
         me.element.append(html);
         /**
@@ -318,9 +320,12 @@ function UserDrag(parameters){
     var closeButton = $('<span/>', {
         'class':'closeDrag'
     });
+    var enlargeButton = $('<span/>',{
+        'class':'enlargeDrag'
+    });
     var html = $('<div/>',{
         'class':'headMenu'
-    }).append(closeButton);
+    }).append(enlargeButton).append(closeButton);
     html.after($('<h2/>',{
         "class":"DragName"
     }).append(name));
@@ -368,6 +373,19 @@ function UserDrag(parameters){
             }
         }
     };
+    me.showDialog = function() {
+        if (me.dialog) {
+            me.dialog.open();
+            console.log('has dial');
+        } else {
+            console.log('new dial');
+            me.dialog = new Dialog(me, {});
+        }
+    };
+    //Не забываем поставить обработчик на открытие окошка
+    enlargeButton.click(function(){
+        me.showDialog();
+    });
     return me;
 }
 function MedPredDrag(parameters){
@@ -610,5 +628,66 @@ function ActionSubtract(parameters){
             return true;
         }
     };
+    return me;
+}
+/**
+ *
+ * @constructor
+ */
+function Dialog(drag, parameters){
+    if (!drag.users.length) {
+        alert('Ошибка, врачей не обнаружено.');
+        return;
+    }
+    var wrapButton = $("<span/>",{
+        "class":"wrapDialog"
+    });
+    var html = $("<div/>",{
+        "class":"headMenu"
+    }).append(wrapButton);
+    html.after($("<div/>",{
+        "class":"dialogBody"
+    }));
+    //Создаем объект на странице
+    var me = new Node($.extend(parameters, {
+        target: parentDialog,
+        css:{
+            width:'900px',
+            height:'900px',
+            overflow:'auto',
+            background:'lightyellow',
+            borderRadius:'10px'
+        },
+        nodeConfig: {
+            "class": "dialog"
+        },
+        show:true,
+        borderRadius:'10px',
+        html:html
+    }));
+
+    //И в себе тоже ссылку на драг.
+    me.drag = drag;
+    //Функция открытия далогового окна
+    me.open = function(){
+        //parentDialog.css('z-index',1000);
+        parentCont.hide();
+        $.sidr('close', 'sidr-left');
+        me.element.show();
+    };
+    //Функция закрытия диалогового окна
+    me.close = function(){
+        $.sidr('open', 'sidr-left');
+        me.element.hide();
+        parentCont.show();
+    };
+    me.open();
+    //Добавляем обработчик на сворачивание окна
+    wrapButton.click(function(){
+        me.close();
+    });
+    //Сохраняем в драге ссылку на себя
+    drag.dialog = me;
+    console.log(drag.dialog);
     return me;
 }

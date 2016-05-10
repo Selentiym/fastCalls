@@ -27,7 +27,11 @@ Yii::app()->getClientScript()->registerCssFile(Yii::app()->baseUrl.'/css/group.c
     </ul>
 </div>-->
 <input type="hidden" id="hidden">
+<div id="DialogContainer" style="position:absolute;top:0;left:0;width:100%;height:100%;">
+
+</div>
 <div id="parentDrag" style="position:relative">
+
     <div id="DragContainer" style="position:absolute;top:0;left:0;width:100%;height:100%;">
 
     </div>
