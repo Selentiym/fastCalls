@@ -3,6 +3,13 @@ parentAction = $("#ActionContainer");
 parentCont = $("#parentDrag");
 baseUrl = '';
 parentDialog = $("#DialogContainer");
+
+def = {};
+def.cell = 1;
+def.cellsPlus = 6;
+def.cellsMinus = 7;
+
+
 /**
  * Created by user on 19.04.2016.
  */
@@ -631,23 +638,27 @@ function ActionSubtract(parameters){
     return me;
 }
 /**
- *
+ * @param drag
  * @constructor
  */
 function Dialog(drag, parameters){
+    /**
+     * @type {UserDrag} drag
+     */
     if (!drag.users.length) {
         alert('Ошибка, врачей не обнаружено.');
         return;
     }
+    var bodyTemp = $("<div/>",{
+        "class":"dialogBody"
+    });
     var wrapButton = $("<span/>",{
         "class":"wrapDialog"
     });
     var html = $("<div/>",{
         "class":"headMenu"
     }).append(wrapButton);
-    html.after($("<div/>",{
-        "class":"dialogBody"
-    }));
+    html.after(bodyTemp);
     //Создаем объект на странице
     var me = new Node($.extend(parameters, {
         target: parentDialog,
@@ -665,7 +676,8 @@ function Dialog(drag, parameters){
         borderRadius:'10px',
         html:html
     }));
-
+    //Сохраняем в себе ссылку на DOM элемент внутренности - будет полезно.
+    me.body = bodyTemp;
     //И в себе тоже ссылку на драг.
     me.drag = drag;
     //Функция открытия далогового окна
@@ -681,7 +693,53 @@ function Dialog(drag, parameters){
         me.element.hide();
         parentCont.show();
     };
+    me.updateData = function (){
+        alert('updated');
+    };
+    /**
+     * Функция для изменения минимальной ячейки юзера.
+     */
+    me.setCell = function(newCell){
+        if (newCell != me.cell) {
+            me.cell = newCell;
+            me.updateData();
+        }
+    };
     me.open();
+    /**
+     * Генерируем внутренность окна.
+     * Заранее внутри должна была быть повешена гифка загрузки.
+     */
+    function toggleButtons(){
+        $(this).parent().children().removeClass('active');
+        $(this).addClass('active');
+    }
+    var cellSize = $('<div/>',{
+        "class":"CellSize",
+        css:{"display":"inline-block"}
+    }).append(MakeButton({text:"День",handler:function(){
+        me.setCell(1);
+        toggleButtons.call(this);
+    }})).append(MakeButton({text:"Неделя",handler:function(){
+        me.setCell('week');
+        toggleButtons.call(this);
+    }})).append(MakeButton({text:"Месяц",handler:function(){
+        me.setCell('month');
+        toggleButtons.call(this);
+
+    }}));
+    var body = $('<div/>',{
+        'class':'commonDialogInfo'
+    }).append($('<h2/>',{
+        'class':'DragName',
+        html:drag.vars.name
+    })).after(
+        MakeCalender()
+    ).after(cellSize).after($('<table/>',{
+        "class":"DialogUsersTable"
+    }).append($('<thead/>').append($('<th/>'))));
+    me.body.append(body);
+    console.log(bodyTemp);
     //Добавляем обработчик на сворачивание окна
     wrapButton.click(function(){
         me.close();
@@ -690,4 +748,30 @@ function Dialog(drag, parameters){
     drag.dialog = me;
     console.log(drag.dialog);
     return me;
+}
+/**
+ * @return DOM элемент, на который повешен календарь.
+ */
+function MakeCalender(){
+    return $('<span/>',{
+        html:"calender"
+    });
+}
+/**
+ *
+ * @return DOM элемент, который содержит кнопку с обработчиком handler и текстом text
+ */
+function MakeButton(param){
+    param = $.extend({
+        "node":"<span/>",
+        "text":"button",
+        "class":"button",
+        handler: function(){return;}
+    }, param);
+    var temp = $(param.node,{
+        css:param.css,
+        "class":param.class
+    }).append(param.text);
+    temp.click(param.handler);
+    return temp;
 }

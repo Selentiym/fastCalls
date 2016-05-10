@@ -72,3 +72,19 @@
     height: 100%;
     display:inline-block;
 }
+.CellSize{
+    text-align:right;
+}
+.CellSize span {
+    display:inline-block;
+    padding:5px;
+    border-radius:5px;
+    background:lightgreen;
+    width:80px;
+    height:30px;
+    text-align:center;
+    margin:5px;
+}
+.CellSize span.active {
+    background:lightblue;
+}
