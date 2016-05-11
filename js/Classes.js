@@ -832,7 +832,7 @@ function User(parameters){
     me.element.append(me.separator);
     me.collectBaseInfo = function(){
         $.ajax({
-            url: baseUrl + '/basicUserData',
+            url: baseUrl + 'basicUserData',
             type:'post',
             data:{id:me.id},
             dataType:"json"
