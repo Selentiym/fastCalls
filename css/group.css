@@ -88,3 +88,36 @@
 .CellSize span.active {
     background:lightblue;
 }
+table .tableSeparator {
+    display:none;
+}
+/*
+Эмулируем таблицу
+*/
+/*.tableCell {
+    display:inline-block;
+    border:1px solid black;
+    text-align:center;
+    padding:5px;
+    vertical-align: middle;
+}*/
+/* Чтобы дивы имели одинаковый размер по вертикали. Достаточно сложно добиться. */
+.tableLine{
+    height:100px;
+}
+.tableLine > * {
+    height:100%;
+}
+.tableLine .tableCell {
+    height:100%;
+}
+/* Теперь по идее размеры ячеек одинаковы */
+.userLine .fio {
+    width:200px;
+}
+.userLine .tel {
+    width:150px;
+}
+.userLine .email{
+    width:100px;
+}

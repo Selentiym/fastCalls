@@ -145,3 +145,4 @@ function DragAddListeners(el){
 $('.DragName').click(function(e){
     alert('click');
 });
+//var human = new User({id:5});

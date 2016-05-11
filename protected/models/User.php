@@ -59,13 +59,14 @@ class User extends UModel
 			array('fio', 'length', 'max'=>500),
 			array('create_time', 'safe'),
 			// The following rule is used by search().
-			array('id, password, username, fio, email, i, create_time, id_type, id_speciality', 'safe', 'on'=>'search'),
+			array('id, username, fio, email, i, create_time, id_type, id_speciality', 'safe', 'on'=>'search'),
 			array('id, id_parent', 'unsafe', 'on'=>'create'),
 			array('input_type', 'safe'),
 			array('jMin, jMax, jMin_add, jMax_add, addresses, password_change, password_change_second,phone,tel,speciality, phones_input, id_mentor, username, conditions, conditions_add, bik,card_number,webmoney,bank_account,allowPatients,input_options', 'safe', 'on'=>'create'),
 			array('jMin, jMax, jMin_add, jMax_add, addresses, password_change, password_change_second,phone,tel,speciality, phones_input, id_mentor, username, conditions, conditions_add, bik,card_number,webmoney,bank_account,allowPatients,input_options', 'safe', 'on'=>'updateByAdmins'),
 			array('*', 'unsafe', 'on'=>'SelfUpdate'),
 			array('bik,card_number,webmoney,bank_account', 'safe', 'on'=>'SelfUpdate'),
+			array('password', 'unsafe'),
 		);
 	}
 	/*public function __construct(){
@@ -835,5 +836,17 @@ class User extends UModel
 			$arr = CHtml::giveAttributeArray($this -> getChildren(),'id');
 		}
 		echo json_encode(array('users' => $arr, 'fio' => $this -> fio));
+	}
+
+	/**
+	 * Отвечает на запросы, когда в $_POST пришел айдишник пользователя из JS
+	 * Отдает обратно json со свойствами юзера. Без какой-либо статистики.
+	 */
+	public function basicDataDumpForJs(){
+		$user = User::model() -> findByPk($_POST['id']);
+		$user -> setScenario('basicDumpForJs');
+		echo json_encode(array(
+			$user -> attributes
+		));
 	}
 }

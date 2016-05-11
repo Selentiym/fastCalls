@@ -15,6 +15,8 @@ Yii::app() -> clientScript -> registerScriptFile(Yii::app() -> baseUrl . '/js/gr
 Yii::app()->getClientScript()->registerCssFile(Yii::app()->baseUrl.'/css/jquery-ui.css');
 Yii::app()->getClientScript()->registerCssFile(Yii::app()->baseUrl.'/css/jquery.sidr.light.min.css');
 Yii::app()->getClientScript()->registerCssFile(Yii::app()->baseUrl.'/css/group.css');
+
+Yii::app() -> getClientScript() -> registerScript('setBaseUrl','baseUrl = "'.Yii::app() -> baseUrl.'/";',CClientScript::POS_BEGIN);
 ?>
     <!--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="//ajax.aspnetcdn.com/ajax/jquery.ui/1.10.3/jquery-ui.min.js"></script>

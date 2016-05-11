@@ -1,7 +1,9 @@
 parentDrag = $("#DragContainer");
 parentAction = $("#ActionContainer");
 parentCont = $("#parentDrag");
-baseUrl = '';
+if (!baseUrl) {
+    baseUrl = '';
+}
 parentDialog = $("#DialogContainer");
 
 def = {};
@@ -694,7 +696,8 @@ function Dialog(drag, parameters){
         parentCont.show();
     };
     me.updateData = function (){
-        alert('updated');
+        console.log('updateFunction');
+        //alert('updated');
     };
     /**
      * Функция для изменения минимальной ячейки юзера.
@@ -728,6 +731,15 @@ function Dialog(drag, parameters){
         toggleButtons.call(this);
 
     }}));
+    //Сохраняем на будущее заголовок страницы.
+    me.tableHead = $('<tr/>');
+    //Сохраняем разделитель заголвочной строки.
+    me.separator = $('<td/>',{
+        'class':'tableSeparator'
+    });
+    me.tableHead.append(me.separator);
+    //Сохраняем ссылку на тело таблицы.
+    me.tbody = $('<tbody/>');
     var body = $('<div/>',{
         'class':'commonDialogInfo'
     }).append($('<h2/>',{
@@ -735,11 +747,32 @@ function Dialog(drag, parameters){
         html:drag.vars.name
     })).after(
         MakeCalender()
-    ).after(cellSize).after($('<table/>',{
+    ).after(
+        cellSize
+    ).after($('<table/>',{
         "class":"DialogUsersTable"
-    }).append($('<thead/>').append($('<th/>'))));
+    }).attr('border',1)
+        .append($('<thead/>')
+            .append(me.tableHead)
+            .after(me.tbody)
+        )
+    );
+    //Делаем шапку таблицы
+    InsertBasicData(me.separator,{
+        fio:'ФИО',
+        tel:'Телефон',
+        email:'Почта'
+    });
     me.body.append(body);
-    console.log(bodyTemp);
+
+    var userObj = _.map(drag.users, function(id){
+        var temp = new User({id:id});
+        me.tbody.append(temp.element);
+    });
+
+    //Задаем ячейку по умолчанию и тем самым запускаем процесс
+    // подгрузки информации о юзерах
+    me.setCell(def.cell);
     //Добавляем обработчик на сворачивание окна
     wrapButton.click(function(){
         me.close();
@@ -774,4 +807,59 @@ function MakeButton(param){
     }).append(param.text);
     temp.click(param.handler);
     return temp;
+}
+/**
+ * Класс пользователя. В дальнейшем можно в него напихать всякого интересного
+ * типа кэширования информации о пользователе, преобразования разных интервалов
+ * вывода направлений, но сейчас всего лишь методы для показа.
+ * @constructor
+ */
+function User(parameters){
+    var me = {};
+    me.id = parameters.id;
+    //Ставим объекту в соответствие его айдишник
+    me.valueOf = function(){
+        return me.id;
+    };
+    //Создаем элемент отображения пользователя
+    me.element = $('<tr/>',{
+        'class':'userLine'
+    });
+    me.separator = $('<td/>',{
+        'class':'tableSeparator',
+        css:{disply:'none'}
+    });
+    me.element.append(me.separator);
+    me.collectBaseInfo = function(){
+        $.ajax({
+            url: baseUrl + '/basicUserData',
+            type:'post',
+            data:{id:me.id},
+            dataType:"json"
+        }).done(function(data){
+            //По непонятной причине возвращается массив, содержащий
+            // нужный объект в качестве единственного элемента.
+            data = data[0];
+            InsertBasicData(me.separator, data);
+        });
+    };
+    me.collectBaseInfo();
+    return me;
+}
+/**
+ * Перед separator вставляет данные по ячекам. Нужна для удобства генерации заголовка
+ * @param separator
+ * @param data
+ */
+function InsertBasicData(separator, data){
+    separator.before($('<td/>',{
+        html:data.fio,
+        "class":"fio tableCell"
+    })).before($('<td/>',{
+        html:data.tel,
+        "class":"tel tableCell"
+    })).before($('<td/>',{
+        html:data.email,
+        "class":"email tableCell"
+    }));
 }
