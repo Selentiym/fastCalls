@@ -849,4 +849,43 @@ class User extends UModel
 			$user -> attributes
 		));
 	}
+
+	/**
+	 * Отвечает на запросы, когда в $_POST пришел айдишник пользователя из JS
+	 * В массиве $_POST помимо айдишника пользователя должен быть
+	 * задан интервал ячеек.
+	 * Отдает обратно json со свойствами юзера. Без какой-либо статистики.
+	 */
+	public function statDumpJS(){
+		//Для удобной смены источника данных, если вдруг понадобится.
+		$data = $_POST;
+		$fromCell = $data['fromOffset'];
+		$toCell = $data['toOffset'];
+		$cellType = $data['cellType'];
+		$rez = array();
+		//Ищем юзера, статистику которого хотим вывести.
+		$user = User::model() -> findByPk($data['id']);
+		if ((strlen($cellType))&&(strlen($fromCell))&&(strlen($toCell))&&($user)&&($fromCell <= $toCell)) {
+			$data = new Data();
+
+			$timePeriod = TimePeriod::fromCell($fromCell, $cellType);
+			for ($i = $fromCell; $i < $toCell; $i++) {
+				$cellInfo = array();
+				//Выдаем информацию по статистике.
+				$cellInfo['count'] = $data -> countCallsInRange(
+						$timePeriod -> from -> getTimestamp(),
+						$timePeriod -> to -> getTimestamp(),
+						$user
+						);
+				$cellInfo['events'] = array();
+				$rez[$i] = $cellInfo;
+				// = $user -> count
+				//В конце переводим интервал чуть дальше
+				//$timePeriod -> nextCell($cellType);
+			}
+		} else {
+			$rez['success'] = false;
+		}
+		echo json_encode($rez);
+	}
 }

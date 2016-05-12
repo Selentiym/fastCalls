@@ -830,7 +830,7 @@ function User(parameters){
         css:{disply:'none'}
     });
     me.element.append(me.separator);
-    me.collectBaseInfo = function(){
+    me.collectBaseInfo = function() {
         $.ajax({
             url: baseUrl + 'basicUserData',
             type:'post',
@@ -842,6 +842,9 @@ function User(parameters){
             data = data[0];
             InsertBasicData(me.separator, data);
         });
+    };
+    me.collectStatInfo = function(){
+        console.log('something');
     };
     me.collectBaseInfo();
     return me;

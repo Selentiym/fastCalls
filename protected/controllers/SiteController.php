@@ -415,6 +415,14 @@ class SiteController extends Controller
 				//'scenario' => 'searchById',
 				'access' => function(){return Yii::app() -> user -> checkAccess('admin');},
 			),
+			'userStatDumpJS' => array(
+				'class' => 'application.controllers.site.ClassMethodAction',
+				'modelClass' => 'User',
+				'method' => 'statDumpJS',
+				'ajax' => true,
+				//'scenario' => 'searchById',
+				'access' => function(){return Yii::app() -> user -> checkAccess('admin');},
+			),
 		);
 	}
 	/**
@@ -1012,5 +1020,13 @@ class SiteController extends Controller
 			$rez ['success'] = false;
 		}
 		echo json_encode($rez, JSON_PRETTY_PRINT);
+	}
+	public function actionCheck() {
+		$per = TimePeriod::fromCell(-1,'week');
+		//var_dump($per);
+		$per -> show();
+		$per = TimePeriod::fromCell(0,7);
+		//var_dump($per);
+		$per -> show();
 	}
 }
