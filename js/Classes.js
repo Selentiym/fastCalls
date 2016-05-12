@@ -6,6 +6,7 @@ if (!baseUrl) {
 }
 parentDialog = $("#DialogContainer");
 
+//def <=> default
 def = {};
 def.cell = 1;
 def.cellsPlus = 6;
@@ -695,19 +696,6 @@ function Dialog(drag, parameters){
         me.element.hide();
         parentCont.show();
     };
-    me.updateData = function (){
-        console.log('updateFunction');
-        //alert('updated');
-    };
-    /**
-     * Функция для изменения минимальной ячейки юзера.
-     */
-    me.setCell = function(newCell){
-        if (newCell != me.cell) {
-            me.cell = newCell;
-            me.updateData();
-        }
-    };
     me.open();
     /**
      * Генерируем внутренность окна.
@@ -764,12 +752,31 @@ function Dialog(drag, parameters){
         email:'Почта'
     });
     me.body.append(body);
-
-    var userObj = _.map(drag.users, function(id){
-        var temp = new User({id:id});
+    //задаем стандартные значения параметров
+    me.startCell = - def.cellsMinus;
+    me.stopCell = def.cellsPlus;
+    //Создаем из массива id пользователей массив объектов пользователей
+    me.usersObj = _.map(drag.users, function(id){
+        var temp = new User({id:id, dialog: me});
         me.tbody.append(temp.element);
+        return temp;
     });
-
+    me.updateData = function (){
+        console.log('updateFunction');
+        _.each(me.usersObj,function(user){
+            user.collectStatInfo(me.startCell,me.stopCell);
+        });
+        //alert('updated');
+    };
+    /**
+     * Функция для изменения минимальной ячейки юзера.
+     */
+    me.setCell = function(newCell){
+        if (newCell != me.cell) {
+            me.cell = newCell;
+            me.updateData();
+        }
+    };
     //Задаем ячейку по умолчанию и тем самым запускаем процесс
     // подгрузки информации о юзерах
     me.setCell(def.cell);
@@ -821,6 +828,8 @@ function User(parameters){
     me.valueOf = function(){
         return me.id;
     };
+    //Сохраняем ссылку на окошко, которое контролирует пользователя
+    me.dialog = parameters.dialog;
     //Создаем элемент отображения пользователя
     me.element = $('<tr/>',{
         'class':'userLine'
@@ -843,8 +852,23 @@ function User(parameters){
             InsertBasicData(me.separator, data);
         });
     };
-    me.collectStatInfo = function(){
-        console.log('something');
+    me.collectStatInfo = function(from,to){
+        var data = {
+            id:me.id,
+            //Тип ячейки получаем напрямую из окошка
+            cellType:me.dialog.cell,
+            fromOffset:from,
+            toOffset:to
+        };
+        $.ajax({
+            url: baseUrl + 'userStatDumpJS',
+            type:"POST",
+            data:data,
+            dataType:"json"
+        }).done(function(data){
+            console.log('User '+me.id + ':');
+            console.log(data);
+        });
     };
     me.collectBaseInfo();
     return me;

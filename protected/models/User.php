@@ -870,6 +870,7 @@ class User extends UModel
 
 			$timePeriod = TimePeriod::fromCell($fromCell, $cellType);
 			for ($i = $fromCell; $i < $toCell; $i++) {
+				$timePeriod -> show();
 				$cellInfo = array();
 				//Выдаем информацию по статистике.
 				$cellInfo['count'] = $data -> countCallsInRange(
@@ -878,14 +879,17 @@ class User extends UModel
 						$user
 						);
 				$cellInfo['events'] = array();
-				$rez[$i] = $cellInfo;
+
 				// = $user -> count
+				$cellInfo['from'] = $timePeriod -> from -> getTimestamp();
+				$cellInfo['to'] = $timePeriod -> to -> getTimestamp();
+				$rez[(int)$i] = $cellInfo;
 				//В конце переводим интервал чуть дальше
-				//$timePeriod -> nextCell($cellType);
+				$timePeriod -> nextCell($cellType);
 			}
 		} else {
 			$rez['success'] = false;
 		}
-		echo json_encode($rez);
+		echo json_encode($rez, JSON_PRETTY_PRINT);
 	}
 }
