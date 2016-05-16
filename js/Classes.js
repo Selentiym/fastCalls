@@ -697,7 +697,8 @@ function Dialog(drag, parameters){
         html:html
     }));
     //Устанавливаем точку, относительно которой считать ячейки
-    me.reper = time();
+    var date = new Date();
+    me.reper = date.getTime();
     //Сохраняем в себе ссылку на DOM элемент внутренности - будет полезно.
     me.body = bodyTemp;
     //И ссылку на драг тоже.
