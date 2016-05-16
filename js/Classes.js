@@ -8,9 +8,9 @@ parentDialog = $("#DialogContainer");
 
 //def <=> default
 def = {};
-def.cell = 1;
-def.cellsPlus = 6;
-def.cellsMinus = 7;
+def.cell = 'week';
+def.cellsPlus = 1;
+def.cellsMinus = 1;
 
 
 /**
@@ -98,7 +98,7 @@ function Node(parameters){
 
 
     /**
-     * Задаем функцию уничтожения
+     * Задаем функцию уничтожения`
      */
     me.destroy = function(){
         var ind = _.indexOf(Base.prototype.getObject(me.id));
@@ -354,7 +354,7 @@ function UserDrag(parameters){
                 return;
             }
         }
-        me.destroy();
+        me.destroy(true);
     });
     //Запоминаем какое было задано имя.
     me.vars.name = name;
@@ -391,6 +391,22 @@ function UserDrag(parameters){
             console.log('new dial');
             me.dialog = new Dialog(me, {});
         }
+    };
+    //Как-то криво, получается, работает наследование.
+    // хотя как-то работает :D
+    var oldDestr = me.destroy;
+    me.destroy = function(doSplice){
+        if (doSplice) {
+            if (me.holder) {
+                //Удаляем элемент из дропа, которому он принадлежит
+                me.holder.guests.remove(me);
+            }
+        }
+        //Удаляем запись о том, что этот драг где-то лежит
+        if (me.dialog) {
+            me.dialog.destroy();
+        }
+        oldDestr();
     };
     //Не забываем поставить обработчик на открытие окошка
     enlargeButton.click(function(){
@@ -582,7 +598,8 @@ function ActionAdd(parameters){
             //Будет хранить результирующих пользователей
             var users = [];
             //Удаляем все операнды.
-            _.map(drop.guests, function (obj) {
+            console.log(drop.guests.length);
+            _.each(drop.guests, function (obj) {
                 if ((obj.users instanceof Array)&&(obj.users.length)) {
                     users = _.union(users, obj.users);
                 }
@@ -679,9 +696,11 @@ function Dialog(drag, parameters){
         borderRadius:'10px',
         html:html
     }));
+    //Устанавливаем точку, относительно которой считать ячейки
+    me.reper = time();
     //Сохраняем в себе ссылку на DOM элемент внутренности - будет полезно.
     me.body = bodyTemp;
-    //И в себе тоже ссылку на драг.
+    //И ссылку на драг тоже.
     me.drag = drag;
     //Функция открытия далогового окна
     me.open = function(){
@@ -708,16 +727,15 @@ function Dialog(drag, parameters){
     var cellSize = $('<div/>',{
         "class":"CellSize",
         css:{"display":"inline-block"}
-    }).append(MakeButton({text:"День",handler:function(){
+    }).append(MakeButton({text:"День",activeOn:def.cell,activeAttr: 1,handler:function(){
         me.setCell(1);
         toggleButtons.call(this);
-    }})).append(MakeButton({text:"Неделя",handler:function(){
+    }})).append(MakeButton({text:"Неделя",activeOn:def.cell,activeAttr: 'week',handler:function(){
         me.setCell('week');
         toggleButtons.call(this);
-    }})).append(MakeButton({text:"Месяц",handler:function(){
+    }})).append(MakeButton({text:"Месяц",activeOn:def.cell,activeAttr: 'month',handler:function(){
         me.setCell('month');
         toggleButtons.call(this);
-
     }}));
     //Сохраняем на будущее заголовок страницы.
     me.tableHead = $('<tr/>');
@@ -734,9 +752,30 @@ function Dialog(drag, parameters){
         'class':'DragName',
         html:drag.vars.name
     })).after(
-        MakeCalender()
+        MakeCalender(function(date){
+            //Меняем реперную точку для показа ячеек.
+            me.reper = date.getTime();
+        })
     ).after(
         cellSize
+    ).after(
+        MakeButton({text:'+ ячейка в прошлом', handler:function(){
+            var num = prompt('Сколько ячеек добавить слева?',1);
+            if (parseInt(num)) {
+                me.addCellsLeft(parseInt(num));
+            }/* else {
+                alert(parseInt(num));
+            }*/
+        }})
+    ).after(
+        MakeButton({text:'+ ячейка в будущем', handler:function(){
+            var num = prompt('Сколько ячеек добавить справа?',1);
+            if (parseInt(num)) {
+                me.addCellsRight(parseInt(num));
+            }/* else {
+                alert(parseInt(num));
+            }*/
+        }})
     ).after($('<table/>',{
         "class":"DialogUsersTable"
     }).attr('border',1)
@@ -761,10 +800,83 @@ function Dialog(drag, parameters){
         me.tbody.append(temp.element);
         return temp;
     });
+    /**
+     *
+     * @param from номер ячейки, с которой начинать составление заголовка
+     * @param to на какой заканчивать
+     * @param appendAfter
+     */
+    me.addStatHeader = function(from,to,appendAfter){
+        if (!appendAfter) {
+            appendAfter = me.separator;
+        }
+        //Сохраняем позицию, куда вставлять ответ сервера.
+        me.appendAfter = appendAfter;
+        //Сохраняем идентификатор
+        me.awaiting = generateId();
+        var data = {
+            fromOffset:from,
+            toOffset:to,
+            cellType:me.cell,
+            dataId: me.awaiting
+        };
+        $.ajax({
+            url: baseUrl + 'cellHeaders',
+            //type:"POST",
+            data:data,
+            dataType:"json"
+        }).done(function(data){
+            _.each(data.response,function(el){
+                var temp = $('<td/>');
+                temp.append(el);
+                me.appendAfter.after(temp);
+                me.appendAfter = temp;
+            });
+        });
+    };
+    /**
+     * Вовращает последнюю ячейку статистики или separator, если ее нет.
+     */
+    me.lastHeaderElement = function(){
+        return me.tableHead.children().filter(":last");
+    };
+    /**
+     * Добавляет number ячеек слева
+     * @param number
+     */
+    me.addCellsLeft = function(number){
+        var old = me.startCell - 1;
+        me.startCell -= number;
+        me.addStatHeader(me.startCell, old,me.separator);
+        _.each(me.usersObj, function(user){
+            user.collectStatInfo(me.startCell, old,'first');
+        });
+    };
+    /**
+     * Добавляет number ячеек справа
+     * @param number
+     */
+    me.addCellsRight = function(number){
+        var old = me.stopCell + 1;
+        me.stopCell += number;
+        me.addStatHeader(old, me.stopCell,me.lastHeaderElement());
+        _.each(me.usersObj, function(user){
+            user.collectStatInfo(old, me.stopCell,'last');
+        });
+    };
+    /**
+     * Чистит заголовок статистики
+     */
+    me.clearStatHeader = function(){
+        me.separator.nextAll().remove();
+    };
     me.updateData = function (){
         console.log('updateFunction');
+        me.clearStatHeader();
+        me.addStatHeader(me.startCell,me.stopCell,me.separator);
         _.each(me.usersObj,function(user){
             user.collectStatInfo(me.startCell,me.stopCell);
+            user.clearStat();
         });
         //alert('updated');
     };
@@ -787,15 +899,44 @@ function Dialog(drag, parameters){
     //Сохраняем в драге ссылку на себя
     drag.dialog = me;
     console.log(drag.dialog);
+    /**
+     * Удаляем первым делом DOM элемент!
+     */
+    me.destroy = function(){
+        me.element.remove();
+        me.drag.dialog = null;
+    };
     return me;
 }
 /**
+ * @param handler
  * @return DOM элемент, на который повешен календарь.
  */
-function MakeCalender(){
-    return $('<span/>',{
-        html:"calender"
+function MakeCalender(handler){
+    var cont = $('<input/>',{
+        type:"text"
     });
+    cont.datepicker({
+        format: '@',
+        //maxDate: moment(),
+        dateLimit: { months: 3 },
+        /*ranges: {
+         'Сегодня': [moment()],
+         'Вчера': [moment().subtract(1, 'days')],
+         'Неделю назад': [moment().subtract(6, 'days')],
+         'Месяц назад': [moment().subtract(29, 'days')],
+         },*/
+        buttonClasses: ['btn', 'btn-sm'],
+        applyClass: 'btn-primary',
+        cancelClass: 'btn-default',
+        onSelect: function (dateStr, obj) {
+            //end.subtract(1, 'days');
+            var date = new Date(dateStr);
+            date.setHours(12);
+            handler(date);
+        }
+    });
+    return cont;
 }
 /**
  *
@@ -805,9 +946,12 @@ function MakeButton(param){
     param = $.extend({
         "node":"<span/>",
         "text":"button",
-        "class":"button",
         handler: function(){return;}
     }, param);
+    param.class += ' button';
+    if (param.activeOn == param.activeAttr) {
+        param.class = param.class + ' active';
+    }
     var temp = $(param.node,{
         css:param.css,
         "class":param.class
@@ -836,9 +980,12 @@ function User(parameters){
     });
     me.separator = $('<td/>',{
         'class':'tableSeparator',
-        css:{disply:'none'}
+        css:{display:'none'}
     });
     me.element.append(me.separator);
+    /**
+     * Функция получает и размещает на страничке текстовую информацию о пользователе
+     */
     me.collectBaseInfo = function() {
         $.ajax({
             url: baseUrl + 'basicUserData',
@@ -852,23 +999,88 @@ function User(parameters){
             InsertBasicData(me.separator, data);
         });
     };
-    me.collectStatInfo = function(from,to){
+    me.lastStatElement = function(){
+        return me.element.children().filter(':last');
+    };
+    /**
+     * Функция обращается к серверу за статистикой по данному пользователю.
+     * Note: тип ячейки сохранен в me.dialog.cell, то есть не передается
+     * в функцию в явном виде, но от него зависит результат!
+     * @param from - ячейка, с которой начать выдавать информацию
+     * @param to - на которой закончить
+     * @param appendAfter - DOM элемент, после которого вставить данные
+     * По умолчанию принимается равным me.separator - невидимой разделяющей
+     * ячейкой в строке соответсвующей пользователю.
+     * Если в качестве appendAfter передано 'last', то присваиваем в конец.
+     * Если 'first', то в начало
+     */
+    me.collectStatInfo = function(from,to, appendAfter){
+        if (appendAfter === 'last'){
+            appendAfter = me.lastStatElement();
+        }
+        if ((!appendAfter)||(appendAfter==='first')){
+            appendAfter = me.separator;
+        }
+        //Сохраняем место, с которого начать присваивание.
+        me.appendAfter = appendAfter;
+        //Сохраняем идентификатор, по которому проверять пришедшие с сервера данные
+        me.awaiting = generateId();
         var data = {
             id:me.id,
             //Тип ячейки получаем напрямую из окошка
             cellType:me.dialog.cell,
             fromOffset:from,
-            toOffset:to
+            toOffset:to,
+            dataId: me.awaiting
         };
         $.ajax({
             url: baseUrl + 'userStatDumpJS',
-            type:"POST",
+            //type:"POST",
             data:data,
             dataType:"json"
         }).done(function(data){
+            //Если что-то не так на серваке, он вернет {success:false}
+            if (data.success === false) {
+                alert('A mistake has occurred while requesting data from the server!');
+                return;
+            }
+            //Случай если вдруг было нажато много разных кнопок быстро.
+            // Принимаем только последнюю информацию.
+            if (me.awaiting != data.dataId) {
+                alert('Not the needed data.');
+                return;
+            }
+            _.each(data.response, function(el){
+                var string = $('<span/>');
+                string
+                    .append($('<span/>',{
+                        text:el.count.common
+                    }))
+                    .append(' -> ')
+                    .append($('<span/>',{
+                        text: el.count.assigned
+                    }))
+                    .append(' -> ')
+                    .append($('<span/>',{
+                        text:el.count.verifyed
+                    }));
+                //Создаем новую ячейку
+                var temp = $('<td/>').append(string);
+                //Вставляем ячейку на страницу
+                me.appendAfter.after(temp);
+                //Сохраняем последний элемент цепочки
+                me.appendAfter = temp;
+            });
             console.log('User '+me.id + ':');
             console.log(data);
         });
+    };
+    /**
+     * Функция удаляет всю статистику по пользователю
+     */
+    me.clearStat = function(){
+        //Удаляем все элменты в строке после разделителя.
+        me.separator.nextAll().remove();
     };
     me.collectBaseInfo();
     return me;

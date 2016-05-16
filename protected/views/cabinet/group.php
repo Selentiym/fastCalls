@@ -10,11 +10,13 @@ Yii::app() -> clientScript -> registerScriptFile(Yii::app() -> baseUrl . '/js/un
 Yii::app() -> clientScript -> registerScriptFile(Yii::app() -> baseUrl . '/js/jquery.sidr.min.js', CClientScript::POS_BEGIN);
 Yii::app() -> clientScript -> registerScriptFile(Yii::app() -> baseUrl . '/js/Classes.js', CClientScript::POS_END);
 Yii::app() -> clientScript -> registerScriptFile(Yii::app() -> baseUrl . '/js/scripts.js', CClientScript::POS_END);
+Yii::app() -> clientScript -> registerScriptFile(Yii::app() -> baseUrl . '/js/jquery-ui-1.10.4.custom.min.js', CClientScript::POS_END);
 Yii::app() -> clientScript -> registerScriptFile(Yii::app() -> baseUrl . '/js/groupScenario.js', CClientScript::POS_END);
 //Yii::app() -> clientScript -> registerCssFile(Yii::app() -> baseUrl . '/css/jquery-ui.css', CClientScript::POS_END);
 Yii::app()->getClientScript()->registerCssFile(Yii::app()->baseUrl.'/css/jquery-ui.css');
 Yii::app()->getClientScript()->registerCssFile(Yii::app()->baseUrl.'/css/jquery.sidr.light.min.css');
 Yii::app()->getClientScript()->registerCssFile(Yii::app()->baseUrl.'/css/group.css');
+Yii::app()->getClientScript()->registerCssFile(Yii::app()->baseUrl.'/css/datePicker/css/jquery-ui-1.10.4.custom.min.css');
 
 Yii::app() -> getClientScript() -> registerScript('setBaseUrl','baseUrl = "'.Yii::app() -> baseUrl.'/";',CClientScript::POS_BEGIN);
 ?>

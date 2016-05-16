@@ -8,6 +8,7 @@
 class TimePeriod {
     public $from;
     public $to;
+    public $type;
     /**
      * @param CDateTime $from
      * @param CDateTime $to
@@ -30,6 +31,9 @@ class TimePeriod {
      * @return TimePeriod
      */
     public function nextCell($cellType = ''){
+        if (!$cellType) {
+            $cellType = $this -> type;
+        }
         //То, что раньше было концом интервала, теперь начало
         $this -> from = clone $this -> to;
         if (($cellType == 'week')||($cellType == 7)) {
@@ -43,13 +47,47 @@ class TimePeriod {
         return $this;
     }
     /**
+     * Возвращает текст, который будет выведен в ячейке заголовка
+     * @param $cellType
+     * @return string
+     */
+    public function giveHeader ($cellType = ''){
+        if ($cellType) {
+            $cellType = $this -> type;
+        }
+        if ($cellType == 'week') {
+            //Номер недели с начала года.
+            $week = $this -> from -> format("W");
+            $temp = clone $this -> from;
+            //Первое число месяца
+            $temp -> setDate($temp -> year(), $temp -> month(), 1);
+            //Номер с начала года первой недели месяца.
+            $firstWeek = $temp -> format("W");
+            return $this -> from -> format($week.": M(".($week - $firstWeek + 1).")");
+        } elseif ($cellType == 1) {
+            return $this -> from -> format("j M");
+        } elseif ((int)$cellType) {
+            return $this -> from -> format("j M - "). $this -> to -> format("j M");
+        } elseif ($cellType == 'month') {
+            return $this -> from -> format("F o");
+        } else {
+            return $this -> from -> format("o.m.d - ") . $this -> to -> format("o.m.d");
+        }
+    }
+    /**
      * @param int $cellOffset
      * @param string $cellType
+     * @param CDateTime|null $reper
      * @return TimePeriod
      */
-    public static function fromCell ($cellOffset = 0, $cellType = ''){
-        $fromTime = new CDateTime();
-        $toTime = new CDateTime();
+    public static function fromCell ($cellOffset = 0, $cellType = '', CDateTime $reper = null){
+        if (is_a($reper, 'CDateTime')) {
+            $fromTime = $reper;
+            $toTime = clone $reper;
+        } else {
+            $fromTime = new CDateTime();
+            $toTime = new CDateTime();
+        }
         $fromTime -> setTime(0,0,0);
         $toTime -> setTime(0,0,0);
         switch($cellType){
@@ -66,7 +104,7 @@ class TimePeriod {
                 //устанавливаем дату на первое число месяца
                 $fromTime -> setDate($fromTime -> year(), $fromTime -> month() + $cellOffset, 1);
                 //А конечную дату на месяц позже
-                $toTime -> setDate($fromTime -> year(), $fromTime -> month() + $cellOffset + 1, 1);
+                $toTime -> setDate($fromTime -> year(), $fromTime -> month() + 1, 1);
                 break;
             case 7:
                 //просто прибавляем нужное количество сдвигов
@@ -81,7 +119,9 @@ class TimePeriod {
                 $toTime -> setDate($fromTime -> year(), $fromTime -> month(), $fromTime -> day() + 1);
                 break;
         }
-        return new self($fromTime, $toTime);
+        $rez = new self($fromTime, $toTime);
+        $rez -> type = $cellType;
+        return $rez;
     }
 
     /**

@@ -36,6 +36,9 @@
     margin-right: 5px;
     display:inline-block;
 }
+.dialog {
+    overflow:auto;
+}
 .dialog .headMenu span.wrapDialog{
     background: url("../images/wrap-icon.png");
     width:20px;
@@ -101,7 +104,9 @@ table .tableSeparator {
     padding:5px;
     vertical-align: middle;
 }*/
-/* Чтобы дивы имели одинаковый размер по вертикали. Достаточно сложно добиться. */
+/* Чтобы дивы имели одинаковый размер по вертикали. Достаточно сложно добиться.
+НЕ АКТУАЛЬНО!
+*/
 .tableLine{
     height:100px;
 }

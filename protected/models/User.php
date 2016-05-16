@@ -858,7 +858,8 @@ class User extends UModel
 	 */
 	public function statDumpJS(){
 		//Для удобной смены источника данных, если вдруг понадобится.
-		$data = $_POST;
+		$data = $_GET;
+		//$data = $_POST;
 		$fromCell = $data['fromOffset'];
 		$toCell = $data['toOffset'];
 		$cellType = $data['cellType'];
@@ -866,14 +867,14 @@ class User extends UModel
 		//Ищем юзера, статистику которого хотим вывести.
 		$user = User::model() -> findByPk($data['id']);
 		if ((strlen($cellType))&&(strlen($fromCell))&&(strlen($toCell))&&($user)&&($fromCell <= $toCell)) {
-			$data = new Data();
+			$dataObj = new Data();
 
 			$timePeriod = TimePeriod::fromCell($fromCell, $cellType);
-			for ($i = $fromCell; $i < $toCell; $i++) {
-				$timePeriod -> show();
+			for ($i = $fromCell; $i <= $toCell; $i++) {
+				//$timePeriod -> show();
 				$cellInfo = array();
 				//Выдаем информацию по статистике.
-				$cellInfo['count'] = $data -> countCallsInRange(
+				$cellInfo['count'] = $dataObj -> countCallsInRange(
 						$timePeriod -> from -> getTimestamp(),
 						$timePeriod -> to -> getTimestamp(),
 						$user
@@ -883,13 +884,34 @@ class User extends UModel
 				// = $user -> count
 				$cellInfo['from'] = $timePeriod -> from -> getTimestamp();
 				$cellInfo['to'] = $timePeriod -> to -> getTimestamp();
-				$rez[(int)$i] = $cellInfo;
+				//Важно, что делаем просто push! Инчае json_encode сделает
+				// объект, а нужен массив
+				$rez[] = $cellInfo;
 				//В конце переводим интервал чуть дальше
 				$timePeriod -> nextCell($cellType);
 			}
 		} else {
 			$rez['success'] = false;
 		}
-		echo json_encode($rez, JSON_PRETTY_PRINT);
+		echo json_encode(array(
+			'response' => $rez,
+			'dataId' => $data['dataId']
+		), JSON_NUMERIC_CHECK);
+	}
+	public function cellHeaders(){
+		//$data = $_POST;
+		$data = $_GET;
+		$fromCell = $data['fromOffset'];
+		$toCell = $data['toOffset'];
+		$cellType = $data['cellType'];
+		$timePeriod = TimePeriod::fromCell($fromCell, $cellType);
+		for ($i = $fromCell; $i <= $toCell; $i++) {
+			$rez[] = $timePeriod -> giveHeader($cellType);
+			$timePeriod -> nextCell($cellType);
+		}
+		echo json_encode(array(
+			'response' => $rez,
+			'dataId' => $data['dataId']
+		),JSON_PRETTY_PRINT);
 	}
 }
