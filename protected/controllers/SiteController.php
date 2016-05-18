@@ -431,6 +431,14 @@ class SiteController extends Controller
 				//'scenario' => 'searchById',
 				'access' => function(){return Yii::app() -> user -> checkAccess('admin');},
 			),
+			'preciseStat' => array(
+				'class' => 'application.controllers.site.ClassMethodAction',
+				'modelClass' => 'User',
+				'method' => 'preciseList',
+				'ajax' => true,
+				//'scenario' => 'searchById',
+				'access' => function(){return Yii::app() -> user -> checkAccess('admin');},
+			),
 		);
 	}
 	/**

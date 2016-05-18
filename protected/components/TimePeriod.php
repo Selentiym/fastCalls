@@ -63,7 +63,9 @@ class TimePeriod {
             $temp -> setDate($temp -> year(), $temp -> month(), 1);
             //Номер с начала года первой недели месяца.
             $firstWeek = $temp -> format("W");
-            return $this -> from -> format($week.": M(".($week - $firstWeek + 1).")");
+            //Эмпирическим путем установленный дефект.
+            $add = $this -> from -> day() == 1 ? 1 : 0;
+            return $this -> from -> format($week.": M(".($week - $firstWeek + $add).")") . $this -> from -> format(" j.n - "). $this -> to -> format("j.n");
         } elseif ($cellType == 1) {
             return $this -> from -> format("j M");
         } elseif ((int)$cellType) {
@@ -145,33 +147,5 @@ class TimePeriod {
     }
     public function show(){
         echo "From {$this -> from -> format(DateTime::W3C)} to {$this -> to -> format(DateTime::W3C)}<br/>";
-    }
-}
-class CDateTime extends DateTime {
-    /**
-     * @var array $date - contains the output of date
-     */
-    public $date;
-    public function date() {
-        //if (empty($this -> date)) {
-            $this -> date = getdate($this -> getTimestamp());
-        //}
-        return $this -> date;
-    }
-    public function weekDay(){
-        $d = $this -> date();
-        return $d['wday'];
-    }
-    public function day(){
-        $d = $this -> date();
-        return $d['mday'];
-    }
-    public function year(){
-        $d = $this -> date();
-        return $d['year'];
-    }
-    public function month(){
-        $d = $this -> date();
-        return $d['mon'];
     }
 }

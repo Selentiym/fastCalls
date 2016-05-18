@@ -863,30 +863,24 @@ class User extends UModel
 		$fromCell = $data['fromOffset'];
 		$toCell = $data['toOffset'];
 		$cellType = $data['cellType'];
+		if ($data['reper'] > 100000) {
+			$reper = new CDateTime();
+			$time = $reper -> getTimestamp();
+			$dif = $time - $data['reper'];
+			$reper -> setTimestamp($data['reper']);
+		} else {
+			$reper = null;
+		}
 		$rez = array();
 		//Ищем юзера, статистику которого хотим вывести.
 		$user = User::model() -> findByPk($data['id']);
 		if ((strlen($cellType))&&(strlen($fromCell))&&(strlen($toCell))&&($user)&&($fromCell <= $toCell)) {
 			$dataObj = new Data();
-
-			$timePeriod = TimePeriod::fromCell($fromCell, $cellType);
+			$timePeriod = TimePeriod::fromCell($fromCell, $cellType, $reper);
 			for ($i = $fromCell; $i <= $toCell; $i++) {
-				//$timePeriod -> show();
-				$cellInfo = array();
-				//Выдаем информацию по статистике.
-				$cellInfo['count'] = $dataObj -> countCallsInRange(
-						$timePeriod -> from -> getTimestamp(),
-						$timePeriod -> to -> getTimestamp(),
-						$user
-						);
-				$cellInfo['events'] = array();
-
-				// = $user -> count
-				$cellInfo['from'] = $timePeriod -> from -> getTimestamp();
-				$cellInfo['to'] = $timePeriod -> to -> getTimestamp();
 				//Важно, что делаем просто push! Инчае json_encode сделает
 				// объект, а нужен массив
-				$rez[] = $cellInfo;
+				$rez[] = $user -> cellInfoByTimePeriod($timePeriod, $dataObj);
 				//В конце переводим интервал чуть дальше
 				$timePeriod -> nextCell($cellType);
 			}
@@ -904,7 +898,13 @@ class User extends UModel
 		$fromCell = $data['fromOffset'];
 		$toCell = $data['toOffset'];
 		$cellType = $data['cellType'];
-		$timePeriod = TimePeriod::fromCell($fromCell, $cellType);
+		if ($data['reper'] > 100000) {
+			$reper = new CDateTime();
+			$reper -> setTimestamp($data['reper']);
+		} else {
+			$reper = null;
+		}
+		$timePeriod = TimePeriod::fromCell($fromCell, $cellType, $reper);
 		for ($i = $fromCell; $i <= $toCell; $i++) {
 			$rez[] = $timePeriod -> giveHeader($cellType);
 			$timePeriod -> nextCell($cellType);
@@ -913,5 +913,67 @@ class User extends UModel
 			'response' => $rez,
 			'dataId' => $data['dataId']
 		),JSON_PRETTY_PRINT);
+	}
+	/**
+	 *
+	 */
+	public function preciseList(){
+		$data = $_GET;
+		$rez = array();
+
+		$smaller = array(
+				'month' => 'week',
+				'week' => 1,
+				7 => 1,
+				1 => 1
+		);
+
+		$cell = $smaller[$data["oldCell"]];
+		if (!$cell) {
+			//По умолчанию в качестве ячейки будем брать день.
+			$cell = 1;
+		}
+		$user = $this -> findByPk($data['id']);
+		if (!$user) { return; }
+		$dataObj = new Data();
+		$time = new CDateTime();
+		$time -> setTimestamp($data["from"]);
+		$timePeriod = TimePeriod::fromCell(0,$cell,$time);
+		$length = 1;
+		while (($timePeriod -> to -> getTimestamp() <= $data["to"]) && ($length < 100)) {
+			$temp = $user -> cellInfoByTimePeriod($timePeriod, $dataObj);
+			$temp['headerInfo'] = $timePeriod -> giveHeader($cell);
+			$rez [] = $temp;
+			$timePeriod -> nextCell();
+			$length ++;
+		}
+		echo json_encode(array(
+				'response' => $rez,
+				'dataId' => $data['dataId']
+		),JSON_PRETTY_PRINT);
+	}
+	/**
+	 * @param $timePeriod
+	 * @param Data $dataObj
+	 * @return array
+	 */
+	public function cellInfoByTimePeriod(TimePeriod $timePeriod, Data $dataObj = null){
+		if (!is_a($dataObj, 'Data')) {
+			$dataObj = new Data();
+		}
+		//$timePeriod -> show();
+		$cellInfo = array();
+		//Выдаем информацию по статистике.
+		$cellInfo['count'] = $dataObj -> countCallsInRange(
+				$timePeriod -> from -> getTimestamp(),
+				$timePeriod -> to -> getTimestamp(),
+				$this
+		);
+		$cellInfo['events'] = array();
+
+		// = $user -> count
+		$cellInfo['from'] = $timePeriod -> from -> getTimestamp();
+		$cellInfo['to'] = $timePeriod -> to -> getTimestamp();
+		return $cellInfo;
 	}
 }

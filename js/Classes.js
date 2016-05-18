@@ -9,8 +9,8 @@ parentDialog = $("#DialogContainer");
 //def <=> default
 def = {};
 def.cell = 'week';
-def.cellsPlus = 1;
-def.cellsMinus = 1;
+def.cellsPlus = 0;
+def.cellsMinus = 0;
 
 
 /**
@@ -698,7 +698,15 @@ function Dialog(drag, parameters){
     }));
     //Устанавливаем точку, относительно которой считать ячейки
     var date = new Date();
-    me.reper = date.getTime();
+    me.setReper = function(time){
+        //Если время передано в милисекундах
+        if (time > 1454253200000) {
+            //Время какое-то нарандом выбранное.
+            time = parseInt(time / 1000);
+        }
+        me.reper = time;
+    };
+    me.reper = me.setReper(date.getTime());
     //Сохраняем в себе ссылку на DOM элемент внутренности - будет полезно.
     me.body = bodyTemp;
     //И ссылку на драг тоже.
@@ -755,7 +763,8 @@ function Dialog(drag, parameters){
     })).after(
         MakeCalender(function(date){
             //Меняем реперную точку для показа ячеек.
-            me.reper = date.getTime();
+            me.setReper(date.getTime());
+            me.updateData();
         })
     ).after(
         cellSize
@@ -819,6 +828,7 @@ function Dialog(drag, parameters){
             fromOffset:from,
             toOffset:to,
             cellType:me.cell,
+            reper: me.reper,
             dataId: me.awaiting
         };
         $.ajax({
@@ -826,7 +836,7 @@ function Dialog(drag, parameters){
             //type:"POST",
             data:data,
             dataType:"json"
-        }).done(function(data){
+        }).done(function(data) {
             _.each(data.response,function(el){
                 var temp = $('<td/>');
                 temp.append(el);
@@ -876,8 +886,8 @@ function Dialog(drag, parameters){
         me.clearStatHeader();
         me.addStatHeader(me.startCell,me.stopCell,me.separator);
         _.each(me.usersObj,function(user){
-            user.collectStatInfo(me.startCell,me.stopCell);
             user.clearStat();
+            user.collectStatInfo(me.startCell,me.stopCell);
         });
         //alert('updated');
     };
@@ -932,7 +942,7 @@ function MakeCalender(handler){
         cancelClass: 'btn-default',
         onSelect: function (dateStr, obj) {
             //end.subtract(1, 'days');
-            var date = new Date(dateStr);
+            var date = new Date(obj.selectedYear, obj.selectedMonth,obj.selectedDay);
             date.setHours(12);
             handler(date);
         }
@@ -1004,6 +1014,74 @@ function User(parameters){
         return me.element.children().filter(':last');
     };
     /**
+     * Создаем отображение для статистики одного пользователя
+     * за определенный период. Нужна для удобства изменения.
+     */
+    me.makeStatBlock = function(el){
+        if (!el.count) {return;}
+        return $('<span/>')
+            .append($('<span/>',{
+                text:el.count.common
+            }))
+            .append(' -> ')
+            .append($('<span/>',{
+                text: el.count.assigned
+            }))
+            .append(' -> ')
+            .append($('<span/>',{
+                text:el.count.verifyed
+            }));
+
+    };
+    /**
+     * Принимает в качестве аргументов UNIX метки времени, а также тип ячейки,
+     * которая должна быть разбита.
+     */
+    me.preciseStat = function (from, to){
+        me.awaiting = generateId();
+        $.ajax({
+            url: baseUrl + 'preciseStat',
+            dataType:"json",
+            //type:"POST",
+            data:{
+                from: from,
+                to: to,
+                oldCell:me.dialog.cell,
+                id:me.id,
+                dataId:me.awaiting
+            }
+        }).done(function(data){
+            alert(data.dataId);
+            console.log(data);
+            if (data.dataId == me.awaiting) {
+                if (!me.dopData) {
+                    //Создаем допстроку
+                    me.dopData = $("<tr/>", {
+                        "class":'dopData'
+                    });
+                    me.dopData.append("<td/>",{
+                        colspan: 1000
+                    });
+                    //me.dopData =
+                    me.element.after(me.dopData);
+                } else {
+                    //Обнуляем содержиое допстроки.
+                    me.dopData.html("");
+                }
+                _.each(data.response, function(el){
+                    var temp = $("<td/>", {
+
+                    });
+                    temp.append($("<div/>").append(el.headerInfo));
+                    temp.append(me.makeStatBlock(el));
+                    me.dopData.append(temp);
+                });
+            } else {
+                alert("not needed data!");
+            }
+        });
+    };
+    /**
      * Функция обращается к серверу за статистикой по данному пользователю.
      * Note: тип ячейки сохранен в me.dialog.cell, то есть не передается
      * в функцию в явном виде, но от него зависит результат!
@@ -1032,6 +1110,7 @@ function User(parameters){
             cellType:me.dialog.cell,
             fromOffset:from,
             toOffset:to,
+            reper: me.dialog.reper,
             dataId: me.awaiting
         };
         $.ajax({
@@ -1052,21 +1131,18 @@ function User(parameters){
                 return;
             }
             _.each(data.response, function(el){
-                var string = $('<span/>');
-                string
-                    .append($('<span/>',{
-                        text:el.count.common
-                    }))
-                    .append(' -> ')
-                    .append($('<span/>',{
-                        text: el.count.assigned
-                    }))
-                    .append(' -> ')
-                    .append($('<span/>',{
-                        text:el.count.verifyed
-                    }));
+
                 //Создаем новую ячейку
-                var temp = $('<td/>').append(string);
+                var temp = $('<td/>').append(me.makeStatBlock(el));
+                //вешаем обработчик расширенной статистики
+                temp.click(function(e){
+                    //alert('from ' + el.from + 'to '+el.to);
+                    if ((!e.ctrlKey)&&(!e.metaKey)) { return; }
+                    //Уточняем статистику.
+                    if (me.dialog.cell != 1) {
+                        me.preciseStat(el.from, el.to);
+                    }
+                });
                 //Вставляем ячейку на страницу
                 me.appendAfter.after(temp);
                 //Сохраняем последний элемент цепочки
@@ -1082,6 +1158,11 @@ function User(parameters){
     me.clearStat = function(){
         //Удаляем все элменты в строке после разделителя.
         me.separator.nextAll().remove();
+        //Удаляем дополнительную статистику.
+        if (me.dopData) {
+            me.dopData.remove();
+            me.dopData = null;
+        }
     };
     me.collectBaseInfo();
     return me;
