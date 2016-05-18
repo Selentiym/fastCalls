@@ -1059,17 +1059,19 @@ function User(parameters){
                     me.dopData = $("<tr/>", {
                         "class":'dopData'
                     });
-                    me.dopData.append("<td/>",{
+
+                    var tmp = $("<td/>",{
                         colspan: 1000
                     });
-                    //me.dopData =
                     me.element.after(me.dopData);
+                    me.dopData = me.dopData.append(tmp);
+                    me.dopData = tmp;
                 } else {
                     //Обнуляем содержиое допстроки.
                     me.dopData.html("");
                 }
                 _.each(data.response, function(el){
-                    var temp = $("<td/>", {
+                    var temp = $("<div/>", {
 
                     });
                     temp.append($("<div/>").append(el.headerInfo));
