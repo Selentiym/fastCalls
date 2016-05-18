@@ -28,3 +28,5 @@ images/UserOption/**/*
 protected/dump.txt
 protected/log.txt
 protected/store.txt
+#file that contains registration info for the google doc api
+configFile.php

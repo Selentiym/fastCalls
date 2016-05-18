@@ -1162,7 +1162,8 @@ function User(parameters){
         me.separator.nextAll().remove();
         //Удаляем дополнительную статистику.
         if (me.dopData) {
-            me.dopData.remove();
+            //dopData сейчас указывает на ячейку таблицы, а нужно удалить строку
+            me.dopData.parent().remove();
             me.dopData = null;
         }
     };

@@ -28,19 +28,8 @@
 		public function __construct($config = false) {
 			//Это нужно мне. Там стоят мои данные, мне лень каждый раз их передавать в аргумент.
 			if (empty($config)) {
-				$config = array(
-					'OAuth2URL' => array(
-						'base' => 'https://accounts.google.com/o/oauth2',
-						'auth' => 'auth', // for Google authorization
-						'token' => 'token', // for OAuth2 token actions
-						'redirect' => 'http://localhost/show_code.php'
-					),
-
-					'clientID' => '79229050263-ectbv1uv1c0cresie5bnpsmbpdu6buho.apps.googleusercontent.com',
-					'clientSecret' => 'ds_7e-ZbzPeHgcr2pH7nOJNe',
-					'tokenDataFile' => Yii::getPathOfAlias('application.components.googleDoc').'/.tokendata'
-					//'tokenDataFile' => '.tokendata'
-				);
+				require_once("configFile.php");
+				$config = giveConfig();
 			}
 			
 			$this->config = $config;

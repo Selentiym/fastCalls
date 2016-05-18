@@ -126,3 +126,14 @@ table .tableSeparator {
 .userLine .email{
     width:100px;
 }
+.dopData td {
+    text-align:right;
+}
+.dopData td > div {
+    display:inline-block;
+    border-left:1px solid black;
+    padding:3px 5px;
+    min-width:100px;
+    max-width:150px;
+    text-align:left;
+}
