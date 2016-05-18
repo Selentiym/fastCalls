@@ -137,3 +137,15 @@ table .tableSeparator {
     max-width:150px;
     text-align:left;
 }
+.little {
+    background: #d467a9;
+}
+.poor {
+    background:#d4643b;
+}
+.half {
+    background:#80ff80;
+}
+.more075 {
+    background: #34c924;
+}

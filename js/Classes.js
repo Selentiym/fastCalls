@@ -1019,19 +1019,35 @@ function User(parameters){
      */
     me.makeStatBlock = function(el){
         if (!el.count) {return;}
-        return $('<span/>')
-            .append($('<span/>',{
-                text:el.count.common
-            }))
-            .append(' -> ')
-            .append($('<span/>',{
-                text: el.count.assigned
-            }))
-            .append(' -> ')
-            .append($('<span/>',{
-                text:el.count.verifyed
-            }));
+        var common = el.count.common;
+        var className = '';
 
+        if (common > 0) {
+
+        }
+        var temp = $('<span/>');
+        temp
+            .append(renderDigit(50,common))
+            .append(' -> ')
+            .append(renderDigit(common,el.count.assigned))
+            .append(' -> ')
+            .append(renderDigit(common,el.count.verifyed))
+        /*temp
+            .append($('<span/>',{
+                text:el.count.common,
+                "class":renderClass(50,common)
+            }))
+            .append(' -> ')
+            .append($('<span/>',{
+                text: el.count.assigned,
+                "class":renderClass(common,el.count.assigned)
+            }))
+            .append(' -> ')
+            .append($('<span/>',{
+                text:el.count.verifyed,
+                "class":renderClass(common,el.count.verifyed)
+            }));*/
+        return temp;
     };
     /**
      * Принимает в качестве аргументов UNIX метки времени, а также тип ячейки,
@@ -1186,4 +1202,36 @@ function InsertBasicData(separator, data){
         html:data.email,
         "class":"email tableCell"
     }));
+}
+function renderClass (top, val) {
+    if (top == 0) {
+        return '';
+    }
+    if (val == 0) {
+        return '';
+    }
+    var className = '';
+    var otn = val / top;
+    if (otn > 0.2) {
+        className = 'little';
+    }
+    if (otn > 0.5) {
+        className = 'half';
+    }
+    if (otn > 0.75 ) {
+        className = 'more075';
+    }
+    if (!className) {
+        className = 'poor';
+    }
+    return className;
+}
+function renderDigit(top,val){
+    if (!val) {
+        val = 0;
+    }
+    return $("<span/>",{
+        text: val,
+        "class":renderClass(top,val)
+    });
 }
