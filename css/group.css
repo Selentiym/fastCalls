@@ -149,3 +149,50 @@ table .tableSeparator {
 .more075 {
     background: #34c924;
 }
+.space {
+    width:101%;
+    display:inline-block;
+    height:1px;
+}
+table {
+    border-spacing: 0;
+    empty-cells: hide;
+    border:none;
+    max-width:100%;
+    overflow: scroll;
+}
+thead tr {
+    border-bottom: 3px solid yellow;
+    background: rgba(255, 92, 79, 0.46);
+}
+thead td {
+    border:none;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    color: #3D3511;
+    font-size: 15px;
+    padding:0 10px;
+    height:50px;
+}
+/* Здесь можно писать стили для ячеек с общей информацией о пользователе */
+tr td  {
+
+}
+tr td.data {
+    min-width:100px;
+    text-align:center;
+    vertical-align: middle;
+    padding: 5px;
+}
+tr.userLine:hover {
+    background: #ff5030;
+}
+tr td.data:nth-child(odd){
+    background: rgba(87, 121, 255, 0.39);
+}
+tr td.data:nth-child(even){
+    background: rgba(80, 255, 151, 0.39);
+}
+tr td.data {
+    max-width:100px;
+}

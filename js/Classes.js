@@ -684,8 +684,7 @@ function Dialog(drag, parameters){
         target: parentDialog,
         css:{
             width:'900px',
-            height:'900px',
-            overflow:'auto',
+            "max-width":"100%",
             background:'lightyellow',
             borderRadius:'10px'
         },
@@ -786,7 +785,7 @@ function Dialog(drag, parameters){
                 alert(parseInt(num));
             }*/
         }})
-    ).after($('<table/>',{
+    ).after($("<div/>",{"class":"space"})).after($('<table/>',{
         "class":"DialogUsersTable"
     }).attr('border',1)
         .append($('<thead/>')
@@ -838,7 +837,7 @@ function Dialog(drag, parameters){
             dataType:"json"
         }).done(function(data) {
             _.each(data.response,function(el){
-                var temp = $('<td/>');
+                var temp = $('<td/>',{"class":"data"});
                 temp.append(el);
                 me.appendAfter.after(temp);
                 me.appendAfter = temp;
@@ -1151,7 +1150,9 @@ function User(parameters){
             _.each(data.response, function(el){
 
                 //Создаем новую ячейку
-                var temp = $('<td/>').append(me.makeStatBlock(el));
+                var temp = $('<td/>', {
+                    "class" : 'data'
+                }).append(me.makeStatBlock(el));
                 //вешаем обработчик расширенной статистики
                 temp.click(function(e){
                     //alert('from ' + el.from + 'to '+el.to);
