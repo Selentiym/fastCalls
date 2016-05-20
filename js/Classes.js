@@ -710,6 +710,9 @@ function Dialog(drag, parameters){
     me.body = bodyTemp;
     //И ссылку на драг тоже.
     me.drag = drag;
+    //Будет хранить ссылку на объект пользователя, который был выбран последним.
+    me.lastSelected = null;
+
     //Функция открытия далогового окна
     me.open = function(){
         //parentDialog.css('z-index',1000);
@@ -916,6 +919,25 @@ function Dialog(drag, parameters){
         me.element.remove();
         me.drag.dialog = null;
     };
+    /**
+     *
+     */
+    me.selectUsersTo = function(user) {
+        var indFrom = me.usersObj.indexOf(user);
+        alert(indFrom);
+        var indFor = me.usersObj.indexOf(me.lastSelected);
+        alert(indFor);
+        if (indFor > indFrom) {
+            for (var i = indFrom; i < indFor; i++) {
+                me.usersObj[i].toggleSelected();
+            }
+        } else {
+            for (var i = indFrom; i > indFor; i--) {
+                me.usersObj[i].toggleSelected();
+            }
+        }
+        me.lastSelected = null;
+    };
     return me;
 }
 /**
@@ -1050,6 +1072,18 @@ function User(parameters){
                 "class":renderClass(common,el.count.verifyed)
             }));*/
         return temp;
+    };
+    /**
+     * Обработчик выделения пользователя
+     */
+    me.toggleSelected = function(){
+        if (me.selected === undefined) {
+            me.selected = 0;
+        }
+        me.selected = !me.selected;
+        console.log(me.selected);
+        me.dialog.lastSelected = me;
+        me.element.toggleClass("selected");
     };
     /**
      * Принимает в качестве аргументов UNIX метки времени, а также тип ячейки,
@@ -1188,6 +1222,15 @@ function User(parameters){
         }
     };
     me.collectBaseInfo();
+    //Вешаем обработчик на строку пользователя
+    me.element.click(function(e){
+        //Выбираем цепочку
+        if (((e.shiftKey)&&(e.shiftKey))&&(me.dialog.lastSelected)) {
+            me.dialog.selectUsersTo(me);
+        } else if (e.altKey) {
+            me.toggleSelected();
+        }
+    });
     return me;
 }
 /**

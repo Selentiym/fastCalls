@@ -184,6 +184,9 @@ tr td.data {
     vertical-align: middle;
     padding: 5px;
 }
+tr.userLine.selected {
+    background: rgba(0, 255, 76, 0.47);
+}
 tr.userLine:hover {
     background: #ff5030;
 }
