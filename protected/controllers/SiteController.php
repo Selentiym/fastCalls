@@ -1037,6 +1037,14 @@ class SiteController extends Controller
 		}
 		echo json_encode($rez, JSON_PRETTY_PRINT);
 	}
+	public function actionAddTestData (){
+		if (Yii::app() -> user -> checkAccess("admin")) {
+			//Выбрали месяц, из которого тянуть пользователей.
+			$month = "April";
+		} else {
+			echo "Not allowed!";
+		}
+	}
 	public function actionCheck() {
 		$per = TimePeriod::fromCell(-1,'week');
 		//var_dump($per);

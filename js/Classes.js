@@ -699,7 +699,7 @@ function Dialog(drag, parameters){
     var date = new Date();
     me.setReper = function(time){
         //Если время передано в милисекундах
-        if (time > 1454253200000) {
+        if (time > 1354253200000) {
             //Время какое-то нарандом выбранное.
             time = parseInt(time / 1000);
         }
@@ -1006,6 +1006,9 @@ function User(parameters){
             //По непонятной причине возвращается массив, содержащий
             // нужный объект в качестве единственного элемента.
             data = data[0];
+            //Устанавливаем title для элемента, чтобы всегда иметь
+            // возможность видеть имя юзера
+            me.element.attr('title',data.fio);
             InsertBasicData(me.separator, data);
         });
     };
