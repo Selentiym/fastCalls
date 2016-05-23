@@ -748,6 +748,33 @@ function Dialog(drag, parameters){
         me.setCell('month');
         toggleButtons.call(this);
     }}));
+    var groupActionButtons = $("<div/>",{
+        "class":"actionButtons"
+    })
+        .append(MakeButton({
+            "class":"selectAll",
+            handler: function(){
+                me.selectAll();
+            },
+            text:"Выделить всех"
+        }))
+        .append(MakeButton({
+            "class":"unSelectAll",
+            handler: function(){
+                me.unSelectAll();
+            },
+            text:"Снять выделение"
+        }))
+        .append(MakeButton({
+            "class":"sendSms",
+            "node":"<div/>",
+            handler: function(){
+                me.sendSms();
+            },
+            text:$("<img/>",{
+                src:baseUrl + "/images/mailicon.png"
+            })
+        }));
     //Сохраняем на будущее заголовок страницы.
     me.tableHead = $('<tr/>');
     //Сохраняем разделитель заголвочной строки.
@@ -788,7 +815,7 @@ function Dialog(drag, parameters){
                 alert(parseInt(num));
             }*/
         }})
-    ).after($("<div/>",{"class":"space"})).after($('<table/>',{
+    ).after(groupActionButtons).after($("<div/>",{"class":"space"})).after($('<table/>',{
         "class":"DialogUsersTable"
     }).attr('border',1)
         .append($('<thead/>')
@@ -812,6 +839,27 @@ function Dialog(drag, parameters){
         me.tbody.append(temp.element);
         return temp;
     });
+    /**
+     *
+     */
+    me.selectedObj = function(){
+        return _.where(me.usersObj,{selected:true});
+    };
+    /**
+     * Возвращает массив идентификаторов выбранных пользователей
+     */
+    me.selectedIds = function(){
+        return _.map(me.selectedObj(), function (obj) { return obj.id; });
+    };
+    /**
+     * Открывает новое окно с интерфейсом добавления свойства
+     * группе пользователей
+     */
+    me.sendSms = function(){
+        //window.open(baseUrl + '/group');
+        var users = me.selectedIds();
+        window.open(baseUrl + '/userCollection?selected='+users.join(';')+'&action=1&return=_close','','Toolbar=1,Location=0,Directories=0,Status=0,Menubar=0,Scrollbars=0,Resizable=0,Width=693,Height=629');
+    };
     /**
      *
      * @param from номер ячейки, с которой начинать составление заголовка
@@ -922,11 +970,30 @@ function Dialog(drag, parameters){
     /**
      *
      */
+    me.selectAll = function () {
+        _.each(me.usersObj, function(user){
+            if (!user.selected) {
+                user.toggleSelected();
+            }
+        });
+        me.lastSelected = null;
+    };
+    me.unSelectAll = function () {
+        _.each(me.usersObj, function(user){
+            if (user.selected) {
+                user.toggleSelected();
+            }
+        });
+        me.lastSelected = null;
+    };
+    /**
+     *
+     */
     me.selectUsersTo = function(user) {
         var indFrom = me.usersObj.indexOf(user);
-        alert(indFrom);
+        //alert(indFrom);
         var indFor = me.usersObj.indexOf(me.lastSelected);
-        alert(indFor);
+        //alert(indFor);
         if (indFor > indFrom) {
             for (var i = indFrom; i < indFor; i++) {
                 me.usersObj[i].toggleSelected();
@@ -1103,7 +1170,7 @@ function User(parameters){
                 dataId:me.awaiting
             }
         }).done(function(data){
-            alert(data.dataId);
+            //alert(data.dataId);
             console.log(data);
             if (data.dataId == me.awaiting) {
                 if (!me.dopData) {
@@ -1131,7 +1198,7 @@ function User(parameters){
                     me.dopData.append(temp);
                 });
             } else {
-                alert("not needed data!");
+                //alert("not needed data!");
             }
         });
     };
