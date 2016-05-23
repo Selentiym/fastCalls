@@ -21,14 +21,7 @@ CustomFlash::ShowFlashes();
 <form method="post" action="<?php echo Yii::app() -> baseUrl; ?>/userSendSms" style="padding-left:20px">
 	<div class="row">
 	<?php
-		$users = User::model() -> giveCollection($_POST["userGroup"]);
-		echo "Выбрано ".count($users)." пользователей:";
-		foreach ($users as $ind => $user){
-			echo "<div>";
-			echo "<input type='hidden' name='userGroup[]' value='".$user -> id."'/>";
-			echo ($ind+1).") ".$user -> fio;
-			echo "</div>";
-		}
+		User::model() -> showUserList($_POST['userGroup']);
 	?>
 	</div>
 	<div class="row">

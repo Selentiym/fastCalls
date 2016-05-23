@@ -764,6 +764,27 @@ class User extends UModel
 		}
 	}
 	/**
+	 * Adds the UserOption::$addProperty property to this user
+	 * if it is not already added
+	 */
+	public function addProperty($unused, $option){
+
+
+		if (is_a($option, 'UserOption')) {
+			$id = $option->id;
+		} else {
+			return;
+		}
+		//Ищем дубли
+		$dups = UserOptionAssignment::model() -> findByAttributes(array('id_user' => $this -> id, 'id_option' => $id));
+		if (!$dups) {
+			$opt = new UserOptionAssignment();
+			$opt -> id_user = $this -> id;
+			$opt -> id_option = $id;
+			$opt -> save();
+		}
+	}
+	/**
 	 * Generates a link to this user's cabinet.
 	 */
 	public function showOneself(){
@@ -951,6 +972,20 @@ class User extends UModel
 				'response' => $rez,
 				'dataId' => $data['dataId']
 		),JSON_PRETTY_PRINT);
+	}
+
+	/**
+	 * @param $source[] - an array of user's ids
+	 */
+	public function showUserList($source) {
+		$users = User::model() -> giveCollection($source);
+		echo "Выбрано ".count($users)." пользователей:";
+		foreach ($users as $ind => $user){
+			echo "<div>";
+			echo "<input type='hidden' name='userGroup[]' value='".$user -> id."'/>";
+			echo ($ind+1).") ".$user -> fio;
+			echo "</div>";
+		}
 	}
 	/**
 	 * @param $timePeriod

@@ -113,6 +113,11 @@ class SiteController extends Controller
 				'access' => function () {return Yii::app() -> user -> checkAccess('admin');},
 				'view' => '//users/sendSms'
 			),
+			'userPropertyForm'=>array(
+				'class'=>'application.controllers.site.FileViewAction',
+				'access' => function () {return Yii::app() -> user -> checkAccess('admin');},
+				'view' => '//users/addProperty'
+			),
 			'userCollection'=>array(
 				'class'=>'application.controllers.site.FileViewAction',
 				'access' => function () {return Yii::app() -> user -> checkAccess('admin');},
@@ -169,6 +174,31 @@ class SiteController extends Controller
 				'action' => 'sendSms',
 				'addArgs' => $_POST["smsText"],
 				'redirect' => Yii::app() -> baseUrl.'/activeuserlist'
+			),
+			'userAddProperty' => array(
+				'class' => 'application.controllers.site.ModelCollectionAction',
+				'modelClass' => 'User',
+				'args' => $_POST["userGroup"],
+				'action' => 'addProperty',
+				'preaction' => function($post, $users){
+					$rez = $post['options'];
+					if ((!((int)$post['options']))&&($post['options'])) {
+						$opt = new UserOption();
+						$opt -> name = $post['options'];
+						if ($opt -> save()){
+							$rez = $opt;
+						} else {echo "not saved";
+							var_dump($opt -> getErrors());
+						}
+					} else {
+						$opt = UserOption::model() -> findByPk($post['options']);
+						if ($opt) {
+							$rez = $opt;
+						}
+					}
+					return $rez;
+				},
+				'addArgs' => $_POST
 			),
 			
 			'createUser' => array(

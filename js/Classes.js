@@ -774,6 +774,16 @@ function Dialog(drag, parameters){
             text:$("<img/>",{
                 src:baseUrl + "/images/mailicon.png"
             })
+        }))
+        .append(MakeButton({
+            "class":"addProperty",
+            "node":"<div/>",
+            handler: function(){
+                me.addUserProperty();
+            },
+            text:$("<img/>",{
+                src:baseUrl + "/images/tag.png"
+            })
         }));
     //Сохраняем на будущее заголовок страницы.
     me.tableHead = $('<tr/>');
@@ -852,13 +862,21 @@ function Dialog(drag, parameters){
         return _.map(me.selectedObj(), function (obj) { return obj.id; });
     };
     /**
-     * Открывает новое окно с интерфейсом добавления свойства
-     * группе пользователей
+     * Открывает новое окно с интерфейсом отправки смс выбранным пользователям
      */
     me.sendSms = function(){
         //window.open(baseUrl + '/group');
         var users = me.selectedIds();
         window.open(baseUrl + '/userCollection?selected='+users.join(';')+'&action=1&return=_close','','Toolbar=1,Location=0,Directories=0,Status=0,Menubar=0,Scrollbars=0,Resizable=0,Width=693,Height=629');
+    };
+    /**
+     * Открывает новое окно с интерфейсом добавления свойства
+     * группе пользователей
+     */
+    me.addUserProperty = function(){
+        //window.open(baseUrl + '/group');
+        var users = me.selectedIds();
+        window.open(baseUrl + '/userCollection?selected='+users.join(';')+'&action=2&return=_close','','Toolbar=1,Location=0,Directories=0,Status=0,Menubar=0,Scrollbars=0,Resizable=0');
     };
     /**
      *

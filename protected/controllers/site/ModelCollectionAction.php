@@ -32,12 +32,22 @@
 		public $partial = false;
 
 		/**
-		 * @param $arg string model argument to be taken into customFind
-		 * @throws CHttpException
+		 * @var bool|callable - function to be executed before everything.
 		 */
+		public $preaction = false;
+
 		public function run()
 		{
 			if (!Yii::app() -> user -> isGuest) {
+				//Результат работы $this -> preaction
+				$thirdArg = false;
+				//Выполняем подготовительную функцию, если таковая имеется.
+				if ($this -> preaction) {
+					$preaction = $this -> preaction;
+					if (is_callable($preaction)) {
+						$thirdArg = $preaction($this -> addArgs, $this -> args);
+					}
+				}
 				$modelClass = ($this -> modelClass);
 				//Получаем CList коллекции
 				$list = $modelClass::model() -> giveCollection($this -> args);
@@ -45,12 +55,12 @@
 				//Если нам передана функция, то вызываем ее с от каждого слена коллекции
 				if (is_callable($action)) {
 					foreach($list as $mem){
-						$action($mem, $this -> addArgs);
+						$action($mem, $this -> addArgs, $thirdArg);
 					}
 				//Если же нам дана строка, то вызываем ее как метод каждого элемента коллекции
 				} elseif (method_exists($modelClass, $action)) {
 					foreach($list as $mem){
-						$mem -> $action($this -> addArgs);
+						$mem -> $action($this -> addArgs, $thirdArg);
 					}
 				}
 				//После окончания действий либо перенаправляем, либо рендерим вьюшку.

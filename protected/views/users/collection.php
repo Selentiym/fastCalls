@@ -18,6 +18,9 @@
 			case "1" :
 				$redirect = 'userSmsForm';
 			break;
+			case "2" :
+				$redirect = 'userPropertyForm';
+			break;
 			default:
 				if (!$data['return']) {
 					$redirect = 'activeuserlist';

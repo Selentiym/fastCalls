@@ -121,13 +121,19 @@ class UserOption extends UModel
 	 * @param string $id - id of the select container
 	 * @param string $appendTo - id of the element to append select2 to
 	 * @param string $placeholder - placeholder text
+	 * @param bool $tags - whether to allow adding new options
 	 */
-	public static function prettySelect($data = false, $id = 'options', $appendTo = false, $placeholder = false){
+	public static function prettySelect($data = false, $id = 'options', $appendTo = false, $placeholder = false, $tags = false){
 		if ($data === false) {
 			$data = self::model()->findAll();
 		}
 		if ($appendTo === false) {
 			$appendTo = $id;
+		}
+		if ($tags) {
+			$tags = 'tags:true,tokenSeparators:[";"],';
+		} else {
+			$tags = '';
 		}
 		/**
 		 * @var array[] $htmlOptions_options - contains settings to be given to
@@ -159,9 +165,9 @@ class UserOption extends UModel
 
 
         });*/
-		echo CHtml::activeDropDownListChosen2(UserOption::model(),'id',$dataToSelect, array('name'=>'options', 'id' => $id,'style' => 'width:200px', 'options' => $htmlOptions_options,'appendSelect2To' => $appendTo, 'empty' => $placeholder),array(),'{'.
+		CHtml::activeDropDownListChosen2(UserOption::model(),'id',$dataToSelect, array('name'=>'options', 'id' => $id,'style' => 'width:200px', 'options' => $htmlOptions_options,'appendSelect2To' => $appendTo, 'empty' => $placeholder),array(),'{'.
 				($placeholder ? 'placeholder:"'.$placeholder.'",' : '')
-				.'
+				.$tags.'
 				templateResult: function(state){
                 if (!state.element) {
                     return state.text;
