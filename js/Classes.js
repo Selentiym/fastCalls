@@ -772,7 +772,7 @@ function Dialog(drag, parameters){
                 me.sendSms();
             },
             text:$("<img/>",{
-                src:baseUrl + "/images/mailicon.png"
+                src:baseUrl + "images/mailicon.png"
             })
         }))
         .append(MakeButton({
@@ -782,7 +782,7 @@ function Dialog(drag, parameters){
                 me.addUserProperty();
             },
             text:$("<img/>",{
-                src:baseUrl + "/images/tag.png"
+                src:baseUrl + "images/tag.png"
             })
         }));
     //Сохраняем на будущее заголовок страницы.
@@ -867,7 +867,7 @@ function Dialog(drag, parameters){
     me.sendSms = function(){
         //window.open(baseUrl + '/group');
         var users = me.selectedIds();
-        window.open(baseUrl + '/userCollection?selected='+users.join(';')+'&action=1&return=_close','','Toolbar=1,Location=0,Directories=0,Status=0,Menubar=0,Scrollbars=0,Resizable=0,Width=693,Height=629');
+        window.open(baseUrl + 'userCollection?selected='+users.join(';')+'&action=1&return=_close','','Toolbar=1,Location=0,Directories=0,Status=0,Menubar=0,Scrollbars=0,Resizable=0,Width=693,Height=629');
     };
     /**
      * Открывает новое окно с интерфейсом добавления свойства
@@ -876,7 +876,7 @@ function Dialog(drag, parameters){
     me.addUserProperty = function(){
         //window.open(baseUrl + '/group');
         var users = me.selectedIds();
-        window.open(baseUrl + '/userCollection?selected='+users.join(';')+'&action=2&return=_close','','Toolbar=1,Location=0,Directories=0,Status=0,Menubar=0,Scrollbars=0,Resizable=0');
+        window.open(baseUrl + 'userCollection?selected='+users.join(';')+'&action=2&return=_close','','Toolbar=1,Location=0,Directories=0,Status=0,Menubar=0,Scrollbars=0,Resizable=0');
     };
     /**
      *
