@@ -163,16 +163,16 @@
 		 */
 		private function findGoogleRecord(GoogleDocApiHelper $api, $today = true, $month = 0){
 			//По очереди перебираем все варианты области поиска и формата для mangoTalker.
-			if ($entry = $this -> findGoogleRecord_lowLevel($api, $today, $month, false, true)) {
-				return $entry;
-			}
 			if ($entry = $this -> findGoogleRecord_lowLevel($api, $today, $month, true, true)) {
 				return $entry;
 			}
-			if ($entry = $this -> findGoogleRecord_lowLevel($api, $today, $month, false, false)) {
+			if ($entry = $this -> findGoogleRecord_lowLevel($api, $today, $month, false, true)) {
 				return $entry;
 			}
 			if ($entry = $this -> findGoogleRecord_lowLevel($api, $today, $month, true, false)) {
+				return $entry;
+			}
+			if ($entry = $this -> findGoogleRecord_lowLevel($api, $today, $month, false, false)) {
 				return $entry;
 			}
 		}
@@ -216,8 +216,12 @@
 				
 				//Обращаемся к гугл доку за информацией.
 				$data = $api -> giveData (array('sq' => $queryString));
-				//Получаем строки
-				$entries = $data -> getEntries();
+				if (!$data) {
+					$entries = array();
+				} else {
+					//Получаем строки
+					$entries = $data->getEntries();
+				}
 				if (count($entries) > 0) {
 					$entry = end($entries);
 				} else {

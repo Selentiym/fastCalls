@@ -769,6 +769,127 @@ class SiteController extends Controller
 		$call = new FastCall();
 		
 	}
+
+	/**
+	 * Добавляет $toAdd звонков из $month месяца
+	 * Используется стандартный метод добавления через
+	 * actionTelfinHangup
+	 */
+	public function actionAddTestData (){
+		function createReciever(){
+			static $users = array();
+			static $count = 0;
+			static $recursion = 0;
+			//Задаем список доступных полчаетелей
+			if (empty($users)) {
+				$criteria = new CDbCriteria();
+				//Выбираем всех обычных докторов
+				$criteria -> compare('id_type',3);
+				$users = User::model() -> findAll();
+				$count = count($users);
+			}
+			$key = mt_rand(0, $count - 1);
+			$user = $users[$key];
+			if ($phone = current($user -> phones)){
+				$rez = array(
+						"CallAPIID" => substr(md5(time()),0,20)
+				);
+				$rez["CalledDID"] = $phone -> number;
+				//Если номер содержит ivr, то создаем tCall
+				if ($phone -> ivr) {
+					$tCall = new TelfinCall();
+					$tCall -> id_phone = $phone -> id;
+					$tCall -> ApiId = $rez['CallAPIID'];
+					if (!$tCall -> save()) {
+						$recursion ++;
+						createReciever();
+					} else {
+						var_dump($tCall -> getErrors());
+					}
+				}
+				$recursion = 0;
+			} else {
+				$recursion ++;
+				if ($recursion > 100){
+					return array();
+				} else {
+					return createReciever();
+				}
+			}
+			return $rez;
+		}
+		if (Yii::app() -> user -> checkAccess("admin")) {
+			//Выбрали месяц, из которого тянуть звонки.
+			$month = "May";
+			$toAdd = 5;
+			$api = new GoogleDocApiHelper();
+			if ($api -> success) {
+				$addr = 'http://fastcalls/public_html/site/telfinHangup';
+				//$addr = Yii::app() -> baseUrl.'/telfinHangup';
+				$api -> setWorkArea('СТАТИСТИКА СПб', $month.' 2016');
+				$data = $api -> giveData ();
+				$entr = $data -> getEntries();
+				if (!$entr) {
+					return;
+				}
+				$mh = curl_multi_init();
+				//var_dump($entr);
+				$size = count($entr);
+				$resources = array();
+				for ($i = 0; $i < $toAdd; $i++) {
+					$num = mt_rand(0, $size - 1);
+					$e = $entr[$num] -> getValues();
+					//var_dump($e -> getValues());
+					//break;
+					$curl = curl_init();
+
+					curl_setopt($curl, CURLOPT_URL, $addr);
+					curl_setopt($curl, CURLOPT_RETURNTRANSFER,true);
+					curl_setopt($curl, CURLOPT_POST, true);
+					$called = createReciever();
+					$request = array(
+							'CallStatus' => 'ANSWER',
+							'CallerIDNum' => $e['mangotalkerномер'],
+							'CalledDID' => $called['CalledDID'],
+							'CallAPIID' => $called['CallAPIID']
+					);
+					curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($request));
+					$_REQUEST = $request;
+					$this -> actionTelfinHangup();
+
+
+					curl_multi_add_handle($mh, $curl);
+					//$out = curl_exec($curl);
+					$resources[] = $curl;
+					//echo $out;
+				}
+				/*$active = null;
+				//execute the handles
+				do {
+					$mrc = curl_multi_exec($mh, $active);
+				} while ($mrc == CURLM_CALL_MULTI_PERFORM);
+
+				while ($active && $mrc == CURLM_OK) {
+					if (curl_multi_select($mh) != -1) {
+						do {
+							$mrc = curl_multi_exec($mh, $active);
+						} while ($mrc == CURLM_CALL_MULTI_PERFORM);
+					}
+				}*/
+				//удаляем все запросы
+				foreach ($resources as $curl){
+					curl_multi_remove_handle($mh, $curl);
+				}
+				curl_multi_close($mh);
+				/*foreach($data -> getEntries() as $d){
+					var_dump($d);
+					echo "<br/><br/>";
+				}*/
+			}
+		} else {
+			echo "Not allowed!";
+		}
+	}
 	/**
 	 * Script to process information from telfin api.
 	 * On hangup telfin sends here information about the call.
@@ -1067,20 +1188,23 @@ class SiteController extends Controller
 		}
 		echo json_encode($rez, JSON_PRETTY_PRINT);
 	}
-	public function actionAddTestData (){
-		if (Yii::app() -> user -> checkAccess("admin")) {
-			//Выбрали месяц, из которого тянуть пользователей.
-			$month = "April";
-		} else {
-			echo "Not allowed!";
-		}
-	}
 	public function actionCheck() {
-		$per = TimePeriod::fromCell(-1,'week');
-		//var_dump($per);
-		$per -> show();
-		$per = TimePeriod::fromCell(0,7);
-		//var_dump($per);
-		$per -> show();
+		$curl = curl_init();
+		$addr = 'http://fastcalls/public_html/site/checkTwo';
+		curl_setopt($curl, CURLOPT_URL, $addr);
+		curl_setopt($curl, CURLOPT_RETURNTRANSFER,true);
+		curl_setopt($curl, CURLOPT_POST, true);
+		curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query(array(
+				'CallStatus' => 'ANSWER',
+				'CallerIDNum' => 'asd',
+				'CalledDID' => 'asddasd',
+				'CallAPIID' => 'asdsdasdasd'
+		)));
+		echo (curl_exec($curl));
+		curl_close($curl);
+	}
+	public function actionCheckTwo(){
+		echo "checked!";
+		var_dump($_POST);
 	}
 }
