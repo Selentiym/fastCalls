@@ -785,6 +785,8 @@ class SiteController extends Controller
 				$criteria = new CDbCriteria();
 				//Выбираем всех обычных докторов
 				$criteria -> compare('id_type',3);
+				//Выбираем только среди определенных медпредов!
+				$criteria -> addInCondition('id_parent',array(574,575,576));
 				$users = User::model() -> findAll();
 				$count = count($users);
 			}

@@ -462,6 +462,27 @@ function OptionDrag(parameters){
         });
     });
 }
+function SpecialityDrag(parameters){
+    var param = chObj(parameters);
+    var id = param.SpecId;
+    if (!id) {
+        id = param.data;
+    }
+    if (!parseInt(id)) { return {success:false}; }
+    $.ajax({
+        url: baseUrl + 'site/usersBySpeciality/' + id,
+        dataType: 'json'
+    }).done(function(data){
+
+        console.log(data);
+        var name = data.name;
+
+        me = UserDrag({
+            users:data.users,
+            name:name
+        });
+    });
+}
 function ActionDrop(parameters){
     var me =  Drop(parameters);
     me.action = parameters.action;

@@ -83,5 +83,22 @@ Yii::app() -> getClientScript() -> registerScript('setBaseUrl','baseUrl = "'.Yii
                 echo "</select>";*/
             ?>
         </li>
+        <li>
+            Специализации
+            <?php
+            $command = Yii::app() -> db -> createCommand("
+                SELECT `id`,`name` FROM `tbl_speciality` WHERE `id` in (SELECT `id_speciality` FROM `tbl_user` GROUP BY `id_speciality`)
+            ");
+            $specs = $command -> queryAll();
+            echo "<select id='specialities'>";
+            foreach ($specs as $spec) {
+                echo "<option value='{$spec['id']}'>";
+                echo $spec['name'];
+                echo "</option>";
+            }
+            //todo дописать селект по специализациям, добавить тестовые данные
+            echo "</select>";
+            ?>
+        </li>
     </ul>
 </div>
