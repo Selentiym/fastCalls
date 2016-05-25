@@ -18,7 +18,7 @@
 <td><?php echo $call -> user -> fio; ?></td>
 <td><?php echo $call -> number; ?></td>
 <td><?php echo $call -> mangoTalker; ?></td>
-<td><?php $phone = $call -> givePhone(); echo $phone ->number.":".$phone -> i; ?></td>
+<td><?php $phone = $call -> givePhone(); echo $phone ->number.":".$phone -> ivr; ?></td>
 <td><?php echo $call -> giveReport(); ?></td>
 <td><?php echo $call -> giveName(); ?></td>
 <td><?php echo $call -> research_type; ?></td>

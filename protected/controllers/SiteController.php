@@ -794,7 +794,7 @@ class SiteController extends Controller
 			$user = $users[$key];
 			if ($phone = current($user -> phones)){
 				$rez = array(
-						"CallAPIID" => substr(md5(time()),0,20)
+						"CallAPIID" => substr(md5(md5(time()).mt_rand(0,10000)),0,20)
 				);
 				$rez["CalledDID"] = $phone -> number;
 				//Если номер содержит ivr, то создаем tCall
@@ -838,6 +838,7 @@ class SiteController extends Controller
 				//var_dump($entr);
 				$size = count($entr);
 				$resources = array();
+				$toJSON = array();
 				for ($i = 0; $i < $toAdd; $i++) {
 					$num = mt_rand(0, $size - 1);
 					$e = $entr[$num] -> getValues();
@@ -855,9 +856,10 @@ class SiteController extends Controller
 							'CalledDID' => $called['CalledDID'],
 							'CallAPIID' => $called['CallAPIID']
 					);
+					$toJSON[]=$request;
 					curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($request));
-					$_REQUEST = $request;
-					$this -> actionTelfinHangup();
+					/*$_REQUEST = $request;
+					$this -> actionTelfinHangup();*/
 
 
 					curl_multi_add_handle($mh, $curl);
@@ -865,6 +867,9 @@ class SiteController extends Controller
 					$resources[] = $curl;
 					//echo $out;
 				}
+				$t = json_encode($toJSON);
+				$this -> render('//statistics/testData',array('t' => $t));
+				//echo json_encode($toJSON);
 				/*$active = null;
 				//execute the handles
 				do {
