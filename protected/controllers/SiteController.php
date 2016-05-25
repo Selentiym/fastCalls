@@ -429,6 +429,14 @@ class SiteController extends Controller
 				'scenario' => 'searchById',
 				'access' => function(){return Yii::app() -> user -> checkAccess('admin');},
 			),
+			'allMDs' => array(
+				'class' => 'application.controllers.site.ClassMethodAction',
+				'modelClass' => 'User',
+				'method' => 'dumpMDs',
+				'ajax' => true,
+				'scenario' => 'giveModel',
+				'access' => function(){return Yii::app() -> user -> checkAccess('admin');},
+			),
 			'usersByOption' => array(
 				'class' => 'application.controllers.site.ClassMethodAction',
 				'modelClass' => 'UserOption',

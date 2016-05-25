@@ -462,6 +462,21 @@ function OptionDrag(parameters){
         });
     });
 }
+function OneUserDrag(parameters){
+    var param = chObj(parameters);
+    var id = param.userId;
+    $.ajax({
+        url: baseUrl + 'site/basicUserData',
+        dataType: "json",
+        type:"POST",
+        data:{id:id}
+    }).done(function(data){
+        new UserDrag({
+            name:data[0].fio,
+            users:[id]
+        });
+    });
+}
 function SpecialityDrag(parameters){
     var param = chObj(parameters);
     var id = param.SpecId;

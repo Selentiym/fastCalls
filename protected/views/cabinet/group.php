@@ -55,6 +55,23 @@ Yii::app() -> getClientScript() -> registerScript('setBaseUrl','baseUrl = "'.Yii
 <div id="menu" style="display:none">
     <ul style="padding-left: 10px">
         <li>
+            <button id="MDsDrag">Медпреды</button>
+        </li>
+        <li>
+            Доктора
+            <?php
+            $criteria = new CDbCriteria();
+            $criteria -> addInCondition('id_type', array(UserType::model() -> getNumber('doctor'),UserType::model() -> getNumber('mainDoc')));
+            $doctors = User::model() -> findAll($criteria);
+            echo "<select id='users_select'>";
+            echo "<option></option>";
+            foreach ($doctors as $d) {
+                echo "<option value='{$d -> id}'>{$d -> fio}</option>";
+            }
+            echo "</select>";
+            ?>
+        </li>
+        <li>
             MD's
             <?php
             $criteria = new CDbCriteria();

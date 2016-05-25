@@ -88,6 +88,20 @@ $('#hidden').sidr({
 $.sidr('open', 'sidr-left');
 
 (function(){
+    var mds = $("#sidr-id-MDsDrag");
+    mds.click(function(){
+        $.ajax({
+            url:baseUrl + 'allMDs',
+            dataType:'json'
+        }).done(function(data){
+            new UserDrag({
+                name:'Медпреды',
+                users:data.users
+            });
+        });
+
+    });
+
     var MedPredList = $('#sidr-id-mainDoc');
     $('.md').dblclick(function () {
         var data = $(this).attr('data-gen');
@@ -114,6 +128,20 @@ $.sidr('open', 'sidr-left');
         MedPredDrag({
             MDid:value
         })
+    });
+    var usersSelect = $("#sidr-id-users_select");
+    usersSelect.select2({
+        placeholder:'Выберите пользователя'
+    });
+    usersSelect.on('select2:selecting', function(event) {
+        //получили значение тега option, который был выбран.
+        var value = event.params.args.data.id;
+        //console.log(event.val);
+        event.preventDefault();
+        usersSelect.select2('close');
+        new OneUserDrag({
+            userId:value
+        });
     });
     var SpecList = $('#sidr-id-specialities');
     SpecList.select2({

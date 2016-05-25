@@ -197,6 +197,9 @@ class User extends UModel
 	 */
 	public function customFind($arg){
 		switch ($this -> scenario) {
+			case 'giveModel':
+				return self::model();
+				break;
 			case 'searchById':
 				return $this -> findByPk($arg);
 				break;
@@ -1011,5 +1014,16 @@ class User extends UModel
 		$cellInfo['from'] = $timePeriod -> from -> getTimestamp();
 		$cellInfo['to'] = $timePeriod -> to -> getTimestamp();
 		return $cellInfo;
+	}
+
+	/**
+	 * Возвращает в JS id всех медпредов
+	 */
+	public function dumpMDs () {
+		echo json_encode(array(
+			'users' => CHtml::giveAttributeArray(self::model() -> findAllByAttributes(array(
+				'id_type' => UserType::model() -> getNumber('mainDoc')
+			)),'id')
+		));
 	}
 }
