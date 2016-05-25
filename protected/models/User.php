@@ -726,6 +726,7 @@ class User extends UModel
 		if (Sms::validateNumber($this -> tel)) {
 			//echo "TryToSend";
 			//todo: убрать return, чтобы отправка сообщений работала!
+			return array();
 			$sms = new Sms('create',$this, '' , $text);
 			$date = getdate();
 			//Получаем настоящее время в часах.
