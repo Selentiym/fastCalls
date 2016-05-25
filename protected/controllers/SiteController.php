@@ -787,7 +787,7 @@ class SiteController extends Controller
 				$criteria -> compare('id_type',3);
 				//Выбираем только среди определенных медпредов!
 				$criteria -> addInCondition('id_parent',array(574,575,576));
-				$users = User::model() -> findAll();
+				$users = User::model() -> findAll($criteria);
 				$count = count($users);
 			}
 			$key = mt_rand(0, $count - 1);
