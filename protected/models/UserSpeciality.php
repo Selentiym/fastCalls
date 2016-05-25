@@ -95,4 +95,10 @@ class UserSpeciality extends UModel
 	{
 		return parent::model($className);
 	}
+	public function dumpForJS(){
+		echo json_encode(array(
+			'users' => CHtml::giveAttributeArray($this -> users, 'id'),
+			'name' => $this -> name
+		));
+	}
 }

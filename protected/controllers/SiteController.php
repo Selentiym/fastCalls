@@ -437,6 +437,14 @@ class SiteController extends Controller
 				'scenario' => 'searchById',
 				'access' => function(){return Yii::app() -> user -> checkAccess('admin');},
 			),
+			'usersBySpeciality' => array(
+				'class' => 'application.controllers.site.ClassMethodAction',
+				'modelClass' => 'UserSpeciality',
+				'method' => 'dumpForJS',
+				'ajax' => true,
+				'scenario' => 'searchById',
+				'access' => function(){return Yii::app() -> user -> checkAccess('admin');},
+			),
 			'basicUserData' => array(
 				'class' => 'application.controllers.site.ClassMethodAction',
 				'modelClass' => 'User',

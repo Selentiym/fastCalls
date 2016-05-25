@@ -91,13 +91,14 @@ Yii::app() -> getClientScript() -> registerScript('setBaseUrl','baseUrl = "'.Yii
             ");
             $specs = $command -> queryAll();
             echo "<select id='specialities'>";
+            echo "<option></option>";
             foreach ($specs as $spec) {
                 echo "<option value='{$spec['id']}'>";
                 echo $spec['name'];
                 echo "</option>";
             }
-            //todo дописать селект по специализациям, добавить тестовые данные
             echo "</select>";
+
             ?>
         </li>
     </ul>

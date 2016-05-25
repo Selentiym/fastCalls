@@ -115,6 +115,20 @@ $.sidr('open', 'sidr-left');
             MDid:value
         })
     });
+    var SpecList = $('#sidr-id-specialities');
+    SpecList.select2({
+        placeholder:'Выберите специализацию'
+    });
+    SpecList.on('select2:selecting', function(event) {
+        //получили значение тега option, который был выбран.
+        var value = event.params.args.data.id;
+        //console.log(event.val);
+        event.preventDefault();
+        SpecList.select2('close');
+        SpecialityDrag({
+            SpecId:value
+        })
+    });
     var OptionsList = $('#sidr-id-options');
     /*OptionsList.select2({
         placeholder:'Выберите свойство'
