@@ -330,6 +330,10 @@ function FastDrag(parameters){
     return Drag(param);
 }
 function UserDrag(parameters){
+    //Будущее тело драга
+    var body = $('<div/>',{
+        'class':'body'
+    });
     var users = chArr(parameters.users);
     if (!users.length) {
         alert('Не выбрано ни одного пользователя!');
@@ -352,13 +356,22 @@ function UserDrag(parameters){
     html.after($('<h2/>',{
         "class":"DragName"
     }).append(name));
-    html.after($('<div/>',{
-        'class':'body'
-    }).append($('<p/>',{
-        text:users.toString()
-    })));
+    html.after(body);
     parameters.html = html;
     var me = FastDrag(parameters);
+    //Сохраняем юзеров, которых отображает данный блок.
+    me.users = users;
+    //Сохраняем ссылку на тело
+    me.body = body;
+    /**
+     * Заново генерирует тело драга
+     */
+    me.remakeBody = function(){
+        me.body.html($('<p/>',{
+            text:me.users.toString()
+        }))
+    };
+    me.remakeBody();
     //Вешаем обработчик закрытия окна. Только сейчас, чтобы можно было сохранить
     // в замыкание функцию закрытия.
     closeButton.click(function(){
@@ -372,8 +385,6 @@ function UserDrag(parameters){
     //Запоминаем какое было задано имя.
     me.vars.name = name;
     me.element.addClass('userDrag');
-    //Сохраняем юзеров, которых отображает данный блок.
-    me.users = users;
     /**
      * Добавляем обработчики, если доступна функция с главной страницы.
      */
@@ -395,8 +406,11 @@ function UserDrag(parameters){
         } else {
             entered = newName;
         }
-        me.element.children('h2').html(entered);
-        me.vars.name = entered;
+        //Изменяем имя только если оно не пустое!
+        if (entered) {
+            me.element.children('h2').html(entered);
+            me.vars.name = entered;
+        }
     };
     me.showDialog = function() {
         if (me.dialog) {
@@ -438,8 +452,18 @@ function UserDrag(parameters){
         if (me.dialog) {
             me.dialog.deleteUser({id:id});
         }
-        me.rename(me.vars.name+"*");
+        me.nowChanged();
+    };
+    /**
+     * Выполняет стандартные действия при модификации драга
+     */
+    me.nowChanged = function(){
         me.vars.notTrivial = true;
+        me.remakeBody();
+        if (me.vars.name.charAt(me.vars.name.length - 1) == "*") {
+            return;
+        }
+        me.rename(me.vars.name+"*");
     };
     return me;
 }
