@@ -1,3 +1,11 @@
+var key;
+body = $("body");
+body.keydown(function(e){
+    key = e.keyCode;
+});
+body.keyup(function(e){
+    key = null;
+});
 parentDrag = $("#DragContainer");
 parentAction = $("#ActionContainer");
 parentCont = $("#parentDrag");
@@ -158,7 +166,7 @@ function Drag(parameters){
     /**
      * Содержит drop, к которому прикреплен данный drag.
      */
-    me.holer = false;
+    me.holder = false;
     /**
      * Объект, который хранит различные переменные.
      * Выделен в отдельной свойство, чтобы не путать ни с чем стандартным.
@@ -290,9 +298,14 @@ function Drop(parameters){
  * @constructor
  */
 function FastDrag(parameters){
+    //Чтобы не париться со смещением остальных драгов при удалении какого-то
+    var cont = $('<div/>',{
+        "class":"smallCont"
+    });
+    parentDrag.append(cont);
     var defaultParam = {
         html: '<span style="color:red">blabla</span>',
-        target: parentDrag,
+        target: cont,
         show: true,
         config: {
             cancel:'.noDrag',
@@ -378,10 +391,12 @@ function UserDrag(parameters){
                     alert('Элемент не может иметь пустое имя');
                     return;
                 }
-                me.element.children('h2').html(entered);
-                me.vars.name = entered;
             }
+        } else {
+            entered = newName;
         }
+        me.element.children('h2').html(entered);
+        me.vars.name = entered;
     };
     me.showDialog = function() {
         if (me.dialog) {
@@ -412,6 +427,20 @@ function UserDrag(parameters){
     enlargeButton.click(function(){
         me.showDialog();
     });
+    /**
+     * Удаляет пользователя из драга
+     * @param id
+     */
+    me.deleteUser = function(id){
+        //Удаляем непосредтвенно из массива пользователей.
+        me.users.remove(id);
+        //Удаляем из диалогового окошка
+        if (me.dialog) {
+            me.dialog.deleteUser({id:id});
+        }
+        me.rename(me.vars.name+"*");
+        me.vars.notTrivial = true;
+    };
     return me;
 }
 function MedPredDrag(parameters){
@@ -1041,7 +1070,7 @@ function Dialog(drag, parameters){
         me.lastSelected = null;
     };
     /**
-     *
+     * Делает toggle пользователей по переданного.
      */
     me.selectUsersTo = function(user) {
         var indFrom = me.usersObj.indexOf(user);
@@ -1058,6 +1087,31 @@ function Dialog(drag, parameters){
             }
         }
         me.lastSelected = null;
+    };
+    /**
+     * Удаляет пользователя с param.id или пользователя param.user.
+     */
+    me.deleteUser = function(param){
+        param = chObj(param);
+        var user = null;
+        //Если задан сам объект, то ничего не нужно искать
+        if (param.user) {
+            user = param.user;
+        } else if (param.id) {
+            console.log('findById');
+            //Ищем объект среди пользователей в диалоге
+            user = _.findWhere({id:param.id});
+        }
+        //Если объект нашелся, то удаляем
+        if (user.id) {
+            me.usersObj.remove(user);
+            //throw "stop";
+            //Уничтожаем объект пользователя.
+            user.destroy();
+            //Обратная связь с драгом. Засчет того, что код находится в условии
+            //нахождения объекта user среди объектов диалога, не будет рекурсии
+            me.drag.deleteUser(user.id);
+        }
     };
     return me;
 }
@@ -1350,8 +1404,31 @@ function User(parameters){
             me.dialog.selectUsersTo(me);
         } else if (e.altKey) {
             me.toggleSelected();
+        } else {
+            //key - внешняя переменная, содержащая код зажатой кнопки.
+            // key - глобальна, объявляется в Classes.js
+            if (key) {
+                //Клавиша DEL
+                if (key == 46) {
+                    console.log(me);
+                    me.destroy();
+                }
+            }
+            //todo сделать внешнее событие onkeydown, onkeyup, сохранять зажатую клавишу
+
         }
     });
+    me.destroy = function() {
+        me.element.remove();
+        if (me.dopData) {
+            me.dopData.remove();
+        }
+        if (me.dialog) {
+            var temp = me.dialog;
+            me.dialog = null;
+            temp.deleteUser({user:me});
+        }
+    };
     return me;
 }
 /**
