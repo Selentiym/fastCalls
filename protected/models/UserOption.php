@@ -122,8 +122,9 @@ class UserOption extends UModel
 	 * @param string $appendTo - id of the element to append select2 to
 	 * @param string $placeholder - placeholder text
 	 * @param bool $tags - whether to allow adding new options
+	 * @param int|string $selected - id of the selected option
 	 */
-	public static function prettySelect($data = false, $id = 'options', $appendTo = false, $placeholder = false, $tags = false){
+	public static function prettySelect($data = false, $id = 'options', $appendTo = false, $placeholder = false, $tags = false, $selected = null){
 		if ($data === false) {
 			$data = self::model()->findAll();
 		}
@@ -143,6 +144,7 @@ class UserOption extends UModel
 		/*if ($placeholder) {
 			$data [] = '';
 		}*/
+		$dataToSelect = array();
 		foreach($data as $option){
 			/**
 			 * @var UserOption $option
@@ -152,6 +154,9 @@ class UserOption extends UModel
 			//if the image is accessible, se the data-image attr to use it later in JS
 			if (file_exists($url)) {
 				$htmlOptions_options [$option -> id] = array('data-image' => $option -> giveImageFolderRelativeUrl() . $option -> logo, 'style' => 'color:blue');
+				if (($option -> id == $selected)&&($selected)){
+					$htmlOptions_options [$option -> id]['selected']='selected';
+				}
 			}
 			$dataToSelect[$option -> id] = $option -> name;
 		}

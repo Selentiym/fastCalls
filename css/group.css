@@ -23,18 +23,21 @@
 .headMenu span{
     cursor:pointer;
 }
-.drag .headMenu span.closeDrag{
-    background: url("../images/cross_small.png");
-    width:20px;
-    height:20px;
-    display:inline-block;
-}
-.drag .headMenu span.enlargeDrag{
-    background: url("../images/expand-screen-icon.png");
+.drag .headMenu span{
     width:20px;
     height:20px;
     margin-right: 5px;
     display:inline-block;
+}
+.drag .headMenu span.closeDrag{
+    background: url("../images/cross_small.png");
+    margin-right: 0;
+}
+.drag .headMenu span.enlargeDrag{
+    background: url("../images/expand-screen-icon.png");
+}
+.drag .headMenu span.tagDrag{
+    background: url("../images/tag.png");
 }
 .dialog {
     overflow:auto;

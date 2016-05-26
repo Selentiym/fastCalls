@@ -350,9 +350,12 @@ function UserDrag(parameters){
     var enlargeButton = $('<span/>',{
         'class':'enlargeDrag'
     });
+    var tagButton = $('<span/>',{
+        "class": 'tagDrag'
+    });
     var html = $('<div/>',{
         'class':'headMenu'
-    }).append(enlargeButton).append(closeButton);
+    }).append(tagButton).append(enlargeButton).append(closeButton);
     html.after($('<h2/>',{
         "class":"DragName"
     }).append(name));
@@ -372,6 +375,9 @@ function UserDrag(parameters){
         }))
     };
     me.remakeBody();
+    tagButton.click(function(){
+        me.addTag();
+    });
     //Вешаем обработчик закрытия окна. Только сейчас, чтобы можно было сохранить
     // в замыкание функцию закрытия.
     closeButton.click(function(){
@@ -464,6 +470,21 @@ function UserDrag(parameters){
             return;
         }
         me.rename(me.vars.name+"*");
+    };
+    /**
+     * Вызывает всплывающее окно с добавлением нового свойства
+     */
+    me.addTag = function(){
+        var fields = {
+            selected: users.join(';'),
+            "return":"_close",
+            action: 2,
+            data:{
+                name:me.name
+            }
+        };
+        alert($.param(fields));
+        window.open(baseUrl + 'userCollection?' + $.param(fields),'','Toolbar=1,Location=0,Directories=0,Status=0,Menubar=0,Scrollbars=0,Resizable=0');
     };
     return me;
 }
@@ -939,7 +960,7 @@ function Dialog(drag, parameters){
         return temp;
     });
     /**
-     *
+     * Возвращает объекты выбранных пользователей
      */
     me.selectedObj = function(){
         return _.where(me.usersObj,{selected:true});
@@ -1438,7 +1459,6 @@ function User(parameters){
                     me.destroy();
                 }
             }
-            //todo сделать внешнее событие onkeydown, onkeyup, сохранять зажатую клавишу
 
         }
     });

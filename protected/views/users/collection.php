@@ -14,6 +14,10 @@
 		foreach ($data["userGroup"] as $id){
 			echo "<input type='hidden' name='userGroup[]' value='".$id."'/>";
 		}
+		echo "";
+		$temp1 = $data['data'];
+		$temp2 = serialize($temp1);
+		echo '<input type="hidden" name="data" value="'.addslashes(serialize($data['data'])).'"/>';
 		switch ($data["action"]) {
 			case "1" :
 				$redirect = 'userSmsForm';
