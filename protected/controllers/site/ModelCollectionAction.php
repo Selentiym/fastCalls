@@ -68,9 +68,8 @@
 					}
 				}
 				if ($this -> close) {
-					Yii::app() -> getClientScript() -> registerScript("close","window.close();",CClientScript::POS_BEGIN);
-					echo "close!";
-					Yii::app() -> end();
+					echo "<script>window.close();</script>";
+					return;
 				}
 				//После окончания действий либо перенаправляем, либо рендерим вьюшку.
 				if ($this -> redirect) {

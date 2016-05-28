@@ -227,3 +227,6 @@ tr td.data:nth-child(even){
 tr td.data {
     max-width:100px;
 }
+tr td.propertyIcon img{
+    height:25px;
+}
