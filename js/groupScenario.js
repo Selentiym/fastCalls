@@ -34,6 +34,25 @@ obj2 = new UserDrag({
     }
 });*/
 new ActionAdd({
+    DOMparams:{
+        nodeConfig:{
+            element:$("#addAction")
+        },
+        css:{
+            background:"#aaa",
+            width:"500px"
+        }
+    },
+    dropConfig: {
+        nodeConfig: {
+            element:$("#addDrop")
+        }
+    },
+    resultDrop:{
+        dropNumber:"0"
+    }
+});
+/*new ActionAdd({
     dropConfig: {
         nodeConfig: {
             'class': 'ui-corner-all',
@@ -47,7 +66,7 @@ new ActionAdd({
             background: '#123'
         }
     }
-});
+});*/
 new ActionSubtract({
     DOMparams:{
         nodeConfig:{

@@ -371,8 +371,8 @@ function UserDrag(parameters){
      */
     me.remakeBody = function(){
         me.body.html($('<p/>',{
-            text:me.users.toString()
-        }))
+            text:me.users.join(', ')
+        }));
     };
     me.remakeBody();
     tagButton.click(function(){
@@ -717,6 +717,10 @@ function ActionAdd(parameters){
     var me = Action(parameters);
     var dropConfig = chObj(parameters.dropConfig);
     me.addDrop(dropConfig);
+    if (parameters.resultDrop.dropNumber) {
+        //Хотим, чтобы результат сложения снова становился аргументом сложения
+        me.resultDrop = me.drops[parameters.resultDrop.dropNumber];
+    }
     me.validate = function(){
         var drop = me.drops[0];
         return (drop.guests.length > 1);

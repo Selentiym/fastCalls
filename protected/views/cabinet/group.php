@@ -40,7 +40,7 @@ Yii::app() -> getClientScript() -> registerScript('setBaseUrl','baseUrl = "'.Yii
     <div id="DragContainer" style="position:relative;top:0;left:0;width:100%;height:100%;">
 
     </div>
-    <div id="ActionContainer" style="position:absolute;top:0;left:0;z-index:-1">
+    <div id="ActionContainer" style="position:absolute;top:0;left:0;z-index:-1" class="action">
         <div id="subtrAction">
             <div id="menuend" class="ui-corner-error drop">
             </div>
@@ -50,6 +50,10 @@ Yii::app() -> getClientScript() -> registerScript('setBaseUrl','baseUrl = "'.Yii
             <div style="font-size:50px">=</div>
             <div id="subtrRez" class="ui-corner-error drop">
             </div>
+        </div>
+        <div id="addAction" class="action">
+            <div style="font-size:50px">+=</div>
+            <div id="addDrop" class="ui-corner-error drop"></div>
         </div>
     </div>
 </div>

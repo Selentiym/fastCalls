@@ -2,6 +2,7 @@
     border: thin solid black;
     border-radius:5px;
     min-width:150px;
+    max-width:200px;
     text-align: center;
     padding:0;
     background-color:lightgoldenrodyellow;
@@ -61,6 +62,12 @@
 }
 #subtrAction {}
 #subtrAction div{
+    display:inline-block;
+    margin:10px;
+    vertical-align:middle;
+}
+#addAction {}
+.action div{
     display:inline-block;
     margin:10px;
     vertical-align:middle;
