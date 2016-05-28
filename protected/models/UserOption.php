@@ -154,9 +154,9 @@ class UserOption extends UModel
 			//if the image is accessible, se the data-image attr to use it later in JS
 			if (file_exists($url)) {
 				$htmlOptions_options [$option -> id] = array('data-image' => $option -> giveImageFolderRelativeUrl() . $option -> logo, 'style' => 'color:blue');
-				if (($option -> id == $selected)&&($selected)){
-					$htmlOptions_options [$option -> id]['selected']='selected';
-				}
+			}
+			if (($option -> id == $selected)&&($selected)){
+				$htmlOptions_options [$option -> id]['selected']='selected';
 			}
 			$dataToSelect[$option -> id] = $option -> name;
 		}

@@ -591,6 +591,14 @@ class User extends UModel
 		return $users;
 	}
 	/**
+	 * Выводит json, содержащий массив id всех пользователей.
+	 */
+	public function AllUsersIdsDumpForJS($medPreds = false,$sortby = '') {
+		echo json_encode(array(
+				'users' => CHtml::giveAttributeArray($this -> findAllByMainDocs($medPreds, $sortby), 'id')
+		));
+	}
+	/**
 	 * @return object[User] - model of the logged in user
 	 */
 	public function giveLogged() {
@@ -870,8 +878,19 @@ class User extends UModel
 	public function basicDataDumpForJs(){
 		$user = User::model() -> findByPk($_POST['id']);
 		$user -> setScenario('basicDumpForJs');
+		$images = array_map(function($opt){
+			/**
+			 * @type UserOption $opt
+			 */
+			if (file_exists($opt -> giveImageFolderAbsoluteUrl(). '/'.$opt -> logo)) {
+				return $opt -> giveImageFolderRelativeUrl().'/'. $opt -> logo;
+			} else {
+				return false;
+			}
+		}, $user -> options);
 		echo json_encode(array(
-			$user -> attributes
+				$user -> attributes,
+				'images' => $images
 		));
 	}
 

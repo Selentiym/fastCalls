@@ -5,6 +5,7 @@
  * Date: 20.04.2016
  * Time: 18:20
  */
+$this -> renderPartial('//navBar',array());
 Yii::app() -> clientScript -> registerScriptFile(Yii::app() -> baseUrl . '/js/jquery-ui.min.js', CClientScript::POS_END);
 Yii::app() -> clientScript -> registerScriptFile(Yii::app() -> baseUrl . '/js/underscore-min.js', CClientScript::POS_END);
 Yii::app() -> clientScript -> registerScriptFile(Yii::app() -> baseUrl . '/js/jquery.sidr.min.js', CClientScript::POS_BEGIN);
@@ -31,12 +32,12 @@ Yii::app() -> getClientScript() -> registerScript('setBaseUrl','baseUrl = "'.Yii
     </ul>
 </div>-->
 <input type="hidden" id="hidden">
-<div id="DialogContainer" style="position:absolute;top:0;left:0;width:100%;height:100%;">
+<div id="DialogContainer" style="position:relative;top:0;left:0;width:100%;height:100%;">
 
 </div>
 <div id="parentDrag" style="position:relative">
 
-    <div id="DragContainer" style="position:absolute;top:0;left:0;width:100%;height:100%;">
+    <div id="DragContainer" style="position:relative;top:0;left:0;width:100%;height:100%;">
 
     </div>
     <div id="ActionContainer" style="position:absolute;top:0;left:0;z-index:-1">
@@ -56,6 +57,7 @@ Yii::app() -> getClientScript() -> registerScript('setBaseUrl','baseUrl = "'.Yii
     <ul style="padding-left: 10px">
         <li>
             <button id="MDsDrag">Медпреды</button>
+            <button id="AllDrag">Все пользователи</button>
         </li>
         <li>
             Доктора

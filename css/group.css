@@ -37,7 +37,7 @@
     background: url("../images/expand-screen-icon.png");
 }
 .drag .headMenu span.tagDrag{
-    background: url("../images/tag.png");
+    background: url("../images/tag-icon.png");
 }
 .dialog {
     overflow:auto;
@@ -99,6 +99,21 @@
 }
 .CellSize span.active {
     background:lightblue;
+}
+
+.actionButtons {
+    margin:10px 0;
+    height:30px;
+}
+.actionButtons > *{
+    display: inline-block;
+    vertical-align:middle;
+    height:25px;
+}
+.actionButtons img {
+    display: inline-block;
+    vertical-align:middle;
+    height:25px;
 }
 table .tableSeparator {
     display:none;
@@ -182,6 +197,10 @@ thead td {
     font-size: 15px;
     padding:0 10px;
     height:50px;
+}
+thead tr td.propertyIcon:before {
+    content:'Иконки свойств';
+    display:inline-block;
 }
 /* Здесь можно писать стили для ячеек с общей информацией о пользователе */
 tr td  {

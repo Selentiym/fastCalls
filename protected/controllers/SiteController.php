@@ -198,7 +198,8 @@ class SiteController extends Controller
 					}
 					return $rez;
 				},
-				'addArgs' => $_POST
+				'addArgs' => $_POST,
+				'close' => true
 			),
 			
 			'createUser' => array(
@@ -451,6 +452,14 @@ class SiteController extends Controller
 				'method' => 'dumpForJS',
 				'ajax' => true,
 				'scenario' => 'searchById',
+				'access' => function(){return Yii::app() -> user -> checkAccess('admin');},
+			),
+			'allUsers' => array(
+				'class' => 'application.controllers.site.ClassMethodAction',
+				'modelClass' => 'User',
+				'method' => 'AllUsersIdsDumpForJS',
+				'ajax' => true,
+				'scenario' => 'giveModel',
 				'access' => function(){return Yii::app() -> user -> checkAccess('admin');},
 			),
 			'basicUserData' => array(

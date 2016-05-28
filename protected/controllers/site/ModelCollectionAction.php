@@ -23,6 +23,10 @@
 		 */
 		public $redirect = false;
 		/**
+		 * @var bool close - if true, the window is closed right after actions
+		 */
+		public $close = false;
+		/**
 		 * @var string view for render
 		 */
 		public $view;
@@ -62,6 +66,11 @@
 					foreach($list as $mem){
 						$mem -> $action($this -> addArgs, $thirdArg);
 					}
+				}
+				if ($this -> close) {
+					Yii::app() -> getClientScript() -> registerScript("close","window.close();",CClientScript::POS_BEGIN);
+					echo "close!";
+					Yii::app() -> end();
 				}
 				//После окончания действий либо перенаправляем, либо рендерим вьюшку.
 				if ($this -> redirect) {

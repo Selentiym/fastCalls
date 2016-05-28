@@ -11,6 +11,7 @@
                 <?php echo CHtml::link('Статистика', Yii::app() -> baseUrl.'/allstat',array('class'=>"list-group-item")); ?>
                 <?php echo CHtml::link('Подробная информация о партнерах', Yii::app() -> baseUrl.'/userlist',array('class'=>"list-group-item")) ?>
                 <?php echo CHtml::link('Действия', Yii::app() -> baseUrl.'/activeuserlist',array('class'=>"list-group-item")) ?>
+                <?php echo CHtml::link('Группы', Yii::app() -> baseUrl.'/group',array('class'=>"list-group-item")) ?>
                 <?php echo CHtml::link('Добавить главного врача', Yii::app() -> baseUrl.'/create/maindoc',array('class'=>"list-group-item")) ?>
 				<?php echo CHtml::link('Входы в Партнерский кабинет', Yii::app() -> baseUrl.'/entries',array('class'=>"list-group-item")) ?>
             </div>

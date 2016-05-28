@@ -101,7 +101,10 @@ $.sidr('open', 'sidr-left');
         });
 
     });
-
+    var allUsers = $("#sidr-id-AllDrag");
+    allUsers.click(function(){
+        new AllUsersDrag();
+    });
     var MedPredList = $('#sidr-id-mainDoc');
     $('.md').dblclick(function () {
         var data = $(this).attr('data-gen');

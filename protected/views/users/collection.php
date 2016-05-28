@@ -2,22 +2,31 @@
 <?php
 	$data = array();
 	//Если запрос пришел с _GET, то переделываем его в _POST
-	if (!empty($_POST['userGroup'])) {
+	if (!empty($_POST['userGroup'])||($_POST['selected'])) {
 		$data = $_POST;
 	} else {
 		$data = $_GET;
-		if ((empty($_GET['userGroup']))&&(strlen($_GET['selected']))) {
-			$data['userGroup'] = explode(';',$_GET['selected']);
-		}
+	}
+	if ((empty($data['userGroup']))&&(strlen($data['selected']))) {
+		$data['userGroup'] = explode(';',$data['selected']);
 	}
 	if (!empty($data["userGroup"])) {
 		foreach ($data["userGroup"] as $id){
 			echo "<input type='hidden' name='userGroup[]' value='".$id."'/>";
 		}
 		echo "";
-		$temp1 = $data['data'];
-		$temp2 = serialize($temp1);
-		echo '<input type="hidden" name="data" value="'.addslashes(serialize($data['data'])).'"/>';
+		function displayVar($var, $names = 'data'){
+			$rez = '';
+			if (is_array($var)) {
+				foreach($var as $key => $val) {
+					$rez .= displayVar($val, $names.'['.$key.']');
+				}
+			} else {
+				$rez .= "<input type='hidden' value='{$var}' name='{$names}'/>";
+			}
+			return $rez;
+		}
+		echo displayVar($data['data']);
 		switch ($data["action"]) {
 			case "1" :
 				$redirect = 'userSmsForm';

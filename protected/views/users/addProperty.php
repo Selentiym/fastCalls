@@ -18,15 +18,13 @@
         $data = $_POST['data'];
         if ($data['dragName']) {
             $newOpt = new UserOption();
-            $newOpt -> id = $data['DragName'];
-            $newOpt -> name = $data['DragName'];
+            $newOpt -> id = $data['dragName'];
+            $newOpt -> name = $data['dragName'];
             array_unshift($options, $newOpt);
         } else {
             unset($data['dragName']);
         }
-        var_dump($_POST);
-        var_dump($data);
-        UserOption::model() -> prettySelect($options,null,false,false,true,$data['DragName']);
+        UserOption::model() -> prettySelect($options,null,false,false,true,$data['dragName']);
         ?>
         <div><input type="submit" value="Присвоить"/></div>
     </div>

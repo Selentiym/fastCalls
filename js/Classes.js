@@ -480,10 +480,15 @@ function UserDrag(parameters){
             "return":"_close",
             action: 2,
             data:{
-                name:me.name
+                dragName:me.vars.name
             }
         };
-        alert($.param(fields));
+        if (!me.vars.notTrivial) {
+            //Если драг обычный, то спрашиваем, точно ли сохранить
+            if (!confirm('Группа пользователей может быть получена из стандартной панели. Вы уверены, что хотите сохранить?')) {
+                return;
+            }
+        }
         window.open(baseUrl + 'userCollection?' + $.param(fields),'','Toolbar=1,Location=0,Directories=0,Status=0,Menubar=0,Scrollbars=0,Resizable=0');
     };
     return me;
@@ -506,6 +511,20 @@ function MedPredDrag(parameters){
         });
     });
     param.users = users;
+}
+function AllUsersDrag(){
+    var me;
+    $.ajax({
+        url: baseUrl + 'allUsers',
+        type:"POST",
+        dataType:"json"
+    }).done(function(data){
+        me = new UserDrag({
+            users:data.users,
+            name:'Все пользователи'
+        });
+    });
+    return me;
 }
 function OptionDrag(parameters){
     var param = chObj(parameters);
@@ -866,14 +885,18 @@ function Dialog(drag, parameters){
             handler: function(){
                 me.selectAll();
             },
-            text:"Выделить всех"
+            text:$("<img/>",{
+                src:baseUrl + "images/tick.png"
+            })
         }))
         .append(MakeButton({
             "class":"unSelectAll",
             handler: function(){
                 me.unSelectAll();
             },
-            text:"Снять выделение"
+            text:$("<img/>",{
+                src:baseUrl + "images/remove.png"
+            })
         }))
         .append(MakeButton({
             "class":"sendSms",
@@ -1247,11 +1270,12 @@ function User(parameters){
         }).done(function(data){
             //По непонятной причине возвращается массив, содержащий
             // нужный объект в качестве единственного элемента.
-            data = data[0];
+            var dataBig = data[0];
+            dataBig.images = data.images;
             //Устанавливаем title для элемента, чтобы всегда иметь
             // возможность видеть имя юзера
-            me.element.attr('title',data.fio);
-            InsertBasicData(me.separator, data);
+            me.element.attr('title',dataBig.fio);
+            InsertBasicData(me.separator, dataBig);
         });
     };
     me.lastStatElement = function(){
@@ -1481,16 +1505,32 @@ function User(parameters){
  * @param data
  */
 function InsertBasicData(separator, data){
-    separator.before($('<td/>',{
+    var firstCell = $('<td/>',{
         html:data.fio,
         "class":"fio tableCell"
-    })).before($('<td/>',{
+    });
+    var imagesCell = $("<td/>",{
+        "class":"propertyIcon tableCell"
+    });
+    if (data.images) {
+        _.each(data.images, function(img){
+            if (!img) {
+                return;
+            }
+            imagesCell.append($("<img/>",{
+                src: img,
+                alt: "Картинка свойства"
+            }));
+            //alert(img);
+        })
+    }
+    separator.before(firstCell).before($('<td/>',{
         html:data.tel,
         "class":"tel tableCell"
     })).before($('<td/>',{
         html:data.email,
         "class":"email tableCell"
-    }));
+    })).before(imagesCell);
 }
 function renderClass (top, val) {
     if (top == 0) {
