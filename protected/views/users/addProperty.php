@@ -16,6 +16,10 @@
         <?php
         $options = UserOption::model() -> findAll();
         $data = $_POST['data'];
+        if (!is_array($data)) {
+            $data = array();
+            $data['dragName'] = '';
+        }
         if ($data['dragName']) {
             $newOpt = new UserOption();
             $newOpt -> id = $data['dragName'];
