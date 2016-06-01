@@ -1221,22 +1221,6 @@ class SiteController extends Controller
 		echo json_encode($rez, JSON_PRETTY_PRINT);
 	}
 	public function actionCheck() {
-		$curl = curl_init();
-		$addr = 'http://fastcalls/public_html/site/checkTwo';
-		curl_setopt($curl, CURLOPT_URL, $addr);
-		curl_setopt($curl, CURLOPT_RETURNTRANSFER,true);
-		curl_setopt($curl, CURLOPT_POST, true);
-		curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query(array(
-				'CallStatus' => 'ANSWER',
-				'CallerIDNum' => 'asd',
-				'CalledDID' => 'asddasd',
-				'CallAPIID' => 'asdsdasdasd'
-		)));
-		echo (curl_exec($curl));
-		curl_close($curl);
-	}
-	public function actionCheckTwo(){
-		echo "checked!";
-		var_dump($_POST);
+		$this -> render('//check');
 	}
 }
