@@ -153,7 +153,7 @@ class Data extends DataFromCsvFile {
 	 * @return array - an array array(<className> => <number of calls classified to be className>)
 	 */
 	public function countCallsInRange($from, $to, User $user){
-		//Если речь идет не о медпредах, то алгоритм обычный.
+		//Если речь идет не о ремпредах, то алгоритм обычный.
 		//if ($user -> id_type != 2) {
 		$conn = MysqlConnect::getConnection();
 		//$BaseSql = "SELECT `id_call_type`,COUNT(`id`) from `tbl_call` WHERE `id_user`='561' AND `date` > FROM_UNIXTIME('1459890000') AND `date` < FROM_UNIXTIME('1460753999') GROUP BY `id_call_type`";

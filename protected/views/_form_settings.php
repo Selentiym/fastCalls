@@ -21,7 +21,7 @@
 ?>
 <h4>Год звонков</h4>
 <?php echo CHtml::activeTextField($model, 'year'); ?>
-<h4>Разрешить ли докторам добавлять новые адреса при создании пользователя</h4>
+<h4>Разрешить ли партнерам добавлять новые адреса при создании пользователя</h4>
 <div>
 <?php //echo CHtml::activeRadioButtonList($model,'allowMDCreateAddresses',array(1 => 'Разрешить', 0 => 'Не разрешить')); ?>
 <?php echo CHtml::radioButtonList(get_class($model).'[allowMDCreateAddresses]',$model -> allowMDCreateAddresses,array(1 => 'Разрешить', 0 => 'Не разрешить')); ?>
@@ -34,7 +34,7 @@
 </div>-->
 <h4>Показывать ли статистику по клиникам при щелчке по картинке</h4>
 <div>
-<?php echo CHtml::activeRadioButtonList($model,'showClinicStat',array(1 => 'Показать', 0 => 'Не показать')); ?>
+<?php echo CHtml::activeRadioButtonList($model,'showcompanyStat',array(1 => 'Показать', 0 => 'Не показать')); ?>
 </div>
 <div>
 <?php echo CHtml::submitButton('Сохранить'); ?>

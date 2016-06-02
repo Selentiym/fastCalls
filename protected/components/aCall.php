@@ -12,9 +12,9 @@
 		public $fio;
 		public $birth;
 		public $number;
-		public $clinic;
+		public $company;
 		public $price;
-		public $research_type;
+		public $repair_type;
 		public $comment;
 		public $id_error;
 		
@@ -92,10 +92,10 @@
 			} else {
 				$criteria -> addCondition('dateString IS NULL');
 			}
-			if ($this -> research_type) {
-				$criteria -> compare('research_type', $this -> research_type);
+			if ($this -> repair_type) {
+				$criteria -> compare('repair_type', $this -> repair_type);
 			} else {
-				$criteria -> addCondition('research_type IS NULL');
+				$criteria -> addCondition('repair_type IS NULL');
 			}
 			if ($this -> j) {
 				$criteria -> compare('j', $this -> j);

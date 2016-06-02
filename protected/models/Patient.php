@@ -115,7 +115,7 @@ class Patient extends UModel
 		if (User::model() -> findByPk($_GET["id"])) {
 			$this -> id_user =$_GET["id"];
 		} else {
-			new CustomFlash('error', 'Patient','IncorrectId','Ошибка при определении доктора, который добавляет пациента.',true);
+			new CustomFlash('error', 'Patient','IncorrectId','Ошибка при определении партнера, который добавляет пациента.',true);
 		}
 	}
 	public function beforeSave() {

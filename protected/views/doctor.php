@@ -6,7 +6,7 @@
 	<div class="col-sm-4">
 		<?php $this -> renderPartial('//info', array('user' => $user)); ?>
 		<?php $this -> renderPartial('//_conditions', array('user' => $user)); ?>
-		<?php $this -> renderPartial('//_meassage'); ?>
+		<?php //$this -> renderPartial('//_meassage'); ?>
 		<?php //$this -> renderPartial('//_statImage'); ?>
 		
 	</div>

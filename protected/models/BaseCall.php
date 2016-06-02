@@ -5,7 +5,7 @@
  *
  * The followings are the available columns in table '{{call}}':
  * @property integer $id
- * @property string $research_type
+ * @property string $repair_type
  * @property integer $i
  * @property integer $j
  * @property string $H
@@ -13,7 +13,7 @@
  * @property string $fio
  * @property string $birth
  * @property string $number
- * @property string $clinic
+ * @property string $company
  * @property string $price
  * @property string $report
  * @property string $mangoTalker
@@ -54,7 +54,7 @@ class BaseCall extends UModel
 	 * @arg iCall call - object that imlements the iCall interface.
 	 */
 	public function storeData(iCall $call){
-		$this -> research_type = $call -> research_type;
+		$this -> repair_type = $call -> repair_type;
 		$this -> i = $call -> i ? $call -> i : NULL;
 		$this -> j = $call -> j ? $call -> j : NULL;
 		$this -> H = $call -> H ? $call -> H : NULL;
@@ -64,7 +64,7 @@ class BaseCall extends UModel
 		$this -> fio = $call -> fio;
 		$this -> birth = $call -> birth;
 		$this -> number = $call -> number;
-		$this -> clinic = $call -> clinic;
+		$this -> company = $call -> company;
 		$this -> price = $call -> price;
 		$this -> report = $call -> report;
 		//$this -> mangoTalker = $call -> mangoTalker;
@@ -110,11 +110,11 @@ class BaseCall extends UModel
 			array('H, wishes, report, comment', 'length', 'max'=>1024),
 			array('fio, birth', 'length', 'max'=>256),
 			array('number', 'length', 'max'=>100),
-			array('clinic', 'length', 'max'=>512),
+			array('company', 'length', 'max'=>512),
 			array('mangoTalker', 'length', 'max'=>128),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, i, j, H, wishes, fio, birth, number, clinic, price, report, mangoTalker, comment, id_call_type, id_user, date', 'safe', 'on'=>'search'),
+			array('id, i, j, H, wishes, fio, birth, number, company, price, report, mangoTalker, comment, id_call_type, id_user, date', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -157,7 +157,7 @@ class BaseCall extends UModel
 			'fio' => 'Fio',
 			'birth' => 'Birth',
 			'number' => 'Number',
-			'clinic' => 'Clinic',
+			'company' => 'company',
 			'price' => 'Price',
 			'report' => 'Report',
 			'mangoTalker' => 'Mango Talker',
@@ -194,7 +194,7 @@ class BaseCall extends UModel
 		$criteria->compare('fio',$this->fio,true);
 		$criteria->compare('birth',$this->birth,true);
 		$criteria->compare('number',$this->number,true);
-		$criteria->compare('clinic',$this->clinic,true);
+		$criteria->compare('company',$this->company,true);
 		$criteria->compare('price',$this->price);
 		$criteria->compare('report',$this->report,true);
 		$criteria->compare('mangoTalker',$this->mangoTalker,true);
@@ -252,7 +252,7 @@ class BaseCall extends UModel
 	 */
 	public function beforeSave(){
 		//Сбрасывает все атрибуты, которые имеют нулевую длину.
-		$attrs = array('price', 'dateString', 'research_type', 'j','wishes','birth');
+		$attrs = array('price', 'dateString', 'repair_type', 'j','wishes','birth');
 		foreach ($attrs as $attr) {
 			//if (property_exists($this, $attr)) {
 				if (strlen($this -> $attr) == 0) {
@@ -287,11 +287,11 @@ class BaseCall extends UModel
 				switch($this -> id_call_type) {
 					//case CallType::model() -> getNumber('cancelled'):
 					case '3':
-						$smsBody = "К сожалению, пациент ".$this -> fio." отменил(а) запись.";
+						$smsBody = "К сожалению, клиент ".$this -> fio." отменил(а) запись.";
 					break;
 					//case CallType::model() -> getNumber('assigned'):
 					case '6':
-						$smsBody = "Пациент ".$this -> fio." записался(ась) на исследование ".$this -> research_type." на ".$this -> report.".";
+						$smsBody = "Клиент ".$this -> fio." записался(ась) на ремонт '".$this -> repair_type."' на ".$this -> report.".";
 					break;
 					default:
 					$cont = false;

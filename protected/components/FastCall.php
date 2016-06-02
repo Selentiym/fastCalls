@@ -95,8 +95,8 @@
 		 */
 		/**
 		 * google doc output:
-		 * array(14) { ["дата"]=> string(4) "3.01" ["типисследования"]=> string(0) "" ["н"]=> string(0) "" ["пожеланияклиента"]=> string(0) ""
-		 * ["фио"]=> string(0) "" ["датарождения"]=> string(0) "" ["контактныйтелефон"]=> string(0) "" ["клиника"]=> string(0) "" 
+		 * array(14) { ["дата"]=> string(4) "3.01" ["типописаниеремонта"]=> string(0) "" ["н"]=> string(0) "" ["пожеланияклиента"]=> string(0) ""
+		 * ["фио"]=> string(0) "" ["датарождения"]=> string(0) "" ["контактныйтелефон"]=> string(0) "" ["компания"]=> string(0) ""
 		 * ["цена"]=> string(0) "" ["отчетпозвонку"]=> string(30) "записан, уточнял" ["mangotalkerномер"]=> string(11) "79217999294" 
 		 * ["комментарий"]=> string(0) "" ["направление"]=> string(0) "" ["sa"]=> string(0) "" } }
 		 */
@@ -136,9 +136,9 @@
 			$this -> fio = $entry["фио"];
 			$this -> birth = $entry["датарождения"];
 			$this -> number = $entry["контактныйтелефон"];
-			$this -> clinic = $entry["клиника"];
+			$this -> company = $entry["компания"];
 			$this -> price = $entry["цена"];
-			$this -> research_type = $entry["типисследования"];
+			$this -> repair_type = $entry["типописаниеремонта"];
 			$this -> comment = $entry["комментарий"];
 			//vardump($entry);
 			//vardump($this);
@@ -187,14 +187,15 @@
 		 * to the call and to the given search time 
 		 */
 		private function findGoogleRecord_lowLevel(GoogleDocApiHelper $api, $today = true, $month = 0, $real = false,$mangoText = true){
-			
+			//Если нужно искать по копии, то убрать!
+			if (!$real) { return;}
 			if (($api -> success)&&($this -> caller)) {
 				//Выбираем нужный месяц.
 				if ($real) {
-					$api -> setWorkArea('СТАТИСТИКА СПб', $this -> giveWorksheetLabel($month));
-				} else {
+					$api -> setWorkArea('Ремонт СПб', $this -> giveWorksheetLabel($month));
+				} /*else {
 					$api -> setWorkArea('Copy of СТАТИСТИКА СПб', $this -> giveWorksheetLabel($month));
-				}
+				}*/
 				$date = getdate($this -> giveUnixTime());
 				//Ставим или не ставим ковычки в зависимости от того, ищем ли мы текст или число.
 				$quotes = $mangoText ? '"' : '';

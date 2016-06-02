@@ -3,7 +3,7 @@
 <?php if ((Yii::app() -> user -> checkAccess('viewOwnUserCabinet', array('user' => $user)))||(Yii::app() -> user -> checkAccess('viewChildUserCabinet', array('user' => $user)))||(Yii::app() -> user -> checkAccess('viewUserCabinet'))) : ?>
 <?php $reviews = $user -> id_type != UserType::model() -> getNumber('doctor') ? Review::model() -> findAll() : $user -> reviews; ?>
 <?php Yii::app()->getClientScript()->registerScript('deleteScript','$(".delete-review").click(function(){
-	if (!confirm("Вы уверены, что хотите удалить отзыв о "+$(this).attr("clinic")+"?")) {
+	if (!confirm("Вы уверены, что хотите удалить отзыв о "+$(this).attr("company")+"?")) {
 		return false;
 	} else {
 		location.replace($(this).attr("goto"));
@@ -13,9 +13,9 @@
 <div class="well">
 	<table class="table table-bordered">
 		<tr>
-			<th>Клиника</th>
-			<th>Доктор</th>
-			<th>Тип исследования</th>
+			<th>Компания</th>
+			<th>Партнер</th>
+			<th>Тип/Описание ремонта</th>
 			<th>Рейтинг</th>
 			<th>Комментарий</th>
 			<th>Автор</th>

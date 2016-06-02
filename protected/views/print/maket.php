@@ -16,7 +16,7 @@
 		echo "<div class='separator'></div>";
 		$this -> renderPartial('//print/oneDirection', array('fio' => $user -> fio, 'number' => mt_rand($min, $max), 'tel' => $tel));
 	} else {
-		echo "Проблемы с интервалом направлений доктора.";
+		echo "Проблемы с интервалом направлений партнера.";
 	}
 	
 ?>

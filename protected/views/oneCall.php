@@ -17,7 +17,7 @@
 <td><?php echo $call -> number; ?></td>
 <td><?php echo $call -> giveReport(); ?></td>
 <td><?php echo $call -> giveName(); ?></td>
-<td><?php echo $call -> research_type; ?></td>
+<td><?php echo $call -> repair_type; ?></td>
 <td><?php echo CHtml::link('Отзыв', Yii::app() -> baseUrl.'/addreview/'.$call -> id); echo $call -> unlinkTag() ? '<br/>'.$call -> unlinkTag() : '' ;?></td>
 
 </tr>

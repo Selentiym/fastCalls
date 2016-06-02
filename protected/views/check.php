@@ -65,7 +65,13 @@ Yii::app() -> getClientScript() -> registerScript('datetimepicker','
         now.setDate(now.getDate() + 7);
         picker.datetimepicker({value:now});
     });
-',CClientScript::POS_READY)
+',CClientScript::POS_READY);
+
+$a = 123;
+$b = $a + 5;
+//$a = 123;
+//$b = $a + 5;
+
 ?>
 <form>
     <input type="text" id="datepicker"/>

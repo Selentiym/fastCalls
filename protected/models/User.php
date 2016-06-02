@@ -268,7 +268,7 @@ class User extends UModel
 				}
 			}
 		}
-		//Проверка на наличие одинаковых номеров у Медпредов.
+		//Проверка на наличие одинаковых номеров у Ремпредов.
 		if ($this -> id_type == UserType::model() -> getNumber('mainDoc')) {
 			$uid = $this -> id;
 			if (!(empty($this -> phones_input))) {
@@ -286,7 +286,7 @@ class User extends UModel
 					}*/
 					$num = count($main_users);
 					if ($num > 0){
-						new CustomFlash('warning','User', 'DuplLine'.$phone -> number, 'Медпред'. (($num > 1) ? 'ы' : '' ).' по имени '.$this -> giveStringFromArray($main_users, ',','fio').' уже име'. (($num > 1) ? 'ют' : 'ет' ).' ту же линию '.$phone -> number.', что и '.$this -> fio.'.',true);
+						new CustomFlash('warning','User', 'DuplLine'.$phone -> number, 'Ремпред'. (($num > 1) ? 'ы' : '' ).' по имени '.$this -> giveStringFromArray($main_users, ',','fio').' уже име'. (($num > 1) ? 'ют' : 'ет' ).' ту же линию '.$phone -> number.', что и '.$this -> fio.'.',true);
 					}
 				}
 			}
@@ -544,7 +544,7 @@ class User extends UModel
 		}
 		$crit = new CDbCriteria;
 		$crit -> compare('id_type', UserType::model() -> getNumber('mainDoc'));
-		//Выбираем всех главных докторов
+		//Выбираем всех главных партнеров
 		$MDs = User::model() -> findAll($crit);
 		//Получаем для каждого из них юзеров и добавляем в массив.
 		$criteria -> compare('id_parent', '1');
@@ -1036,7 +1036,7 @@ class User extends UModel
 	}
 
 	/**
-	 * Возвращает в JS id всех медпредов
+	 * Возвращает в JS id всех ремпредов
 	 */
 	public function dumpMDs () {
 		echo json_encode(array(

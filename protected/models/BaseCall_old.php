@@ -5,7 +5,7 @@
  *
  * The followings are the available columns in table '{{call}}':
  * @property integer $id
- * @property string $research_type
+ * @property string $repair_type
  * @property integer $i
  * @property integer $j
  * @property string $H
@@ -13,7 +13,7 @@
  * @property string $fio
  * @property string $birth
  * @property string $number
- * @property string $clinic
+ * @property string $company
  * @property integer $price
  * @property string $report
  * @property string $mangoTalker
@@ -51,11 +51,11 @@ class BaseCall extends UModel
 			array('H, wishes, report, comment', 'length', 'max'=>1024),
 			array('fio, birth', 'length', 'max'=>256),
 			array('number', 'length', 'max'=>100),
-			array('clinic', 'length', 'max'=>512),
+			array('company', 'length', 'max'=>512),
 			array('mangoTalker', 'length', 'max'=>128),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, i, j, H, wishes, fio, birth, number, clinic, price, report, mangoTalker, comment, id_call_type, id_user, date', 'safe', 'on'=>'search'),
+			array('id, i, j, H, wishes, fio, birth, number, company, price, report, mangoTalker, comment, id_call_type, id_user, date', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -97,7 +97,7 @@ class BaseCall extends UModel
 			'fio' => 'Fio',
 			'birth' => 'Birth',
 			'number' => 'Number',
-			'clinic' => 'Clinic',
+			'company' => 'company',
 			'price' => 'Price',
 			'report' => 'Report',
 			'mangoTalker' => 'Mango Talker',
@@ -134,7 +134,7 @@ class BaseCall extends UModel
 		$criteria->compare('fio',$this->fio,true);
 		$criteria->compare('birth',$this->birth,true);
 		$criteria->compare('number',$this->number,true);
-		$criteria->compare('clinic',$this->clinic,true);
+		$criteria->compare('company',$this->company,true);
 		$criteria->compare('price',$this->price);
 		$criteria->compare('report',$this->report,true);
 		$criteria->compare('mangoTalker',$this->mangoTalker,true);

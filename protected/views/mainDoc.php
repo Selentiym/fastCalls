@@ -19,7 +19,7 @@
 	<div class="col-sm-4">
 	<?php $this -> renderPartial('//_conditions', array('user' => $user)); ?>	
 	<?php $this -> renderPartial('//mentor', array('mentor' => $user -> mentor)); ?>
-	<?php $this -> renderPartial('//_meassage'); ?>
+	<?php //$this -> renderPartial('//_meassage'); ?>
 	<?php //$this -> renderPartial('//_statImage'); ?>
 	
 		
@@ -87,14 +87,14 @@
 				<?php echo CHtml::link('
 				<button class="btn btn-xs btn-success" id="create-doctor">
 					<span class="glyphicon glyphicon-plus"></span>
-					Добавить доктора
+					Добавить партнера
 				</button>', Yii::app() -> baseUrl.$user -> giveUserNameForPage().'/create/doctor', array("target" => "_blank")); ?>
 				<div class="well" style="margin-top: 30px">
-					<h5>Не получается подключить доктора?</h5>
+					<h5>Не получается подключить партнера?</h5>
 
 					<p>
 						Администратор сайта поможет Вам.
-						Для подключения доктора, отправьте заявку на почту partnership@o-mri.ru.
+						Для подключения партнера, отправьте заявку на почту partnership@o-mri.ru.
 					</p>
 
 					<p>

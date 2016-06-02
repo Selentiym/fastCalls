@@ -114,7 +114,7 @@ if (Yii::app() -> user -> checkAccess('admin')) :
 	", CClientScript::POS_END);
 	
 	Yii::app()->getClientScript()->registerScript('deleteScript','$(".delete-doctor").click(function(){
-		if (!confirm("Вы уверены, что хотите удалить доктора "+$(this).attr("name")+"?")) {
+		if (!confirm("Вы уверены, что хотите удалить партнера "+$(this).attr("name")+"?")) {
 			return false;
 		} else {
 			location.replace($(this).attr("goto"));
@@ -210,7 +210,7 @@ if (Yii::app() -> user -> checkAccess('admin')) :
 	?>
 	</table>
 	<?php
-		/* Вывод менюшки с главными докторами */
+		/* Вывод менюшки с главными партнерами */
 		$initials = function($name){
 			$words = explode (' ',$name);
 			$rez = $words[0].' ';

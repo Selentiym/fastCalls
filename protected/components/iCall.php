@@ -15,9 +15,9 @@
 		public $fio;
 		public $birth;
 		public $number;
-		public $clinic;
+		public $company;
 		public $price;
-		public $research_type;
+		public $repair_type;
 		public $comment;
 		public $id_error;
 		*/

@@ -17,7 +17,7 @@
 		echo "<div class='separator'></div>";
 		$this -> renderPartial('//print/oneDirectionImage', array('fio' => $user -> fio, 'number' => $num, 'tel' => $tel));
 	} else {
-		echo "Проблемы с интервалом направлений доктора.";
+		echo "Проблемы с интервалом направлений партнера.";
 	}
 	
 ?>

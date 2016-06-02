@@ -1,6 +1,6 @@
 <div class="single_direction">
 	<div class="heading">Общегородская медицинская служба записи на МРТ и КТ диагностику</div>
-	<div class="tel">Многоканальный телефон службы звписи: <?php echo $tel; ?></div>
+	<div class="tel">Многоканальный телефон службы записи: <?php echo $tel; ?></div>
 	<div class="bottom_line"></div>
 	<div class="inf_list">Информационный лист №<span><?php echo $number; ?></span></div>
 	<div class="bottom_line"></div>
@@ -12,11 +12,11 @@
 			<div class="checkbox_cont"><span class="checkbox"></span><div class="name">КТ</div></div><span class='contrast'>необходимость контрастирования</span><div class="checkbox_cont"><div class="checkbox"></div>Да<div class="checkbox"></div>Нет</div>
 		</div>
 		<div class="row">
-			<div class="checkbox_cont"><div class="checkbox"></div>Другое исследование</div><div class="custom_gap_1"></div>
+			<div class="checkbox_cont"><div class="checkbox"></div>Другой ремонт</div><div class="custom_gap_1"></div>
 		</div>
 	</div>
 	<div class="block">
-		<div class="block_heading">Название исследования/Область исследования</div>
+		<div class="block_heading">Название ремонта</div>
 		<div class="obl_issled"><div class="gap_80"></div></div>
 	</div>
 	<div class="container_no_border">
@@ -32,7 +32,7 @@
 		<div class="row gap_cont w80"><span class="gap_int">Врач:</span><?php echo $fio; ?></div>
 	</div>
 	<div class="assign block">
-		Записаться на исследование<br/>Вы можете по телефону: <?php echo $tel; ?>
+		Записаться на ремонт<br/>Вы можете по телефону: <?php echo $tel; ?>
 	</div>
 	<div class="block">
 		<div class="heading">Пожалуйста, впишите адрес, дату и время Вашего исследования:</div>

@@ -7,7 +7,7 @@
 		
 		public $success = true;
 		/**
-		 * @var array config - a config array that gives information about the authentification. It is needed only
+		 * @var array config - a config array that gives information about the authentication. It is needed only
 		 * when attaining tokens
 		 */
 		protected $config;
@@ -79,8 +79,8 @@
 		/**
 		 * @arg array crit - criteria to the query. array('sq' => '<query condition>', 'reverse' => (true|false), 'orderby' => '<columnName>')
 		 * <query condition> - a string that can contain "and", "or" operators concatenating simple queries like <columnName> (>|<|=|<=|>=|<>) <value>
-		 * @arg string|object[Google\Spreadsheet\Spreadsheet] spread - the spreadSheet object to get data from
-		 * @arg string|object[Google\Spreadsheet\Worksheet] work - the worksheet object to get data from. It must be the ancestor or $spread
+		 * @arg string|Google\Spreadsheet\Spreadsheet spread - the spreadSheet object to get data from
+		 * @arg string|Google\Spreadsheet\Worksheet work - the worksheet object to get data from. It must be the ancestor or $spread
 		 * @return arrayIterator - array iterator for data rows sorted by <columnName>.
 		 */
 		public function giveData($crit = array(), $spread = false, $work = false){
@@ -91,8 +91,8 @@
 			}
 		}
 		/**
-		 * @arg string|object[Google\Spreadsheet\Spreadsheet] spread - the spreadSheet object to get data from
-		 * @arg string|object[Google\Spreadsheet\Worksheet] work - the worksheet object to get data from. It must be the ancestor or $spread
+		 * @arg string|Google\Spreadsheet\Spreadsheet spread - the spreadSheet object to get data from
+		 * @arg string|Google\Spreadsheet\Worksheet work - the worksheet object to get data from. It must be the ancestor or $spread
 		 * @return boolean - whether setting is successful
 		 */
 
@@ -138,13 +138,10 @@
 			}
 		}
 		/**
-		 * Searches the google doc files. Both: the original one and the copy.
+		 * Searches the google doc file.
 		 */
 		public function searchEverywhere($queryArray, $workSheet){
-			if ($entry = $this -> getLastEntry($queryArray,'СТАТИСТИКА СПб', $workSheet)) {
-				return $entry;
-			}
-			if ($entry = $this -> getLastEntry($queryArray,'Copy of СТАТИСТИКА СПб', $workSheet)) {
+			if ($entry = $this -> getLastEntry($queryArray,'Ремонт СПб', $workSheet)) {
 				return $entry;
 			}
 			return false;
@@ -160,10 +157,10 @@
 			}
 		}
 		/**
-		 * WARNING: BAD PRACTICE. Gives an up-to-date accesToken. I do no know how to do it correct. I need an access token to
+		 * WARNING: BAD PRACTICE. Gives an up-to-date accessToken. I do no know how to do it correct. I need an access token to
 		 * set up a "comfortable" api, but there is no way to get the updated token directly without changing the googleapi.php
 		 * So I decided to make a workaround and parse the HTTP header that contains a renewed token. This is not a good idea,
-		 * it works for now.
+		 * but it works for now.
 		 * @return string - the token string!
 		 */
 		protected function getToken(){

@@ -45,11 +45,11 @@
 <td><?php //echo $call -> H; ?></td>
 <td><?php //echo $call -> giveStringFromArray($phone -> main_users,',','fio'); ?></td>-->
 <td><?php echo $call -> comment; ?></td>
-<td><?php echo $call -> research_type; ?></td>
+<td><?php echo $call -> repair_type; ?></td>
 <td><?php echo $call -> number; ?></td>
 <td><?php echo $call -> giveReport(); ?></td>
 <td><?php echo $call -> fio; ?></td>
-<td><?php echo $call -> clinic; ?></td>
+<td><?php echo $call -> company; ?></td>
 <td><?php echo CHtml::link('del', Yii::app() -> baseUrl.'/deleteCall/'.$call -> id); ?></td>
 
 

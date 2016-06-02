@@ -45,11 +45,11 @@
 					} else {
 						$this -> speciality = array($data);
 					}
-					//Если специализация не "Медпред", то ставим тип юзера и ищем медпреда. 
-					//Если же он сам медпред, то просто ставим тип и родителем объявляем залогиненного юзера.
-					if ($data != 'Медпред') {
+					//Если специализация не "Ремпред", то ставим тип юзера и ищем ремпреда.
+					//Если же он сам ремпред, то просто ставим тип и родителем объявляем залогиненного юзера.
+					if ($data != 'Ремпред') {
 						$this -> id_type = UserType::model() -> getNumber('doctor');
-						$this -> id_parent = User::model() -> findByAttributes(array('fio' => trim($array[$nums['Медпред']]),'id_type' => UserType::model() -> getNumber('mainDoc'))) -> id;
+						$this -> id_parent = User::model() -> findByAttributes(array('fio' => trim($array[$nums['Ремпред']]),'id_type' => UserType::model() -> getNumber('mainDoc'))) -> id;
 					} else {
 						$this -> id_type = UserType::model() -> getNumber('mainDoc');
 						$this -> id_parent = Yii::app() -> user -> getId();
@@ -98,7 +98,7 @@
 							if ($obj -> save()) {
 							//if (1) {
 								$this -> phones_input[] = $obj -> id;
-								new CustomFlash('warning','UserPhone','NotFound','Номер телефона '.$phone.' не был найден в таблице линий при добавлении медпреда. Ему был присвоен идентификатор '.$obj -> i, true);
+								new CustomFlash('warning','UserPhone','NotFound','Номер телефона '.$phone.' не был найден в таблице линий при добавлении ремпреда. Ему был присвоен идентификатор '.$obj -> i, true);
 							} else {
 								new CustomFlash('error','UserPhone','CanNotSave','Не удалось добавить линию <'.$phone.'> .',true);
 							}

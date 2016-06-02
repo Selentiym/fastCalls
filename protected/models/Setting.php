@@ -34,7 +34,7 @@ class Setting extends UModel
 			array('comment_stat', 'length', 'max'=>1024),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('comment_stat, allowMDCreateAddresses, comment_show,showClinicStat,year', 'safe'),
+			array('comment_stat, allowMDCreateAddresses, comment_show,showcompanyStat,year', 'safe'),
 		);
 	}
 	/**

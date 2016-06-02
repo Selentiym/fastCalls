@@ -31,7 +31,7 @@
 				<th class="fio">ФИО</th>
 				<th class="tel">Телефон</th>
 				<?php if ($show) : ?>
-				<th class="doc">Доктор</th>
+				<th class="doc">Партнер</th>
 				<?php endif; ?>
 				<th class="create">Добавлен</th>
 				<th class="note">Примечание</th>

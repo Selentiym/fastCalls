@@ -60,11 +60,11 @@ Yii::app() -> getClientScript() -> registerScript('setBaseUrl','baseUrl = "'.Yii
 <div id="menu" style="display:none">
     <ul style="padding-left: 10px">
         <li>
-            <button id="MDsDrag">Медпреды</button>
+            <button id="MDsDrag">Ремпреды</button>
             <button id="AllDrag">Все пользователи</button>
         </li>
         <li>
-            Доктора
+            Партнера
             <?php
             $criteria = new CDbCriteria();
             $criteria -> addInCondition('id_type', array(UserType::model() -> getNumber('doctor'),UserType::model() -> getNumber('mainDoc')));

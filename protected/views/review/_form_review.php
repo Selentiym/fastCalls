@@ -2,7 +2,7 @@
 	CustomFlash::showFlashes();
 ?>
 	
-<!--<div class="ui-dialog ui-widget ui-widget-content ui-corner-all ui-front dialog ui-dialog-buttons ui-draggable ui-resizable" tabindex="-1" role="dialog" aria-describedby="doctor-dialog" aria-labelledby="ui-id-1" style="position: absolute; height: auto; width: 550px; top: 2566px; left: 353px; display: block; z-index: 101;"><div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix ui-draggable-handle"><span id="ui-id-1" class="ui-dialog-title">Форма добавление/редактирования доктора</span><button type="button" class="ui-dialog-titlebar-close"></button></div><div id="doctor-dialog" class="ui-dialog-content ui-widget-content" style="width: auto; min-height: 25px; max-height: none; height: auto;">-->
+<!--<div class="ui-dialog ui-widget ui-widget-content ui-corner-all ui-front dialog ui-dialog-buttons ui-draggable ui-resizable" tabindex="-1" role="dialog" aria-describedby="doctor-dialog" aria-labelledby="ui-id-1" style="position: absolute; height: auto; width: 550px; top: 2566px; left: 353px; display: block; z-index: 101;"><div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix ui-draggable-handle"><span id="ui-id-1" class="ui-dialog-title">Форма добавление/редактирования партнера</span><button type="button" class="ui-dialog-titlebar-close"></button></div><div id="doctor-dialog" class="ui-dialog-content ui-widget-content" style="width: auto; min-height: 25px; max-height: none; height: auto;">-->
 <?php $form=$this->beginWidget('CActiveForm', array(
         'id'=>'review-form',
         // Please note: When you enable ajax validation, make sure the corresponding
@@ -19,27 +19,27 @@
 
             <div class="well">
                 <div class="form-group">
-                    <label for="name">Клиника</label>
+                    <label for="name">Компания</label>
 					<?php $criteria = new CDbCriteria; ?>
 					<?php /*if ($model -> our) {
 						$criteria -> compare('our','1');
 					} */?>
-                    <?php $clinics = TestAddress::model() -> findAll($criteria); ?>
-					<?php CHtml::activeDropDownListChosen2(TestAddress::model(), 'id',CHtml::listData($clinics,'id','name'), array('class' => 'select2 clinicName','name' => get_class($model).'[id_clinic]'), array($model -> id_clinic), '{placeholder: "Выберите клинику"}'); ?>
-					<?php //echo $form->textField($model, 'clinic',array('size'=>60,'maxlength'=>255,'placeholder'=>'Название клиники')); ?>
+                    <?php $companies = TestAddress::model() -> findAll($criteria); ?>
+					<?php CHtml::activeDropDownListChosen2(TestAddress::model(), 'id',CHtml::listData($companies,'id','name'), array('class' => 'select2 companyName','name' => get_class($model).'[id_company]'), array($model -> id_company), '{placeholder: "Выберите клинику"}'); ?>
+					<?php //echo $form->textField($model, 'company',array('size'=>60,'maxlength'=>255,'placeholder'=>'Название клиники')); ?>
                 </div>
 
                 
 
                 <div class="form-group">
-                    <label for="speciality">Доктор</label>
-					<?php echo $form->textField($model, 'doctor',array('size'=>60,'maxlength'=>255,'placeholder'=>'ФИО доктора')); ?>
+                    <label for="speciality">Партнер</label>
+					<?php echo $form->textField($model, 'doctor',array('size'=>60,'maxlength'=>255,'placeholder'=>'ФИО партнера')); ?>
                     <!--<input type="text" class="form-control" id="speciality" name="speciality" placeholder="" title="" data-original-title="Специализация врача: невролог, хирург, ортопед и тд">-->
                 </div>
 				
 				<div class="form-group">
-                    <label for="speciality">Исследование</label>
-					<?php echo $form->textField($model, 'research_type',array('size'=>60,'maxlength'=>255,'placeholder'=>'Тип обследования')); ?>
+                    <label for="speciality">Тип/Описание ремонта</label>
+					<?php echo $form->textField($model, 'repair_type',array('size'=>60,'maxlength'=>255,'placeholder'=>'Тип обследования')); ?>
                     <!--<input type="text" class="form-control" id="speciality" name="speciality" placeholder="" title="" data-original-title="Специализация врача: невролог, хирург, ортопед и тд">-->
                 </div>
 				

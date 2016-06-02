@@ -85,7 +85,7 @@
 					-> from('{{call}}') 
 					-> where('id_user IS NULL AND ' . $time -> giveSql() . BaseCall::notDeletedSql()) 
 					-> queryScalar(); 
-					echo 'Ошибок (не привязался доктор): '.$errorCalls;
+					echo 'Ошибок (не привязался партнер): '.$errorCalls;
 					?>
 				</div>
                 <div class="list-group-item">

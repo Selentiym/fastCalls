@@ -2,7 +2,7 @@
 <?php $users = User::model() -> findAllByMainDocs('',''); ?>
 <?php
 	Yii::app()->getClientScript()->registerScript('deleteScript','$(".delete-doctor").click(function(){
-		if (!confirm("Вы уверены, что хотите удалить доктора "+$(this).attr("name")+"?")) {
+		if (!confirm("Вы уверены, что хотите удалить партнера "+$(this).attr("name")+"?")) {
 			return false;
 		} else {
 			location.replace($(this).attr("goto"));

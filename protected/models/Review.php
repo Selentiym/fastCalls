@@ -5,9 +5,9 @@
  *
  * The followings are the available columns in table '{{review}}':
  * @property integer $id
- * @property string $clinic
+ * @property string $company
  * @property string $doctor
- * @property string $research_type
+ * @property string $repair_type
  * @property integer $rating
  * @property string $review
  * @property integer $our
@@ -38,12 +38,12 @@ class Review extends UModel
 		return array(
 			array('rating, our', 'required'),
 			array('rating, our, id_call', 'numerical', 'integerOnly'=>true),
-			array('id_clinic, doctor', 'length', 'max'=>1024),
-			array('research_type', 'length', 'max'=>256),
+			array('id_company, doctor', 'length', 'max'=>1024),
+			array('repair_type', 'length', 'max'=>256),
 			array('review', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, id_clinic, doctor, research_type, rating, review, our, id_call', 'safe', 'on'=>'search'),
+			array('id, id_company, doctor, repair_type, rating, review, our, id_call', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -57,7 +57,7 @@ class Review extends UModel
 		return array(
 			'call' => array(self::BELONGS_TO, 'Call', 'id_call'),
 			'user' => array(self::BELONGS_TO, 'User', 'id_user'),
-			'clinic' => array(self::BELONGS_TO, 'TestAddress','id_clinic')
+			'company' => array(self::BELONGS_TO, 'TestAddress','id_company')
 		);
 	}
 
@@ -68,9 +68,9 @@ class Review extends UModel
 	{
 		return array(
 			'id' => 'ID',
-			'clinic' => 'Clinic',
+			'company' => 'company',
 			'doctor' => 'Doctor',
-			'research_type' => 'Research Type',
+			'repair_type' => 'Research Type',
 			'rating' => 'Rating',
 			'review' => 'Review',
 			'our' => 'Our',
@@ -97,9 +97,9 @@ class Review extends UModel
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id);
-		$criteria->compare('clinic',$this->clinic,true);
+		$criteria->compare('company',$this->company,true);
 		$criteria->compare('doctor',$this->doctor,true);
-		$criteria->compare('research_type',$this->research_type,true);
+		$criteria->compare('repair_type',$this->repair_type,true);
 		$criteria->compare('rating',$this->rating);
 		$criteria->compare('review',$this->review,true);
 		$criteria->compare('our',$this->our);
@@ -127,8 +127,8 @@ class Review extends UModel
 			$this -> our = 1;
 			$this -> call  = BaseCall::model() -> findByPk($get['id_call']) ;
 			$call = $this -> call;
-			$this -> clinic = $call -> clinic;
-			$this -> research_type = $call -> research_type;
+			$this -> company = $call -> company;
+			$this -> repair_type = $call -> repair_type;
 		} else {
 			//Если же нет айди звонка, то помечаем, что юзер не наш
 			$this -> our = 0;
@@ -147,22 +147,22 @@ class Review extends UModel
 	 */
 	public function giveStat() {
 		$criteria = new CDbCriteria;
-		$criteria -> group = 'id_clinic';
-		$criteria -> with = 'clinic';
+		$criteria -> group = 'id_company';
+		$criteria -> with = 'company';
 		$reviews = self::model() -> findAll($criteria);
 		$comm = Yii::app() -> db -> createCommand();
 		$comm -> select('COUNT(`rating`) as t1,SUM(`rating`) as t2');
-		$comm -> where('`id_clinic` = :id');
+		$comm -> where('`id_company` = :id');
 		$comm -> from('{{review}}');
-		$clinics = array();
+		$companies = array();
 		foreach($reviews as $review) {
-			$clinic = $review -> clinic;
-			$comm -> params = array(':id' => $clinic -> id);
+			$company = $review -> company;
+			$comm -> params = array(':id' => $company -> id);
 			$rez = $comm -> queryAll();
-			$clinic -> sum = $rez[0]['t2'];
-			$clinic -> countReviews = $rez[0]['t1'];
-			$clinics[] = $clinic;
+			$company -> sum = $rez[0]['t2'];
+			$company -> countReviews = $rez[0]['t1'];
+			$companies[] = $company;
 		}
-		return $clinics;
+		return $companies;
 	}
 }

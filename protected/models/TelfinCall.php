@@ -35,7 +35,6 @@ class TelfinCall extends UModel
 			array('id_phone, id_call', 'numerical', 'integerOnly'=>true),
 			array('ApiId', 'length', 'max'=>20),
 			// The following rule is used by search().
-			// @todo Please remove those attributes that should not be searched.
 			array('ApiId, id_phone, id_call', 'safe', 'on'=>'search'),
 		);
 	}

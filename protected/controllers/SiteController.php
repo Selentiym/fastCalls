@@ -696,9 +696,9 @@ class SiteController extends Controller
 		Yii::app()->user->logout();
 		$this->redirect(Yii::app()->homeUrl);
 	}
-	/*public function actionDownloadClinicsList(){
-		$reader = new CsvReader(Yii::app() -> basePath.'/../files/tests_clinics.csv');
-		echo Yii::app() -> basePath.'/files/tests_clinics.csv';
+	/*public function actionDownloadcompanysList(){
+		$reader = new CsvReader(Yii::app() -> basePath.'/../files/tests_companies.csv');
+		echo Yii::app() -> basePath.'/files/tests_companies.csv';
 		if ($reader -> file) {
 			$reader -> saveHeader();
 			$reader -> separator = ';';
@@ -782,8 +782,8 @@ class SiteController extends Controller
 	public function actionCheckApi(){
 		$api = new GoogleDocApiHelper();
 		if ($api -> success) {
-			$api -> setWorkArea('нАзвание русскими буквами', 'Лист1');
-			$data = $api -> giveData (array('sq' => 'возраст > 5'));
+			$api -> setWorkArea('Ремонт СПб', 'May 2016');
+			$data = $api -> giveData ();
 			foreach($data -> getEntries() as $d){
 				var_dump($d);
 				echo "<br/><br/>";
@@ -808,9 +808,9 @@ class SiteController extends Controller
 			//Задаем список доступных полчаетелей
 			if (empty($users)) {
 				$criteria = new CDbCriteria();
-				//Выбираем всех обычных докторов
+				//Выбираем всех обычных партнеров
 				$criteria -> compare('id_type',3);
-				//Выбираем только среди определенных медпредов!
+				//Выбираем только среди определенных ремпредов!
 				$criteria -> addInCondition('id_parent',array(574,575,576));
 				$users = User::model() -> findAll($criteria);
 				$count = count($users);
@@ -848,12 +848,12 @@ class SiteController extends Controller
 		if (Yii::app() -> user -> checkAccess("admin")) {
 			//Выбрали месяц, из которого тянуть звонки.
 			$month = "May";
-			$toAdd = 5;
+			$toAdd = 1;
 			$api = new GoogleDocApiHelper();
 			if ($api -> success) {
 				$addr = 'http://fastcalls/public_html/site/telfinHangup';
 				//$addr = Yii::app() -> baseUrl.'/telfinHangup';
-				$api -> setWorkArea('СТАТИСТИКА СПб', $month.' 2016');
+				$api -> setWorkArea('Ремонт СПб', $month.' 2016');
 				$data = $api -> giveData ();
 				$entr = $data -> getEntries();
 				if (!$entr) {
@@ -987,7 +987,7 @@ class SiteController extends Controller
 		$telfin = new TelfinApiHelper();
 		$phone = $telfin -> givePhoneObject($_REQUEST, true);
 		
-		//Если 1, то доктор найден, если 0, то нет.
+		//Если 1, то партнер найден, если 0, то нет.
 		$correctNum = $phone ? 1 : 0;
 		if ($correctNum) {
 			echo "PhoneId: ".$phone -> id.'<br/>';
@@ -1087,12 +1087,12 @@ class SiteController extends Controller
 				//Количество параметров, по которым происходит посик.
 				$params = 1;
 				$queryString = "дата = {$bCall -> dateString}";
-				if ($bCall -> research_type) {
-					$queryString .= ' and типисследования="'.$bCall -> research_type.'"';
+				if ($bCall -> repair_type) {
+					$queryString .= ' and типописаниеремонта="'.$bCall -> repair_type.'"';
 					$params ++;
 				}
-				if ($bCall -> clinic) {
-					$queryString .= ' and клиника = "'.$bCall -> clinic.'"';
+				if ($bCall -> company) {
+					$queryString .= ' and компания = "'.$bCall -> company.'"';
 					$params ++;
 				}
 				if ($bCall -> fio) {

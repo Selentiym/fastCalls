@@ -32,7 +32,7 @@
 	№<?php echo $user -> jMin_add; ?> ... №<?php echo $user -> jMax_add; ?><br>
 
 	</small>
-	<a href="<?php echo Yii::app() -> baseUrl . '/print/'.$user->username;?>" class="print_me"><span>Распечатать направения этого доктора</span><span style="font-size:30px;" class="glyphicon glyphicon-print"></span></a>
+	<a href="<?php echo Yii::app() -> baseUrl . '/print/'.$user->username;?>" class="print_me"><span>Распечатать направления этого партнера</span><span style="font-size:30px;" class="glyphicon glyphicon-print"></span></a>
 	<?php endif; ?>
 	
 

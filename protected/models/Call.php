@@ -12,21 +12,21 @@
 		public $wishes;
 		public $birth;
 		public $number;
-		public $clinic;
+		public $company;
 		public $price;
 		public $mangoTalker;
 		public $comment;
-		public $research_type;
+		public $repair_type;
 		public $id_error;
 		public $IFromFile = false;
 		public function __construct($array = array(), $header = array()){
-			$this -> array = $array;
+			$this->array = $array;
 			if ($header) {
 				$num = array_flip(array_map('trim',$header));
 				$this -> dateString = $array[$num["Дата"]];
 				$this -> State = $array[$num["sa"]];
 				$this -> report = $array[$num["Отчет по звонку"]];
-				$this -> research_type = $array[$num["Тип исследования"]];
+				$this -> repair_type = $array[$num["Тип Описание ремонта"]];
 				//$this -> i = $array[2];
 				$data = $array[$num["Н"]];
 				//echo $data;
@@ -47,7 +47,7 @@
 				$this -> wishes = $array[$num["Пожелания клиента"]];
 				$this -> birth = $array[$num["Дата рождения"]];
 				$this -> number = $array[$num["Контактный телефон"]];
-				$this -> clinic = $array[$num["Клиника"]];
+				$this -> company = $array[$num["Компания"]];
 				$this -> price = $array[$num["Цена"]];
 				$this -> mangoTalker = $array[$num["MangoTalker номер"]];
 				$this -> comment = $array[$num["Комментарий"]];
@@ -64,7 +64,7 @@
 					$this -> dateString = $array[0];
 					$this -> State = $array[12];
 					$this -> report = $array[9];
-					$this -> research_type = $array[1];
+					$this -> repair_type = $array[1];
 					//$this -> i = $array[2];
 					//$this -> j = $array[3];
 					$this -> fio = $array[4];
@@ -72,7 +72,7 @@
 					$this -> wishes = $array[3];
 					$this -> birth = $array[5];
 					$this -> number = $array[6];
-					$this -> clinic = $array[7];
+					$this -> company = $array[7];
 					$this -> price = $array[8];
 					$this -> mangoTalker = $array[10];
 					$this -> comment = $array[11];
@@ -241,7 +241,7 @@
 						//print_r($users);
 						$this -> id_error = CallError::model() -> giveText('two_j');
 						//echo "<br/><br/>".$this -> j;
-						new CustomFlash('error','BaseCall','Multiple_j_assign','Номер направления'.$this -> j.' присвоен более чем одному простому доктору. Из-за этого невозможно определить принадлежность звонка.',true);
+						new CustomFlash('error','BaseCall','Multiple_j_assign','Номер направления'.$this -> j.' присвоен более чем одному партнеру. Из-за этого невозможно определить принадлежность звонка.',true);
 						return NULL;
 				}
 			}
@@ -301,7 +301,7 @@
 					break;
 					default:
 						$this -> id_error = CallError::model() -> giveText('two_i');
-						new CustomFlash('error','BaseCall','Multiple_phone_assign','Номер с индентификатором '.$phone -> i.' присвоен более чем одному простому доктору с совпадающими адресами. Из-за этого невозможно определить принадлежность звонка.',true);
+						new CustomFlash('error','BaseCall','Multiple_phone_assign','Номер с индентификатором '.$phone -> i.' присвоен более чем одному партнеру с совпадающими адресами. Из-за этого невозможно определить принадлежность звонка.',true);
 						return NULL;
 				}
 				//print_r($phone -> regular_users);
@@ -325,7 +325,7 @@
 		 * @arg object[BaseCall] record - the record attributes of which are to be set
 		 */
 		public function setRecordAttributes($record){
-			$record -> research_type = $this -> research_type;
+			$record -> repair_type = $this -> repair_type;
 			$record -> i = $this -> i ? $this -> i : NULL;
 			$record -> j = $this -> j ? $this -> j : NULL;
 			$record -> H = $this -> H ? $this -> H : NULL;
@@ -334,7 +334,7 @@
 			$record -> fio = $this -> fio;
 			$record -> birth = $this -> birth;
 			$record -> number = $this -> number;
-			$record -> clinic = $this -> clinic;
+			$record -> company = $this -> company;
 			$record -> price = $this -> price;
 			$record -> price = $this -> price;
 			$record -> report = $this -> report;
