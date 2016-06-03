@@ -21,6 +21,8 @@
 class User extends UModel
 {
 	const SMS_SEND = '1';
+	const ADD_PROPERTY = '2';
+	const ADD_ACTION = '3';
 	/**
 	 * @var string $_childrenIdString contains all chuildren's ids separated by commas
 	 */
@@ -776,7 +778,7 @@ class User extends UModel
 		}
 	}
 	/**
-	 * Adds the UserOption::$addProperty property to this user
+	 * Adds the $option property to this user
 	 * if it is not already added
 	 */
 	public function addProperty($unused, $option){
@@ -1002,13 +1004,15 @@ class User extends UModel
 	 */
 	public function showUserList($source) {
 		$users = User::model() -> giveCollection($source);
-		echo "Выбрано ".count($users)." пользователей:";
+		echo "<span onClick='$(\"#users\").toggle(500)'>Выбрано ".count($users)." пользователей:</span>";
+		echo "<div id='users' style='display:none'>";
 		foreach ($users as $ind => $user){
 			echo "<div>";
 			echo "<input type='hidden' name='userGroup[]' value='".$user -> id."'/>";
 			echo ($ind+1).") ".$user -> fio;
 			echo "</div>";
 		}
+		echo "</div>";
 	}
 	/**
 	 * @param $timePeriod
@@ -1044,5 +1048,11 @@ class User extends UModel
 				'id_type' => UserType::model() -> getNumber('mainDoc')
 			)),'id')
 		));
+	}
+	/**
+	 * Adds a reminder to this user. Takes data from $data
+	 */
+	public function addAction($data){
+		return;
 	}
 }

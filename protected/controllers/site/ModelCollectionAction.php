@@ -39,10 +39,22 @@
 		 * @var bool|callable - function to be executed before everything.
 		 */
 		public $preaction = false;
+		/**
+		 * @var boolean|callable checkAccess function to be called to access page
+		 */
+		public $checkAccess = true;
 
 		public function run()
 		{
 			if (!Yii::app() -> user -> isGuest) {
+				//Если функция проверки доступа существует, то проверяем его.
+				if (is_callable($this -> checkAccess)) {
+					$name = $this -> checkAccess;
+					if (!($name())) {
+						$this -> controller -> renderPartial($this -> accessDenied);
+						Yii::app() -> end();
+					}
+				}
 				//Результат работы $this -> preaction
 				$thirdArg = false;
 				//Выполняем подготовительную функцию, если таковая имеется.

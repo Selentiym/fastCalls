@@ -29,16 +29,5 @@ CustomFlash::ShowFlashes();
 		<textarea data-changed="0" id="smsText" name="smsText" placeholder="Введите текст сообщения. <ФИО> заменяется на ФИО в именительном падеже." style="width:400px;height:250px"></textarea>
 		<div><input type="submit" value="Отправить"/></div>
 		</div>
-		<div id="texts" class="col-sm-4">
-			<?php
-				$patterns = SmsPattern::model() -> findAll();
-				foreach ($patterns as $pt) {
-					echo "<div><button data-text='{$pt -> text}'>{$pt -> value}</button></div>";
-				}
-			?>
-			<!--<div><button data-text="text1">Поздравление с др</button></div>
-			<div><button data-text="text2">Текст2</button></div>
-			<div><button data-text="text3">Текст3</button></div>-->
-		</div>
 	</div>
 </form>

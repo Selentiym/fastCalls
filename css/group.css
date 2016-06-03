@@ -40,6 +40,9 @@
 .drag .headMenu span.tagDrag{
     background: url("../images/tag-icon.png");
 }
+.drag .headMenu span.addAction{
+    background: url("../images/exclamation-icon.png");
+}
 .dialog {
     overflow:auto;
 }

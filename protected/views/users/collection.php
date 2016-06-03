@@ -28,12 +28,15 @@
 		}
 		echo displayVar($data['data']);
 		switch ($data["action"]) {
-			case "1" :
+			case (User::SMS_SEND):
 				$redirect = 'userSmsForm';
 			break;
-			case "2" :
+			case (User::ADD_PROPERTY) :
 				$redirect = 'userPropertyForm';
 			break;
+			case (USER::ADD_ACTION);
+				$redirect = 'userActionForm';
+				break;
 			default:
 				if (!$data['return']) {
 					$redirect = 'activeuserlist';
@@ -51,10 +54,11 @@
 		}
 	}
 	if ($redirect == "_close"){
-		Yii::app()->getClientScript()->registerScript('redirect', '
+		var_dump($data);
+		/*Yii::app()->getClientScript()->registerScript('redirect', '
 
 		window.close();
-		', CClientScript::POS_READY);
+		', CClientScript::POS_READY);*/
 	} else {
 		Yii::app()->getClientScript()->registerScript('redirect', '
 		$("#form").attr("action","' . Yii::app()->baseUrl . '/' . $redirect . '");

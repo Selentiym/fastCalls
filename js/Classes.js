@@ -353,9 +353,12 @@ function UserDrag(parameters){
     var tagButton = $('<span/>',{
         "class": 'tagDrag'
     });
+    var actionButton = $('<span/>',{
+        "class": 'addAction'
+    });
     var html = $('<div/>',{
         'class':'headMenu'
-    }).append(tagButton).append(enlargeButton).append(closeButton);
+    }).append(actionButton).append(tagButton).append(enlargeButton).append(closeButton);
     html.after($('<h2/>',{
         "class":"DragName"
     }).append(name));
@@ -377,6 +380,10 @@ function UserDrag(parameters){
     me.remakeBody();
     tagButton.click(function(){
         me.addTag();
+    });
+    actionButton.click(function(){
+        //На драге только неподробные кнопки.
+        me.addAction();
     });
     //Вешаем обработчик закрытия окна. Только сейчас, чтобы можно было сохранить
     // в замыкание функцию закрытия.
@@ -489,6 +496,21 @@ function UserDrag(parameters){
                 return;
             }
         }
+        window.open(baseUrl + 'userCollection?' + $.param(fields),'','Toolbar=1,Location=0,Directories=0,Status=0,Menubar=0,Scrollbars=0,Resizable=0');
+    };
+    /**
+     * Вызывает всплывающее окно с добавлением действия
+     */
+    me.addAction = function(inpAction){
+        var fields = {
+            //selected: users.join(';'),
+            userGroup: users,
+            "return":"_close",
+            action: 3,
+            data:{
+                action:inpAction
+            }
+        };
         window.open(baseUrl + 'userCollection?' + $.param(fields),'','Toolbar=1,Location=0,Directories=0,Status=0,Menubar=0,Scrollbars=0,Resizable=0');
     };
     return me;

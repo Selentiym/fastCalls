@@ -118,6 +118,11 @@ class SiteController extends Controller
 				'access' => function () {return Yii::app() -> user -> checkAccess('admin');},
 				'view' => '//users/addProperty'
 			),
+			'userActionForm'=>array(
+				'class'=>'application.controllers.site.FileViewAction',
+				'access' => function () {return Yii::app() -> user -> checkAccess('admin');},
+				'view' => '//users/addAction'
+			),
 			'userCollection'=>array(
 				'class'=>'application.controllers.site.FileViewAction',
 				'access' => function () {return Yii::app() -> user -> checkAccess('admin');},
@@ -200,6 +205,15 @@ class SiteController extends Controller
 				},
 				'addArgs' => $_POST,
 				'close' => true
+			),
+			'userAddAction' => array(
+				'class' => 'application.controllers.site.ModelCollectionAction',
+				'modelClass' => 'User',
+				'args' => $_POST["userGroup"],
+				'action' => 'addAction',
+				'addArgs' => $_POST,
+				'close' => true,
+				'checkAccess' => Yii::app() -> user -> checkAccess('createAction')
 			),
 			
 			'createUser' => array(
