@@ -238,7 +238,8 @@ class SiteController extends Controller
 				'class' => 'application.controllers.site.ModelCreateAction',
 				'modelClass' => 'UserPhone',
 				'view' => '//PhoneCreate',
-				'scenario' => 'create'
+				'scenario' => 'create',
+				'redirectUrl' => 'data'
 			),
 			'ReviewCreate' => array(
 				'class' => 'application.controllers.site.ModelCreateAction',

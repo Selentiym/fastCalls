@@ -42,6 +42,7 @@
 						//Помимо обычных атрибутов устанавливаем файлы
 						$model -> fileOperations($_FILES);
 					}
+					$created = false;
 					//Сохраняем атрибуты
 					if (!empty($_POST[$this -> modelClass])) {
 						
@@ -56,11 +57,16 @@
 						if ($model -> save()) {
 							//uncomment$this->controller -> redirect($model -> redirectAfterCreate($this -> redirectUrl));
 							new CustomFlash('success',$this -> modelClass, 'CreateSuccess','Создание успешно!',true);
+							$created = true;
 							//echo "Saved!!!!";
 						} else {
 							//print_r($model -> getErrors());
 							$model -> explainErrors();
 						}//*/
+					}
+					//В случае удачного создания перенаправляем
+					if (($created)&&($this -> redirectUrl)){
+						$this -> controller -> redirect($this -> redirectUrl);
 					}
 					$this->controller->layout = '//layouts/site';
 					$this->controller->render($this->view, array('model' => $model));
