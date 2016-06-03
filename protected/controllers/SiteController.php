@@ -1032,7 +1032,7 @@ class SiteController extends Controller
 		//ob_start();
 		
 		
-		$validated = preg_match('/$\d{'.self::LENGTH.'}^/',$_REQUEST["ivr"]) ? 1 : 0;
+		$validated = preg_match('/^\d{'.self::LENGTH.'}$/',$_REQUEST["ivr"]) ? 1 : 0;
 		
 		
 		/*$out = ob_get_contents();
