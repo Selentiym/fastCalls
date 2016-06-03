@@ -1014,7 +1014,8 @@ class SiteController extends Controller
 		//end!
 		$out = ob_get_contents();
 		ob_end_clean();
-		$f = fopen(Yii::getPathOfAlias('application'). DIRECTORY_SEPARATOR .'log.txt','a+');
+		$dateStr = date("_Y_M_d");
+		$f = fopen(Yii::getPathOfAlias('application'). DIRECTORY_SEPARATOR . 'logs' . DIRECTORY_SEPARATOR . "log{$dateStr}.txt",'a+');
 		fwrite($f, 'There was an interactive request '.date('j.m H:i:s').':<br/>'.PHP_EOL);
 		fwrite($f, $out.'<br/>'.PHP_EOL);
 		fclose($f);
@@ -1031,7 +1032,7 @@ class SiteController extends Controller
 		//ob_start();
 		
 		
-		$validated = preg_match('/\d{'.self::LENGTH.'}/',$_REQUEST["ivr"]) ? 1 : 0;
+		$validated = preg_match('/$\d{'.self::LENGTH.'}^/',$_REQUEST["ivr"]) ? 1 : 0;
 		
 		
 		/*$out = ob_get_contents();

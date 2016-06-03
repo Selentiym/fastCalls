@@ -84,12 +84,18 @@ defined('JSON_PRETTY_PRINT') or define('JSON_PRETTY_PRINT',128);
 			$tCall = TelfinCall::model() -> findByPk($input['CallAPIID']);
 			if ($tCall) {
 				$phone = UserPhone::model() -> findByPk($tCall -> id_phone);
+				echo "the call is already present in database.<br/>".PHP_EOL;
 				//Если ID звонка найден в базе, то возвращаем то, что записано, а не пытаеся его найти.
 				//if ($phone) {
 				return $phone;
 				//}
 			}
 			$number = $input['CalledDID'];
+			//Если нет номера, то и говорить не о чем.
+			if (!$number) {
+				echo "No number is specified<br/>".PHP_EOL;
+				return null;
+			}
 			$ivr = $input[self::IVR_KEY];
 			echo "Number: ".$number."<br/>";
 			echo "IVR: ".$ivr."<br/>";
