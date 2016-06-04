@@ -138,13 +138,13 @@ function modifyForm(chosen){
     //common comment
     var comment = $("#comment");
     switch (chosen){
-        case "1":
+        case "sms":
             text.show();
             break;
-        case "2":
+        case "email":
             text.show();
             break;
-        case "3":
+        case "reminder":
             text.hide();
             break;
     }

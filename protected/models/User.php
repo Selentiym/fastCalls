@@ -1053,6 +1053,8 @@ class User extends UModel
 	 * Adds a reminder to this user. Takes data from $data
 	 */
 	public function addAction($data){
-		return;
+		$data['id_user'] = $this -> id;
+		$action = UserActionFactory::getInstance() -> giveAction($data);
+		//$action -> save();
 	}
 }

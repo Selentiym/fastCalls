@@ -16,10 +16,12 @@ return array(
 	'import'=>array(
 		'application.components.CHtml',
 		'application.models.*',
+		'application.models.actions.*',
 		'application.components.*',
 		'application.components',
 		'application.components.googleDoc.*',
 		'application.components.telfin.*',
+		'application.components.userActions.*',
 		//'webroot.vendor.autoload'
 	),
 

@@ -28,7 +28,7 @@ Yii::app() -> getClientScript() -> registerScript('applyText','
     <div class="row">
         <div class="col-xs-4">
             <div id="datepickerButtons">
-            <input type="hidden" name="purposeTime" id="purposeTime"/>
+            <input type="hidden" name="time" id="purposeTime"/>
             <span id="today">today</span>
             <span id="tomorrow">tomorrow</span>
             <span id="threeDays">3 days</span>
@@ -42,7 +42,7 @@ Yii::app() -> getClientScript() -> registerScript('applyText','
                     CHtml::activeDropDownListChosen2(
                         ActionType::model(),
                         'id',
-                        CHtml::listData(ActionType::model() -> findAll(),'id','name'),
+                        CHtml::listData(ActionType::model() -> findAll(),'alias','name'),
                         array('id'=>'actionType', 'name'=>'actionType'),
                         array(),
                         '{}');
