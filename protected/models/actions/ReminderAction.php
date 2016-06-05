@@ -6,5 +6,5 @@
  * Time: 16:19
  */
 class ReminderAction extends UserAction {
-
+    const TYPE = 3;
 }

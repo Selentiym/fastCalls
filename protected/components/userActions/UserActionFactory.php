@@ -5,6 +5,12 @@
  * Date: 03.06.2016
  * Time: 10:40
  */
+
+/**
+ * Class UserActionFactory
+ * В основном будет использоваться для создания нового действия,
+ *  поскольку в дальнейшем из базы будет вытаскиваться объект нужного класса.
+ */
 class UserActionFactory {
     const DefaultClass = 'UserAction';
     /**
@@ -15,9 +21,9 @@ class UserActionFactory {
      * @var string[] $types содержит типы доступных действий
      */
     public static $types = [
-        'sms',
-        'email',
-        'reminder'
+        1 => 'sms',
+        2 => 'email',
+        3 => 'reminder'
     ];
     //Содержит логику создания или доставания из базы действия. Выбирает
     // какой класс дйствия создавать в зависимости от $data.
@@ -25,7 +31,7 @@ class UserActionFactory {
      * @param $data
      * @return iUserAction
      */
-    public static function giveAction($data) {
+    public function giveAction($data) {
         //По умолчанию класс модели - просто UserAction, но
         // нежелательно, чтобы так было.
         $className = self::DefaultClass;

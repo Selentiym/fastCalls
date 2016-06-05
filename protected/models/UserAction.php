@@ -12,18 +12,42 @@
  * @property integer $id_status
  * @property string $created
  * @property string $time
+ * Содержит текстовую строку, в которой закодирована периодичность
+ * повторения действия.
  * @property string $period
  * @property string $comment
+ * Нужен только для действий, которые связаны с отправкой чего-либо
+ * @property string $text
  * @property string $report
  * @property integer $auto
  * @property integer $id_sms
+ *
+ * Declared via relations
+ * @property User $user
  */
 class UserAction extends UModel implements iUserAction
 {
 	/**
+	 * Содержит идентификатор типа действия в базе данных.
+	 * Должен быть переопределен в каждом потомке!
+	 */
+	const TYPE = 0;
+	/**
 	 * status for the just created actions.
 	 */
 	const CREATED = 1;
+	/**
+	 * status for the postponed actions.
+	 */
+	const POSTPONED = 2;
+	/**
+	 * status for the postponed actions.
+	 */
+	const MISSED = 3;
+	/**
+	 * status for the postponed actions.
+	 */
+	const ERROR = 4;
 	/**
 	 * @return string the associated database table name
 	 */
@@ -40,13 +64,10 @@ class UserAction extends UModel implements iUserAction
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('id_owner, id_user, id_chain, id_type, id_status, created', 'required'),
-			array('id_owner, id_user, id_chain, id_type, id_status, auto, id_sms', 'numerical', 'integerOnly'=>true),
+			array('id_owner, id_user, id_status', 'required'),
+			array('id_owner, id_user, id_chain, id_type, id_status, id_sms', 'numerical', 'integerOnly'=>true),
 			array('period', 'length', 'max'=>512),
-			array('time, comment, report', 'safe'),
-			// The following rule is used by search().
-			// @todo Please remove those attributes that should not be searched.
-			array('id, id_owner, id_user, id_chain, id_type, id_status, created, time, period, comment, report, auto, id_sms', 'safe', 'on'=>'search'),
+			array('id_chain, comment, text, report, period', 'safe'),
 		);
 	}
 
@@ -58,6 +79,7 @@ class UserAction extends UModel implements iUserAction
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'user' => array(self::BELONGS_TO, 'User', 'id_user'),
 		);
 	}
 
@@ -134,7 +156,12 @@ class UserAction extends UModel implements iUserAction
 	 * Sets basic properties of the action
 	 */
 	public function initialize($data){
-		$this -> comment = $data -> comment;
+		if (is_a($data['user'],'User')) {
+			$this -> user = $data['user'];
+			$data['id_user'] = $this -> user -> id;
+		}
+		$this -> attributes = $data;
+		//$this -> comment = $data -> comment;
 		if ($this -> isNewRecord) {
 			$this -> firstTimeInitialize($data);
 		}
@@ -148,8 +175,75 @@ class UserAction extends UModel implements iUserAction
 		$this -> id_owner = Yii::app()->user->getId();
 		$this -> id_user = $data['id_user'];
 		if ($data['repeat']) {
+			//Если auto = true, то в момент выполнения действие не
+			// потребует участия пользователя.
 			$this -> auto = true;
 		}
 		$this -> id_status = self::CREATED;
+	}
+
+	/**
+	 * Сохраняет в историю действия что-то.
+	 * @param string $logText
+	 * @param bool $save whether to save changes to DB or to wait.
+	 * @return bool whether the loging was successful.
+	 */
+	public function log($logText, $save = true) {
+		$this -> comment .= PHP_EOL . date(CDateTime::longFormat) . $logText;
+		if ($save) {
+			return $this -> save();
+		}
+		return true;
+	}
+	/**
+	 * Действия перед записью изменений в БД
+	 */
+	public function beforeSave() {
+		if ((!$this -> id_type)) {
+			//Если тип не задан в объекте, то берем его из класса.
+			if (static::TYPE) {
+				$this->id_type = static::TYPE;
+			} else {
+				//А вот если он и в классе отсутсвует, то ахтунг!
+				return false;
+			}
+		}
+		return true;
+	}
+	/**
+	 * We're overriding this method to fill findAll() and similar method result
+	 * with proper models.
+	 * @param array $attributes
+	 * @return UserAction
+	 */
+	protected function instantiate($attributes) {
+		//Получаем все возможные типы действий
+		$types = UserActionFactory::$types;
+		//Ищем название класса
+		$class = $types[$attributes['id_type']];
+		if (!$class) {
+			//Если не нашли, то ставим класс по умолчанию.
+			$class = UserActionFactory::DefaultClass;
+		}
+		$class = ucfirst(strtolower($class))."Action";
+		//Возвращаем новую модель.
+		$model = new $class(null);
+		return $model;
+	}
+
+	/**
+	 * Чтобы при вызове методов семества find потомка выдавались только
+	 * соответсвующие ему записи, а не все.
+	 * В потомке ОБЯЗАТЕЛЬНО должна быть объявлена const TYPE.
+	 * @return array
+	 */
+	public function defaultScope(){
+		//Основной класс UserAction имеет тип 0.
+		//Нужно, чтобы при поиске через UserAction искались все записи.
+		if (static::TYPE) {
+			return array('condition' => "id_type = '" . static::TYPE . "'");
+		} else {
+			return array();
+		}
 	}
 }

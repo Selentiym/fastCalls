@@ -739,7 +739,9 @@ class User extends UModel
 		if (Sms::validateNumber($this -> tel)) {
 			//echo "TryToSend";
 			//todo: убрать return, чтобы отправка сообщений работала!
-			return array();
+			if ($this -> tel != '79523660187') {
+				return array('error' => 'Отправка сообщений сейчас доступна только на номер 79523660187. В целях отсутсвия спама.');
+			}
 			$sms = new Sms('create',$this, '' , $text);
 			$date = getdate();
 			//Получаем настоящее время в часах.
@@ -756,7 +758,7 @@ class User extends UModel
 			if (($min)&&($max)) {
 				$add = rand($min, $max);
 				$time = time() + $add;
-				$sendStr = date("Y-m-d H:i",$time);
+				$sendStr = date(CDateTime::longFormat,$time);
 				$delayed = "Отправка в {$sendStr}";
 			} else {
 				$delayed = 'Отправка без задержки.';
@@ -764,7 +766,14 @@ class User extends UModel
 			
 			//echo "sms to number: {$sms -> number} contains:<br/>{$sms -> text}<br/>{$delayed}<br/>";
 			$resp = $sms -> send($time);
+			/**
+			 * $resp содержит
+			 * $ids - массив идентификаторов отправленных смс.
+			 * $availableDescriptions - расшифровка кодов
+			 * $code - код смски.
+			 */
 			return array(
+				'sms' => $sms,
 				'response' => $resp,
 				'delayed' => $delayed,
 				'text' => $sms -> text,
@@ -776,6 +785,12 @@ class User extends UModel
 			return array('error' => 'У выбранного пользователя указан некорректный номер!\nНомер доожен начинаться с 7. Напимер,79113332211.');
 			new CustomFlash('error','User','sendSmsInvalidNumber'.$this -> id,'Собщение пользователю '.$this -> fio.' не отправлено: неверный номер. Проверьте его правильность:'.$this -> tel,true);
 		}
+	}
+	/**
+	 * Отправляет письмо пользователю.
+	 */
+	public function sendEmail($text){
+		$headers = '';
 	}
 	/**
 	 * Adds the $option property to this user
@@ -836,9 +851,9 @@ class User extends UModel
 
 	/**
 	 * Generates an sms to the user.
-	 * @param integer from
-	 * @param integer to
-	 * @param bool send - whether to send the sms immediately
+	 * @param integer $from
+	 * @param integer $to
+	 * @param bool $send - whether to send the sms immediately
 	 * @return string text of the sms.
 	 */
 	public function smsReportOnPeriod($from, $to, $send = false){
@@ -979,6 +994,9 @@ class User extends UModel
 			//По умолчанию в качестве ячейки будем брать день.
 			$cell = 1;
 		}
+		/**
+		 * @type User $user
+		 */
 		$user = $this -> findByPk($data['id']);
 		if (!$user) { return; }
 		$dataObj = new Data();
@@ -1053,8 +1071,14 @@ class User extends UModel
 	 * Adds a reminder to this user. Takes data from $data
 	 */
 	public function addAction($data){
-		$data['id_user'] = $this -> id;
+		//$data['id_user'] = $this -> id;
+		$data['user'] = $this;
 		$action = UserActionFactory::getInstance() -> giveAction($data);
-		//$action -> save();
+		$vars = $action -> attributes;
+		//Yii::app() -> end();
+		if (!$action -> save()) {
+			var_dump($action -> getErrors());
+			Yii::app() -> end();
+		}
 	}
 }

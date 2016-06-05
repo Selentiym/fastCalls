@@ -7,6 +7,10 @@
  */
 class CDateTime extends DateTime {
     /**
+     * Формат даты со временем.
+     */
+    const longFormat = "Y-m-d H:i";
+    /**
      * @var array $date - contains the output of date
      */
     public $date;

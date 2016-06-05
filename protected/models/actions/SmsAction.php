@@ -23,10 +23,23 @@
  * @property integer $auto
  * @property integer $id_sms
  */
-class SmsAction extends UserAction {
-    public function initialize($data){
-        parent::initialize($data);
-        //$this ->
-        return;
+class SmsAction extends SendMessageAction {
+    const TYPE = 1;
+    /**
+     * @return array validation rules for model attributes.
+     */
+    public function rules()
+    {
+        // NOTE: you should only define rules for those attributes that
+        // will receive user inputs.
+        return parent::rules();
+    }
+    public function sendIt() {
+        $arr = $this -> user -> sendSms($this -> text);
+        //Если ошибка, добавляем в конец коммента ее текст.
+        if ($arr['error']) {
+            $this -> comment .= PHP_EOL . $arr['error'];
+            $this -> id_status = self::ERROR;
+        }
     }
 }

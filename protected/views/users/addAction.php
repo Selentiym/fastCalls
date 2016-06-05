@@ -51,7 +51,7 @@ Yii::app() -> getClientScript() -> registerScript('applyText','
         </div>
         <div class="col-xs-4">
             <input id="repeat" type="checkbox" name="repeat"/> Повторять регулярно
-            <select name="repeatPeriod" id="repeatPeriod" style="display:none">
+            <select name="period" id="repeatPeriod" style="display:none">
                 <option value="year">Раз в год</option>
                 <option value="month">Раз в месяц</option>
                 <option value="week">Раз в неделю</option>

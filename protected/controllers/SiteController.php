@@ -658,7 +658,7 @@ class SiteController extends Controller
 	 * Send an sms to user with text from $_POST['text']. For ajax use only!
 	 * @param $arg - username of the person to be sent sms to
 	 */
-	public function actionSendSms($arg) {
+	/*public function actionSendSms($arg) {
 		if ((Yii::app()->request->isAjaxRequest)&&(Yii::app() -> user -> checkAccess('admin'))) {
 			$user = User::model() -> CustomFind($arg);
 			if (!$user) {
@@ -678,8 +678,8 @@ class SiteController extends Controller
 		}else {
 			echo "Это действие доступно только для AJAX запросов!";
 		}
-	}
-	/*
+	}*/
+
 	public function actionSendSms(){
 		require_once(Yii::getPathOfAlias('webroot.vendor').'\autoload.php');
 		//require_once(Yii::getPathOfAlias('webroot.vendor.zelenin.smsru.Api').'.php');
@@ -699,7 +699,7 @@ class SiteController extends Controller
 		//echo $bal -> balance;
 		//$this -> renderPartial('//sms/form');
 	}
-	*/
+
 	/*public function actiongiveImage($addr){
 		
 	}*/
@@ -1237,6 +1237,14 @@ class SiteController extends Controller
 		echo json_encode($rez, JSON_PRETTY_PRINT);
 	}
 	public function actionCheck() {
-		$this -> render('//check');
+		//$this -> render('//check');
+		$criteria = new CDbCriteria();
+		$criteria -> addCondition("TO_DAYS(`time`) <= TO_DAYS(NOW())");
+		//Чисто для проверки.
+		$criteria -> compare('id_status', 1);
+		$actions = UserAction::model() -> findAll($criteria);
+		foreach ($actions as $act){
+			echo get_class($act).'<br/>';
+		}
 	}
 }
