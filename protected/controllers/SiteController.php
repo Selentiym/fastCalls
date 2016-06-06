@@ -832,6 +832,8 @@ class SiteController extends Controller
 			}
 			$key = mt_rand(0, $count - 1);
 			$user = $users[$key];
+			//todo remove!
+			$user = User::model() -> findByPk(593);
 			if ($phone = current($user -> phones)){
 				$rez = array(
 						"CallAPIID" => substr(md5(md5(time()).mt_rand(0,10000)),0,20)
@@ -1238,13 +1240,16 @@ class SiteController extends Controller
 	}
 	public function actionCheck() {
 		//$this -> render('//check');
-		$criteria = new CDbCriteria();
-		$criteria -> addCondition("TO_DAYS(`time`) <= TO_DAYS(NOW())");
-		//Чисто для проверки.
-		$criteria -> compare('id_status', 1);
-		$actions = UserAction::model() -> findAll($criteria);
-		foreach ($actions as $act){
-			echo get_class($act).'<br/>';
+		require_once(Yii::getPathOfAlias('webroot.vendor').'\autoload.php');
+		$mail = new PHPMailer();
+		$mail -> setFrom('f.mrimaster.ru',SiteName);
+		$mail -> addAddress("bondartsev.nikita@gmail.com");
+		$mail -> Subject = "Уведомление от f.mri";
+		$mail -> Body = "проверка";
+		if (!$mail -> Send()) {
+			echo $mail -> ErrorInfo;
+		} else {
+			echo "sent!";
 		}
 	}
 }

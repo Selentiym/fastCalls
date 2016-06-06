@@ -10,4 +10,9 @@ defined('YII_DEBUG') or define('YII_DEBUG',true);
 defined('YII_TRACE_LEVEL') or define('YII_TRACE_LEVEL',3);
 
 require_once($yii);
+
+//Не имеет отношения к структуре фреймворка.
+// Просто задаю глобальную константу.
+define('SiteName','Общегородская служба записи на МРТ и КТ исследования');
+
 Yii::createWebApplication($config)->run();

@@ -9,6 +9,11 @@ class EmailAction extends SendMessageAction {
     const TYPE = 2;
     //Можно рассмотреть вариант Disposition-Notification-To
     public function sendIt(){
-
+        $mail = new PHPMailer();
+        $mail -> setFrom('f.mrimaster.ru',SiteName);
+        $mail -> addAddress($this -> email);
+        $mail -> Subject = "Уведомление от f.mri";
+        //todo добавить тему в форму отправки писем!
+        $mail -> Body($text);
     }
 }

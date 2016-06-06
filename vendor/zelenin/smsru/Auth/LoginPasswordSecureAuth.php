@@ -2,8 +2,12 @@
 
 namespace Zelenin\SmsRu\Auth;
 
+use Zelenin\SmsRu\Auth\TokenCache\CacheInterface;
+use Zelenin\SmsRu\Auth\TokenCache\DummyCache;
+
 class LoginPasswordSecureAuth extends AbstractAuth
 {
+
     /**
      * @var string
      */
@@ -20,15 +24,27 @@ class LoginPasswordSecureAuth extends AbstractAuth
     private $apiId;
 
     /**
+     * @var CacheInterface
+     */
+    private $cache;
+
+    /**
+     * @var string
+     */
+    private $cacheKey = 'zelenin.smsru.auth.token';
+
+    /**
      * @param string $login
      * @param string $password
      * @param null|string $apiId
+     * @param CacheInterface|null $cache
      */
-    public function __construct($login, $password, $apiId = null)
+    public function __construct($login, $password, $apiId = null, CacheInterface $cache = null)
     {
         $this->login = $login;
         $this->password = $password;
         $this->apiId = $apiId;
+        $this->cache = $cache === null ? new DummyCache() : $cache;
     }
 
     /**
@@ -37,13 +53,22 @@ class LoginPasswordSecureAuth extends AbstractAuth
     public function getAuthParams()
     {
         $token = $this->authGetToken();
+
         return [
             'login' => $this->login,
             'token' => $token,
-            'sha512' => $this->apiId
+            'sha512' => !empty($this->apiId)
                 ? hash('sha512', $this->password . $token . $this->apiId)
-                : hash('sha512', $this->password . $token)
+                : hash('sha512', $this->password . $token),
         ];
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getApiId()
+    {
+        return $this->apiId;
     }
 
     /**
@@ -51,11 +76,26 @@ class LoginPasswordSecureAuth extends AbstractAuth
      */
     private function authGetToken()
     {
-        return $this->getContext()->getClient()->request('auth/get_token');
+        $token = null;
+        if ($this->cache->exists($this->cacheKey)) {
+            $token = $this->cache->get($this->cacheKey);
+        }
+
+        if (!$token) {
+            $token = $this->requestAuthToken();
+            $this->cache->set($this->cacheKey, $token, 60 * 9);
+        }
+
+        return $token;
     }
 
-    public function getApiId()
+    /**
+     * @return string
+     */
+    private function requestAuthToken()
     {
-        return $this->apiId;
+        return $this->getContext()
+            ->getClient()
+            ->request('auth/get_token');
     }
 }

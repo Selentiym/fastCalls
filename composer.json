@@ -1,8 +1,15 @@
 {
     "require": {
+        "php":">=5.6",
         "zelenin/smsru": "~4",
 		"asimlqt/php-google-spreadsheet-client": "2.3.*",
-		"google/apiclient":">=1"//,
-        //"phpmailer":">=1"
-    }
+		"google/apiclient":">=1",
+        "PHPMailer/PHPMailer":"*"
+    },
+    "repositories": [
+        {
+            "type" : "git",
+            "url" : "https://github.com/PHPMailer/PHPMailer"
+        }
+    ]
 }
