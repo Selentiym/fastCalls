@@ -11,13 +11,13 @@ class EmailAction extends SendMessageAction {
     public function sendIt(){
         $rez = $this -> user -> sendEmail($this -> text);
         if ($rez['report']) {
-            $this -> status = UserAction::GOOD;
+            $this -> id_status = UserAction::GOOD;
             $this -> log($rez['report'], false);
         } elseif ($rez['error']) {
-            $this -> status = UserAction::ERROR;
+            $this -> id_status = UserAction::ERROR;
             $this -> log($rez['error'], false);
         } else {
-            $this -> status = UserAction::ERROR;
+            $this -> id_status = UserAction::ERROR;
             $this -> log('Возникла неизвестная ошибка.', false);
         }
     }
