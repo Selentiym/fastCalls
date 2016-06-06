@@ -220,7 +220,7 @@ class UserAction extends UModel implements iUserAction
 		}
 		//Такая вот странная проверка на то, лежит ли в time метка времени Unix
 		if ($this -> time > 10000000) {
-			$this -> time = new CDbExpression("FROM_UNIXTIME('".$this -> time."'')");
+			$this -> time = new CDbExpression("FROM_UNIXTIME('".$this -> time."')");
 		}
 		return true;
 	}
