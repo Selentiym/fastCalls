@@ -207,6 +207,11 @@ class Sms extends UModel
 		//Если смс была отправлена в качестве действия над юзером, то
 		// при смене статуса, сообщаем об изменении в действие.
 		if ($act = $this -> action) {
+			if ($status == 103) {
+				$act -> id_status = UserAction::GOOD;
+			} else {
+				$act -> id_status = UserAction::ERROR;
+			}
 			//Добавляем в комментарий информацию.
 			$act -> log (self::decodeDescr($status));
 		}
