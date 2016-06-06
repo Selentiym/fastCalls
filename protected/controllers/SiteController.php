@@ -1240,7 +1240,7 @@ class SiteController extends Controller
 	}
 	public function actionCheck() {
 		//$this -> render('//check');
-		require_once(Yii::getPathOfAlias('webroot.vendor').'\autoload.php');
+		require_once(Yii::getPathOfAlias('webroot.vendor'). DIRECTORY_SEPARATOR .'autoload.php');
 		$mail = new PHPMailer();
 		$mail -> setFrom('f.mrimaster.ru',SiteName);
 		$mail -> addAddress("bondartsev.nikita@gmail.com");
