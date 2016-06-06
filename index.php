@@ -14,5 +14,6 @@ require_once($yii);
 //Не имеет отношения к структуре фреймворка.
 // Просто задаю глобальную константу.
 define('SiteName','Общегородская служба записи на МРТ и КТ исследования');
+define('FromMail','mail@f.mrimaster.ru');
 
 Yii::createWebApplication($config)->run();

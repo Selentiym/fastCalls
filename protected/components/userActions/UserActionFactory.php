@@ -58,6 +58,11 @@ class UserActionFactory {
         //Инициилизируем модель. К данному моменту, что бы ни было передано,
         // будет определен объект $act.
         $act -> initialize($data);
+        $time = time();
+        if (($data['makeNow'])||($act -> time < $time)) {
+            $act -> time = $time;
+            $act -> MakeAction();
+        }
         return $act;
     }
 

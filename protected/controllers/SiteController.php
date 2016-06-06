@@ -1242,7 +1242,9 @@ class SiteController extends Controller
 		//$this -> render('//check');
 		require_once(Yii::getPathOfAlias('webroot.vendor'). DIRECTORY_SEPARATOR .'autoload.php');
 		$mail = new PHPMailer();
-		$mail -> setFrom('f.mrimaster.ru',SiteName);
+		$mail -> CharSet = "UTF-8";
+		$mail -> From = 'mail@f.mrimaster.ru';
+		$mail -> FromName = 'имя';
 		$mail -> addAddress("bondartsev.nikita@gmail.com");
 		$mail -> Subject = "Уведомление от f.mri";
 		$mail -> Body = "проверка";

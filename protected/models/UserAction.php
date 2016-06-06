@@ -49,6 +49,10 @@ class UserAction extends UModel implements iUserAction
 	 */
 	const ERROR = 4;
 	/**
+	 * status for completed actions.
+	 */
+	const GOOD = 5;
+	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
@@ -195,6 +199,13 @@ class UserAction extends UModel implements iUserAction
 		}
 		return true;
 	}
+	/**
+	 * Функция-заглушка
+	 */
+	public function MakeAction(){
+		return;
+	}
+
 	/**
 	 * Действия перед записью изменений в БД
 	 */

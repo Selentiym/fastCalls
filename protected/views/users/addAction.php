@@ -35,6 +35,7 @@ Yii::app() -> getClientScript() -> registerScript('applyText','
             <span id="week">week</span>
             </div>
             <input type="text" id="datepicker"/>
+            <input type="checkbox" name="makeNow" id="makeNow"/>Выполнить сразу
         </div>
         <div class="col-xs-4">
             <div class="row">

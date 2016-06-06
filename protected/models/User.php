@@ -786,11 +786,43 @@ class User extends UModel
 			new CustomFlash('error','User','sendSmsInvalidNumber'.$this -> id,'Собщение пользователю '.$this -> fio.' не отправлено: неверный номер. Проверьте его правильность:'.$this -> tel,true);
 		}
 	}
+
 	/**
 	 * Отправляет письмо пользователю.
-	 */
-	public function sendEmail($text){
-		$headers = '';
+	 * @param string $text
+	 * @param string $subject
+	 * @return array - массив с результатом отправки.
+	 * @throws phpmailerException
+     */
+	public function sendEmail($text, $subject = ''){
+		//Регулярка с http://web.izjum.com/regexp-email-url-phone
+		if (($this -> email)&&(preg_match('/^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$/',$this -> email))) {
+			require_once(Yii::getPathOfAlias('webroot.vendor') . DIRECTORY_SEPARATOR . 'autoload.php');
+			$mail = new PHPMailer();
+			$mail->CharSet = "UTF-8";
+			$mail->From = FromMail;
+			$mail->FromName = SiteName;
+			$mail->addAddress($this -> email);
+			if ($subject) {
+				$mail->Subject = $subject;
+			} else {
+				$mail->Subject = "Уведомление от f.mri";
+			}
+			$mail->Body = $text;
+			if (!$mail->Send()) {
+				return array(
+					'error' => $mail -> ErrorInfo
+				);
+			} else {
+				return array(
+					'report' => 'Письмо отправлено!'
+				);
+			}
+		} else {
+			return array(
+				'error' => 'Неверный адрес.'
+			);
+		}
 	}
 	/**
 	 * Adds the $option property to this user

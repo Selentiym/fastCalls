@@ -27,6 +27,9 @@ function pageReady() {
         return now;
     }
     function toPicker(date) {
+        if (picker.prop("disabled")) {
+            return;
+        }
         hidden.val(unixTime(date));
         picker.datetimepicker({value: date});
     }
@@ -127,6 +130,15 @@ function pageReady() {
     textCont.change(function(){
         $(this).attr("data-changed","1");
     });
+    var makeNow = $("#makeNow");
+    makeNow.click(function(){
+        var ch = makeNow.prop("checked");
+        setMakeNow(ch);
+    });
+    function setMakeNow(ch){
+        makeNow.prop("checked", ch);
+        picker.prop("disabled",ch);
+    }
 }
 function selectType(type){
     select.select2("val",type);
