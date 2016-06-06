@@ -40,6 +40,8 @@ class SmsAction extends SendMessageAction {
         if ($arr['error']) {
             $this -> comment .= PHP_EOL . $arr['error'];
             $this -> id_status = self::ERROR;
+        } else {
+            $this -> id_sms = $arr['sms'] -> id;
         }
     }
 }

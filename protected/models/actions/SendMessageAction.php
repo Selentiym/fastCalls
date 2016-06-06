@@ -30,5 +30,6 @@ abstract class SendMessageAction extends UserAction {
     }
     public function MakeAction() {
         $this -> sendIt();
+        $this -> save();
     }
 }

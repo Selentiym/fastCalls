@@ -104,6 +104,7 @@ class Sms extends UModel
 	}
 	/**
 	 * @var mixed arg - the argument to the custom search.
+	 * @return Sms|null
 	 */
 	public function customFind($arg) {
 		if (preg_match('/^\d*$/',$arg)) {
