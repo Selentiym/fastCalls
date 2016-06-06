@@ -123,7 +123,6 @@ class UserAction extends UModel implements iUserAction
 	 */
 	public function search()
 	{
-		// @todo Please modify the following code to remove attributes that should not be searched.
 
 		$criteria=new CDbCriteria;
 
@@ -219,6 +218,10 @@ class UserAction extends UModel implements iUserAction
 				return false;
 			}
 		}
+		//Такая вот странная проверка на то, лежит ли в time метка времени Unix
+		if ($this -> time > 10000000) {
+			$this -> time = new CDbExpression("FROM_UNIXTIME('".$this -> time."'')");
+		}
 		return true;
 	}
 	/**
@@ -245,7 +248,7 @@ class UserAction extends UModel implements iUserAction
 	/**
 	 * Чтобы при вызове методов семества find потомка выдавались только
 	 * соответсвующие ему записи, а не все.
-	 * В потомке ОБЯЗАТЕЛЬНО должна быть объявлена const TYPE.
+	 * P.S. В потомке ОБЯЗАТЕЛЬНО должна быть объявлена const TYPE.
 	 * @return array
 	 */
 	public function defaultScope(){
