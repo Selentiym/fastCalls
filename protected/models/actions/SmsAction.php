@@ -38,10 +38,15 @@ class SmsAction extends SendMessageAction {
         $arr = $this -> user -> sendSms($this -> text);
         //Если ошибка, добавляем в конец коммента ее текст.
         if ($arr['error']) {
-            $this -> comment .= PHP_EOL . $arr['error'];
+            $this -> log($arr['error'], false);
             $this -> id_status = self::ERROR;
         } else {
+            //Если ошибки нет, то проверяем, не был ли сделан перенос.
             $this -> id_sms = $arr['sms'] -> id;
+            if ($arr['sendStr']) {
+                $this -> id_status = UserAction::POSTPONED;
+                $this -> log('Смс отправится в '.$arr['sendStr'].'.',false);
+            }
         }
     }
 }

@@ -61,7 +61,7 @@ class UserActionFactory {
         $time = time();
         if (($data['makeNow'])||($act -> time < $time)) {
             $act -> time = $time;
-            $act -> MakeAction();
+            $act -> MakeAction($data);
         }
         return $act;
     }

@@ -28,8 +28,13 @@ abstract class SendMessageAction extends UserAction {
     protected function prepareText(){
         return SmsPattern::prepareText($this -> user, $this -> text);
     }
-    public function MakeAction() {
-        $this -> sendIt();
+
+    /**
+     * Отсылает сообщение и сохраняет статусы.
+     * @param mixed[] $data
+     */
+    public function MakeAction($data) {
+        $this -> sendIt($data);
         $this -> save();
     }
 }

@@ -24,6 +24,20 @@ interface iUserAction {
     /**
      * Выполняет действие. Может быть отправка смс, запрос отчета
      * у пользователя, отправка письма и так далее.
+     * @param mixed[] $data - содержит информацию со страницы о том,
+     * как действие выполнить.
      */
-    public function MakeAction();
+    public function MakeAction($data);
+    /**
+     * Переносим действие на заданное время
+     * @param int $time - unix time when  to make action
+     * @param bool $save
+     * @return bool whether the action was postponed
+     */
+    public function Postpone($time, $save = true);
+    /**
+     * @return string[] - массив названий вьюх, с помощью который отобразить действие
+     * Вьюхи вызываются по очереди, внутрь передается $model, содержащий модель действия
+     */
+    public function giveViews();
 }

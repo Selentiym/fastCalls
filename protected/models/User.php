@@ -71,6 +71,8 @@ class User extends UModel
 			array('password', 'unsafe'),
 		);
 	}
+
+
 	/*public function __construct(){
 		call_user_func_array(array("parent", __construct), func_get_args());
 		$this -> prepareCalls();
@@ -107,6 +109,10 @@ class User extends UModel
 			'calls' => array(self::HAS_MANY,'BaseCall', 'id_user'),
 			'reviews' => array(self::HAS_MANY,'Review', 'id_user'),
 			'patients' => array(self::HAS_MANY,'Patient', 'id_user', 'order'=>'patients.create_time DESC'),
+			//Все действия, которые созданы этим пользователем. Не очень важный атрибут.
+			'owned_actions' => array(self::HAS_MANY,'UserAction','id_owner'),
+			'owned_today_actions' => array(self::HAS_MANY, 'UserAction', 'id_owner','scopes'=>array('today')),
+			'toShowActions' => array(self::HAS_MANY, 'UserAction', 'id_owner','scopes'=>array('todayOrEarlier','not_done','user_needed'), 'order' => 'time ASC')
 			//'children' => array(self::HAS_MANY,'User','id_parent'),
 		);
 	}
@@ -755,6 +761,9 @@ class User extends UModel
 				$min = (24 - $hours + 9) * 3600;
 				$max = $min + 5 * 3600;
 			}
+			//Инициализируем переменные, чтобы было симпатичнее :)
+			$sendStr = '';
+			$time = false;
 			if (($min)&&($max)) {
 				$add = rand($min, $max);
 				$time = time() + $add;
@@ -776,6 +785,7 @@ class User extends UModel
 				'sms' => $sms,
 				'response' => $resp,
 				'delayed' => $delayed,
+				'sendStr' => $sendStr,
 				'text' => $sms -> text,
 				'number' => $sms -> number
 			);
@@ -783,7 +793,7 @@ class User extends UModel
 		} else {
 			//echo "Неверный номер!<br/>";
 			return array('error' => 'У выбранного пользователя указан некорректный номер!\nНомер доожен начинаться с 7. Напимер,79113332211.');
-			new CustomFlash('error','User','sendSmsInvalidNumber'.$this -> id,'Собщение пользователю '.$this -> fio.' не отправлено: неверный номер. Проверьте его правильность:'.$this -> tel,true);
+			//new CustomFlash('error','User','sendSmsInvalidNumber'.$this -> id,'Собщение пользователю '.$this -> fio.' не отправлено: неверный номер. Проверьте его правильность:'.$this -> tel,true);
 		}
 	}
 
@@ -1100,7 +1110,7 @@ class User extends UModel
 		));
 	}
 	/**
-	 * Adds a reminder to this user. Takes data from $data
+	 * Adds an action to this user. Takes data from $data
 	 */
 	public function addAction($data){
 		//$data['id_user'] = $this -> id;

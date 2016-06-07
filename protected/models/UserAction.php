@@ -158,7 +158,7 @@ class UserAction extends UModel implements iUserAction
 	/**
 	 * Sets basic properties of the action
 	 */
-	public function initialize($data){
+	public function initialize($data) {
 		if (is_a($data['user'],'User')) {
 			$this -> user = $data['user'];
 			$data['id_user'] = $this -> user -> id;
@@ -198,13 +198,36 @@ class UserAction extends UModel implements iUserAction
 		}
 		return true;
 	}
+
 	/**
 	 * Функция-заглушка
+	 * @param $data
 	 */
-	public function MakeAction(){
+	public function MakeAction($data){
 		return;
 	}
-
+	/**
+	 * Переносим действие на заданное время
+	 * @param int $time - unix time when  to make action
+	 * @param bool $save
+	 * @return bool whether the action was postponed
+	 */
+	public function Postpone($time, $save = true){
+		if ($time > time()) {
+			$this -> log('Перенесено с '.date(CDateTime::longFormat, $this -> time). ' на '.date(CDateTime::longFormat, $time).'.');
+			$this -> time = $time;
+			$this -> id_status = UserAction::POSTPONED;
+			if ($save) {
+				return $this -> save();
+			} else {
+				return true;
+			}
+		}
+		return false;
+	}
+	public function giveViews() {
+		return array('//actions/_mainView');
+	}
 	/**
 	 * Действия перед записью изменений в БД
 	 */
@@ -244,7 +267,35 @@ class UserAction extends UModel implements iUserAction
 		$model = new $class(null);
 		return $model;
 	}
+	/**
+	 * @return array
+	 */
+	public function scopes(){
+		return array(
+				'today' => array(
+						'condition' => "TO_DAYS(`time`) = TO_DAYS(NOW())"
+				),
+				'todayOrEarlier' => array(
+						'condition' => "TO_DAYS(`time`) <= TO_DAYS(NOW())"
+				),
+				'not_done' => array(
+					//@todo поправить! Сделать адекватное условие
+					// на незаконченные действия
+					'condition' => "`id_status` BETWEEN '1' AND '3'"
+				)
+		);
+	}
 
+	/**
+	 * another scope!
+	 * @return UserAction
+	 */
+	public function user_needed () {
+		$crit = new CDbCriteria();
+		$crit -> compare('auto', "0");
+		$this -> getDbCriteria() -> mergeWith($crit);
+		return $this;
+	}
 	/**
 	 * Чтобы при вызове методов семества find потомка выдавались только
 	 * соответсвующие ему записи, а не все.

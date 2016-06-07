@@ -19,7 +19,7 @@
 	width:30px;
 }
 .doctor_shortcut .print_me span{
-	text-decoration:italic;
+	font-style:italic;
 	font-size:8px;
 	display:inline-block;
 	width:50px;
@@ -112,4 +112,38 @@ a > .page {
 }
 #patients_table .doc {
 	width:15%;
+}
+
+/**
+ * Блок, посвященный списку действий
+ */
+.action_shortcuts {
+	height:100px;
+	text-align:right;
+	padding-right:20px;
+}
+.action_shortcuts .action_shortcut{
+	display:inline-block;
+	width:150px;
+	border:1px solid black;
+	padding:10px;
+	margin:1px;
+	height:80px;
+	vertical-align: middle;
+}
+.action_shortcuts .action_shortcut span{
+	display:block;
+	font-size:10px;
+	text-align:justify;
+}
+.action_shortcuts .action_shortcut span.username {
+	text-align: center;
+}
+
+.action_shortcut.ReminderAction {
+	/*content:''
+	display: block;
+	width:20px;
+	height:20px;*/
+	background:url('../images/exclamation-icon.png') no-repeat;
 }

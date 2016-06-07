@@ -38,8 +38,18 @@
 				<?php echo $content; ?>
 			</div>
 
-	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+	<!--<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">-->
 
 	</div>
+	<footer>
+		<?php
+			//Если пользователь может создавать действия, то он может их и простматривать.
+			if (Yii::app() -> user -> checkAccess('createAction')) {
+				$user = User::model()->findByPk(Yii::app()->user->getId());
+				$actions = $user -> toShowActions;
+				$this->renderPartial('//users/_actions_list', array('actions' => $actions));
+			}
+		?>
+	</footer>
 	</body>
 </html>

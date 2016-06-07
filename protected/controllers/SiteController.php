@@ -1239,19 +1239,9 @@ class SiteController extends Controller
 		echo json_encode($rez, JSON_PRETTY_PRINT);
 	}
 	public function actionCheck() {
-		//$this -> render('//check');
-		require_once(Yii::getPathOfAlias('webroot.vendor'). DIRECTORY_SEPARATOR .'autoload.php');
-		$mail = new PHPMailer();
-		$mail -> CharSet = "UTF-8";
-		$mail -> From = 'mail@f.mrimaster.ru';
-		$mail -> FromName = 'имя';
-		$mail -> addAddress("bondartsev.nikita@gmail.com");
-		$mail -> Subject = "Уведомление от f.mri";
-		$mail -> Body = "проверка";
-		if (!$mail -> Send()) {
-			echo $mail -> ErrorInfo;
-		} else {
-			echo "sent!";
-		}
+		$user = User::model() -> findByPk(Yii::app() -> user -> getId());
+		$actions = $user -> toShowActions;
+		$this -> render('//users/_actions_list',array('actions' => $actions));
+		//$needed = UserAction::model() -> today_needed_not_done() -> findAll();
 	}
 }
