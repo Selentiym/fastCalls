@@ -11,9 +11,6 @@
 		
 		<?php  Yii::app()->getClientScript()->registerCoreScript('jquery'); ?>
 		
-		<?php Yii::app()->getClientScript()->registerScriptFile(Yii::app()->baseUrl.'/css/bootstrap.min.js'); ?>
-		<?php Yii::app()->getClientScript()->registerScriptFile(Yii::app()->baseUrl.'/css/bundle-bundle_bootstrap_defer.js'); ?>
-		
 		<?php Yii::app()->getClientScript()->registerCssFile(Yii::app()->baseUrl.'/css/select2.min.css'); ?>
 		<?php Yii::app()->getClientScript()->registerScriptFile(Yii::app()->baseUrl.'/js/select2.full.js'); ?>
 		<?php //Yii::app()->getClientScript()->registerScriptFile(Yii::app()->baseUrl.'/js/select2_locale_ru.js'); ?>

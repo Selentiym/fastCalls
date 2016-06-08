@@ -63,8 +63,10 @@
 						$this->controller->layout = '//layouts/site';
 						$this->controller->render($this->view, array('model' => $model));
 					} else {
+						if ($this -> redirect == '_close') {
+							Yii::app() -> getClientScript() -> registerScript('closeScript','close()',CClientScript::POS_READY);
+						}
 						$this -> controller -> redirect(Yii::app() -> baseUrl . $this -> redirect);
-						
 					}
 				} else {
 					$this -> controller -> render('//accessDenied');

@@ -19,6 +19,10 @@
 		 */
 		public $ajax = false;
 		/**
+		 *
+		 */
+		public $layout = '//layouts/site';
+		/**
 		 * @param $arg string model argument to be taken into customFind
 		 * @throws CHttpException
 		 */
@@ -33,7 +37,7 @@
 						throw new CHttpException(404, "{$this->modelClass} not found");
 					//echo $this -> view;
 					//var_dump($model);
-					$this->controller->layout = '//layouts/site';
+					$this->controller->layout = $this -> layout;
 					if ($this -> partial) {
 						$this->controller->renderPartial($this->view, array('model' => $model, 'get' => $_GET), false, true);
 					} else {

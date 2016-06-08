@@ -121,7 +121,7 @@ class SiteController extends Controller
 			'userActionForm'=>array(
 				'class'=>'application.controllers.site.FileViewAction',
 				'access' => function () {return Yii::app() -> user -> checkAccess('admin');},
-				'view' => '//users/addAction'
+				'view' => '//actions/addAction'
 			),
 			'userCollection'=>array(
 				'class'=>'application.controllers.site.FileViewAction',
@@ -318,6 +318,13 @@ class SiteController extends Controller
 				'modelClass' => 'UserOption',
 				'view' => '//option/update_option'
 			),
+
+			'MakeAction' => array(
+				'class' => 'application.controllers.site.ModelViewAction',
+				'modelClass' => 'UserAction',
+				'view' => '//actions/makeAction',
+				'layout' => '//layouts/scriptsOnly'
+			),
 			
 			
 			'PhoneDelete' => array(
@@ -508,6 +515,14 @@ class SiteController extends Controller
 				'ajax' => true,
 				//'scenario' => 'searchById',
 				'access' => function(){return Yii::app() -> user -> checkAccess('admin');},
+			),
+			'addActionReport' => array(
+				'class' => 'application.controllers.site.ClassMethodAction',
+				'modelClass' => 'UserAction',
+				'redirectUrl' => '_close',
+				'method' => 'addReport',
+				'args' => $_POST,
+				'access' => function(){return Yii::app() -> user -> checkAccess('createAction');},
 			),
 		);
 	}

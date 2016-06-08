@@ -86,6 +86,10 @@
 									$this -> controller -> render(array('model' => $object));
 								}
 							} else {
+								if ($this -> redirectUrl == '_close') {
+									echo "<script>close()</script>";
+									Yii::app() -> end();
+								}
 								$this -> controller -> redirect($this -> redirectUrl);
 							}
 						} else {

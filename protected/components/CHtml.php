@@ -80,5 +80,13 @@
 				});
 			", CClientScript::POS_END);
 		}
+
+		/**
+		 * @param string $string
+		 * @return string - html of the prettified text
+		 */
+		public static function PrettyText($string){
+			return "<pre>".str_replace('\n','<br/>',$string)."</pre>";
+		}
 	}
 ?>

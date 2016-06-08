@@ -84,6 +84,7 @@ class UserAction extends UModel implements iUserAction
 		// class name for the relations automatically generated below.
 		return array(
 			'user' => array(self::BELONGS_TO, 'User', 'id_user'),
+			'parent' => array(self::BELONGS_TO, 'UserAction', 'id_chain'),
 		);
 	}
 
@@ -159,22 +160,36 @@ class UserAction extends UModel implements iUserAction
 	 * Sets basic properties of the action
 	 */
 	public function initialize($data) {
-		if (is_a($data['user'],'User')) {
-			$this -> user = $data['user'];
-			$data['id_user'] = $this -> user -> id;
+		$time = $data['time'];
+		if ($time) {
+			$this->time = new CDbExpression("FROM_UNIXTIME({$time})");
 		}
 		$this -> attributes = $data;
+		//Если нажата кнопка с утверждением, что действие выполнено
+		if ($data['done']) {
+			$this -> id_status = self::GOOD;
+			$this -> report = $data['report'];
+		}
+		//Если нажата кнока "Отложить"
+		if ($data['postponeSubmit']) {
+			$this -> log("Отчет перед переносом: ".$data['report']);
+			$this -> Postpone($data['postpone'], false);
+		}
 		//$this -> comment = $data -> comment;
 		if ($this -> isNewRecord) {
 			$this -> firstTimeInitialize($data);
 		}
-		$this -> time = new CDbExpression("FROM_UNIXTIME({$data['time']})");
+
 	}
 
 	/**
 	 * @param $data
 	 */
 	public function firstTimeInitialize($data){
+		if (is_a($data['user'],'User')) {
+			$this -> user = $data['user'];
+			$data['id_user'] = $this -> user -> id;
+		}
 		$this -> id_owner = Yii::app()->user->getId();
 		$this -> id_user = $data['id_user'];
 		if ($data['repeat']) {
@@ -206,6 +221,15 @@ class UserAction extends UModel implements iUserAction
 	public function MakeAction($data){
 		return;
 	}
+
+	/**
+	 * @param $data
+	 * @return mixed|void
+	 */
+	public function addReport($data) {
+		$this -> initialize($data);
+		$this -> save();
+	}
 	/**
 	 * Переносим действие на заданное время
 	 * @param int $time - unix time when  to make action
@@ -222,11 +246,34 @@ class UserAction extends UModel implements iUserAction
 			} else {
 				return true;
 			}
+		} else {
+			$this -> log('Неудачная попытка переноса на '.date(CDateTime::longFormat,$time),false);
 		}
 		return false;
 	}
+
+	/**
+	 * @return string[] - массив вьюшек, которые используются для отображения
+	 * ярлыка действия.
+	 */
 	public function giveViews() {
 		return array('//actions/_mainView');
+	}
+
+	/**
+	 * @return string - текст статуса данного действия.
+	 */
+	public function statusText(){
+		return static::decodeStatus($this -> id_status);
+	}
+
+	/**
+	 * @param int $status - код статуса, для которого вернуть текст.
+	 * @return string - текст расшифровки статуса.
+	 */
+	public static function decodeStatus($status){
+		$rez = 'Неизвестный статус';
+		return $rez;
 	}
 	/**
 	 * Действия перед записью изменений в БД

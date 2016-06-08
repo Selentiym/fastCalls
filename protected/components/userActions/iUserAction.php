@@ -40,4 +40,12 @@ interface iUserAction {
      * Вьюхи вызываются по очереди, внутрь передается $model, содержащий модель действия
      */
     public function giveViews();
+
+    /**
+     * Обновляет отчет и статус действия в зависимости от переданной пользователем
+     * информации. Актуально скорее для действий с auto = 0.
+     * @param $data
+     * @return mixed
+     */
+    public function addReport($data);
 }
